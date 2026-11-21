@@ -45,7 +45,8 @@ static int64_t warpUs = 0;                   // console fast-forward (testing)
 static bool matrixOn = true;
 static bool pausedByFlat = false;
 static uint32_t peekUntil = 0;
-static uint32_t doneAt = 0, lastChirp = 0;
+static uint32_t doneAt = 0;
+static int doneChirpsPlayed = 0;  // single chirps after the first burst
 static uint8_t doneDown = 255;
 static int settingsItem = 0;
 static uint32_t cancelAt = 0;
@@ -88,7 +89,7 @@ static void enter(St s) {
   uint32_t ms = millis();
   if (s == St::Done) {
     doneAt = ms;
-    lastChirp = ms;
+    doneChirpsPlayed = 0;
     doneDown = tilt.downEdge();
     sound.chirps(cfg::kDoneFirstChirps);  // one 3-chirp burst when it first finishes
   }
@@ -214,9 +215,9 @@ static void handleDone(uint32_t ms) {
     startBlock(lastDurationUs);
     return;
   }
-  if (ms - doneAt < cfg::kDoneFastMs && ms - lastChirp >= cfg::kChirpEveryMs) {
-    lastChirp = ms;
-    sound.chirps(cfg::kDoneChirps);
+  if (doneChirpsPlayed < cfg::kDoneLaterChirps && ms - doneAt >= cfg::kChirpEveryMs * (doneChirpsPlayed + 1)) {
+    ++doneChirpsPlayed;
+    sound.chirps(1);
   }
 }
 
@@ -421,7 +422,8 @@ void setup() {
     if (r.state == persist::kDone) {
       st = St::Done;
       // already alarmed before the reset: resume the quiet slow flash, no chirps
-      doneAt = lastChirp = millis() - cfg::kDoneFastMs;
+      doneAt = millis() - cfg::kDoneFastMs;
+      doneChirpsPlayed = cfg::kDoneLaterChirps;
     } else {
       clk.restore(now, dur, rem, r.state == persist::kPaused);
       pausedByFlat = r.flags & 1;
