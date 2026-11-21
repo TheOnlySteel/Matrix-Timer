@@ -217,7 +217,7 @@ Recommendation: **arduino-cli with pinned versions**, scripted in the repo (a Ma
 |---|---|
 | Board manager URL | **`https://static-cdn.m5stack.com/resource/arduino/package_m5stack_index_cn.json`**. The standard `package_m5stack_index.json` does **not** carry the C61 core yet. **[B]** |
 | Board package | **M5Stack ≥ 3.3.10-a** (needed for the C61 target) |
-| Board | FQBN **`m5stack:esp32:m5stack_corematrix`** **[B]** |
+| Board | FQBN **`m5stack:esp32:m5stack_corematrix:CDCOnBoot=cdc`** (the option routes `Serial` to USB); pinned in the Makefile, `make setup` then `make flash SKETCH=…` **[B]** |
 | Libraries | **M5Unified ≥ 0.2.29**, **M5GFX ≥ 0.2.36**; optionally M5PM1 and M5IOE1 for direct PMIC access |
 | Port | `/dev/cu.usbmodem101` on Steel's Mac (native USB-Serial-JTAG, 303A:1001); no driver needed on macOS **[B]** |
 | Serial | Ensure "USB CDC On Boot: Enabled" so `Serial` routes to USB-Serial-JTAG (default in most C-series board defs; check) |
