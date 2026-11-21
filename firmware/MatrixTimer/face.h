@@ -189,6 +189,20 @@ inline Frame checkFrame() {
   return f;
 }
 
+// Done, alternative: three solid triangles (height 4) stacked into one
+// (height 8, 15 wide), centred: Steel asked to try it (21 Nov).
+inline Frame triforceFrame() {
+  Frame f;
+  const int top = 4;  // rows 4..11
+  for (int r = 0; r < 4; ++r)
+    for (int d = -r; d <= r; ++d) {
+      f.set(top + r, 7 + d, true);        // upper triangle, apex col 7
+      f.set(top + 4 + r, 3 + d, true);    // lower left, apex col 3
+      f.set(top + 4 + r, 11 + d, true);   // lower right, apex col 11
+    }
+  return f;
+}
+
 // Settings: item letter on top, value underneath, both 3x5 at 1x.
 inline Frame settingsFrame(char item, const char* value) {
   Frame f;
