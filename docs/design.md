@@ -80,6 +80,8 @@ stateDiagram-v2
     Set --> Running: B click
     Running --> Paused: B click
     Paused --> Running: B click
+    Running --> Paused: lay flat 1 s
+    Paused --> Running: stand up (if paused by laying flat)
     Running --> Set: B hold 1.5 s (cancel)
     Paused --> Set: B hold 1.5 s (cancel)
     Running --> Done: remaining = 0
@@ -119,15 +121,24 @@ Entered with A+C held for 2 s from Set; the matrix shows a one-letter code per i
 | Sound | Chirp, Silent | Chirp |
 | Orientation | Auto (IMU, only if check passes), 0°, 90°, 180°, 270° | Auto, else 0° |
 
-### 5.4 Tilt (optional, gated on the IMU check)
+### 5.4 Lay flat to pause
 
-If the boot-time IMU check passes (hardware.md §9 check 3):
+The device stands like a picture frame. **Laying it down flat pauses the block; standing it back up resumes.** This is the primary pause gesture; B still works.
 
-- **Auto-orientation:** the frame rotates in 90° steps so row 0 is always the top edge, with 1 s of hysteresis.
-- **Flip to repeat:** in Done, turning the device over (sustained 180° change, > 0.8 s) restarts the same duration, like flipping an hourglass.
-- **Face-down to pause:** matrix toward the desk for > 2 s pauses; turning it back resumes.
+Detection is plain gravity, no motion learning needed. Standing, gravity lies in the plane of the matrix; lying flat, it points through the matrix (the BMI270's Z axis). Rule: Z carries > 0.8 g for 1 s → pause; in-plane gravity > 0.8 g for 0.5 s → resume. The 1 s dwell ignores the device being picked up or nudged. The same in-plane vector says which edge is down, so the frame auto-rotates in 90° steps to keep row 0 at the top (1 s hysteresis), and the buttons-or-USB-down choice (bench check 5) stops mattering.
 
-If the check fails, none of this exists and the orientation setting is manual. No feature is lost that the buttons can't do.
+A pause from laying flat looks the same as a B pause (§3.1) and is stored the same way, so a reset while lying down resumes paused.
+
+**The one thing to test first** (hardware.md §5.4, bench check 3): your Bottom2 is v1.3, so its BMI270 sits on the same bus as the Core Matrix's, either at 0x69 (fine, just pin the address) or at 0x68 (collision). The schematic text doesn't show which.
+
+| Check result | On battery (bars' rail off under Auto) | On USB with bars on |
+|---|---|---|
+| Bottom2 IMU at 0x69 | Works | Works |
+| Bottom2 IMU at 0x68 | Works: the Bottom2 IMU is unpowered, so the Core Matrix's is alone | **Collision.** Lay-flat pause and auto-rotate need the bars' rail off, so if the check finds a collision, the Bars default becomes Off and a setting trades pause-by-tilt for bars on USB. |
+
+Either way the gesture works in the case you care most about, on battery. If the IMU is unusable in some state, the device falls back silently to the B button and the manual orientation setting.
+
+Also enabled once the check passes: **flip to repeat**. In Done, turning the frame upside down (sustained 180° change, > 0.8 s) restarts the same duration.
 
 ### 5.5 Done
 
@@ -186,8 +197,8 @@ The bars are drawn flanking the matrix as they appear with the stack standing up
 
 ## 9. Open questions
 
-1. **Upright or flat?** The grid reads best standing up like a picture frame, where "rows from the top" means what it says. Standing on which edge depends on where the USB-C port and buttons are (bench check 5). If it lies flat, auto-orientation (IMU permitting) or a fixed setting handles "down". *Recommendation: upright, on a small stand, cable out the side.*
-2. **Which Bottom2 revision?** Decides whether tilt features can exist at all (hardware.md §5.4).
+1. **Bottom2 IMU address** (0x68 or 0x69) decides whether lay-flat pause also works on USB with bars on (§5.4). Resolved by bench check 3.
+2. **Which edge stands down** is handled by auto-rotation; the remaining question is only where the cable exits (bench check 5).
 3. **Start full or start empty?** This design starts with all LEDs on and turns them off (the lit area is what's left). The inverse, filling up, reads as progress made rather than time left. Lit-means-left matches your description; easy to flip if it feels wrong on the desk.
 4. **Pomodoro sequencing** (work → 5 min break → work) is a small extension of the state machine; worth doing only if you'd use it.
 5. **Companion app.** Not in v1. If wanted later, the cheapest path is a BLE GATT service (duration, start/stop, state notifications) driven from a Mac menu-bar app or a Web Bluetooth page; the C61 supports BLE 5.

@@ -7,7 +7,7 @@ Research date: 21 November 2026. The Core Matrix launched on 6 November 2026, so
 | What you have | Exact product | SKU | Confidence |
 |---|---|---|---|
 | "Core Matrix" | **M5Stack CoreMatrix** (also styled "Core Matrix", sold as "Core Matrix Dev Kit"), ESP32-C61 controller with a 16×16 LED matrix | C158 | High. Not to be confused with the ATOM Matrix (ESP32, 5×5 RGB). |
-| "M5GO Battery Bottom2" | **Base M5GO Bottom2**, an expansion base designed for the **Core2**. Two hardware revisions exist. | A014-C (MPU6886 IMU) or A014-C-V13 (BMI270 IMU) | High on the product; **which revision you have is [?]** and matters (§5.4). |
+| "M5GO Battery Bottom2" | **Base M5GO Bottom2**, an expansion base designed for the **Core2**. Two hardware revisions exist. | **A014-C-V13 (v1.3, BMI270 IMU)**, confirmed by Steel 21 Nov 2026. (The older A014-C has an MPU6886.) | High |
 
 The Bottom2 is not listed as compatible with the Core Matrix anywhere. It works because both follow the 30-pin M-Bus convention, but every pin it uses lands on a different Core Matrix GPIO than on a Core2. Section 5 is the mapping.
 
@@ -251,7 +251,7 @@ Implication: on the 500 mAh cell, **roughly 9–12 h with bars on (10 % cap), 25
 
 Each is a five-minute sketch; together they retire every **[?]** above.
 
-1. **Inventory.** Read the label on the Bottom2 (A014-C vs A014-C-V13). Plug in, confirm `/dev/cu.usbmodem*` appears.
+1. **Inventory.** Bottom2 is v1.3 (confirmed). Plug in, confirm `/dev/cu.usbmodem*` appears.
 2. **I2C scan, boost on vs off.** Expect 0x4F, 0x68, 0x6E, 0x72 (0x72 won't show in a read-probe scan; probe with a zero-length write). Then `M5.Power.M5pm1.setExtOutput(false)` and rescan. Anything that disappears is on the Bottom2.
 3. **IMU collision test.** With the boost on, read WHO_AM_I/CHIP_ID at 0x68 and 0x69, then stream accelerometer data while tilting. Clean, gravity-consistent data at a known address → IMU features allowed. Noisy, quantised or nonsensical data → collision; IMU features stay off whenever the bars are powered.
 4. **Bars.** SPI driver on G5, light index 0..9 in turn, record the physical position of each into `bar_index`. Check the first LED for flicker (3.3 V logic margin).
