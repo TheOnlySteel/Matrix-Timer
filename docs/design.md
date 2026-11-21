@@ -6,7 +6,7 @@ Companion to [hardware.md](hardware.md), which this doc relies on for every pin,
 
 ## 1. What it is
 
-A utilitarian desk timer for work blocks: a digital hourglass without the hourglass styling. You set a duration and press start. All 256 LEDs light, then tick off one at a time, left to right along the top row, then along the next row down, until the last LED in the bottom-right corner goes out. The LEDs still lit *are* the time remaining. The LED that is currently being used up blinks with a shrinking on-time, so the display is visibly moving between ticks. The LED bars on the Bottom2 show the same quantity as a smooth analogue gauge and shift colour as the block ends. When the last LED goes out, the matrix flashes and chirps.
+A utilitarian desk timer for work blocks: a digital hourglass without the hourglass styling. You set a duration and press start. All 256 LEDs light, then tick off one at a time, left to right along the top row, then along the next row down, until the last LED in the bottom-right corner goes out. The LEDs still lit *are* the time remaining. The LED that is currently being used up blinks, so the display is visibly moving between ticks. The LED bars on the Bottom2 show the same quantity as a smooth analogue gauge and shift colour as the block ends. When the last LED goes out, the matrix flashes and chirps.
 
 **Goals:** glanceable remaining time from across a desk; a sense of continuous motion; durations from 1 minute to 4 hours set in seconds with three buttons; a full workday on battery; survive an accidental reset without losing the block.
 
@@ -30,14 +30,14 @@ These decide the design more than taste does (details in hardware.md §1):
 | Ticks per block | **256** (every LED) |
 | Order | Row 0 left → right, then row 1, … row 15. Row 0 is the top after rotation. |
 | LEDs lit | `ceil(256 × remaining / total)` |
-| One LED | `total / 256`: 5.9 s for 25 min, 14 s for 1 h, 56 s for 4 h |
+| One LED | `total / 256`: 5.9 s for 25 min (about 4 blinks), 14 s for 1 h, 56 s for 4 h |
 | One row | exactly 1/16 of the block: 94 s for 25 min, 3¾ min for 1 h |
 
 Using ceil means *a lit LED always means time remains*, and the last LED goes out at exactly zero. Reading it is arithmetic you can do at a glance: rows left ÷ 16 is the fraction left, and for a 1-hour block each row is 3¾ minutes.
 
-**The active LED.** The first lit LED is the one being consumed. It blinks once per second, and its on-time equals the share of its own slice still left: 95 % on just after the previous LED went out, 50 % halfway through, a brief flicker just before it goes dark. So between ticks the display is always moving, and the speed of the shrink tells you the block's length. If a slice is under 2 s (blocks under ~8.5 minutes), the active LED stays steady; at that pace the ticking itself is the motion.
+**The active LED.** The first lit LED is the one being consumed. It blinks **1 s on, 0.5 s off** in an unbroken rhythm. The display moves on to the next LED (or the next row) only at the start of a blink cycle. In the off phase just before that, the outgoing LED and the next one go dark together, and the next one then blinks back on, on schedule, so a hand-over looks like one ordinary blink. The price is that an LED can go out up to one cycle (1.5 s) after its exact time. That is invisible at 5.9 s per LED, and Done still fires at the exact time. This was tuned on the desk with Steel on 21 Nov. The original design shrank the on-time within a 1 s cycle, so the LED "drained", but it ended in a flicker and jumped at hand-overs. If a slice is under 1.5 s (blocks under ~6.4 minutes), the active LED stays steady; at that pace the ticking itself is the motion.
 
-**Paused:** the active LED holds steady and the whole matrix breathes (global brightness sweeping between 1/16 and the set level at 0.5 Hz), which is unmistakable from across a room without drawing a pause glyph over the grid.
+**Paused:** the active LED holds steady and the whole matrix drops to a static 1/16 duty, its dimmest step, while the bars show a dim amber LED at the bottom (§4). Steel tried the original breathing version on the desk (21 Nov) and preferred a static dim. It still reads as "paused" from across a room without a glyph over the grid.
 
 ![Active LED in real time: the blink on-time shrinks, then the LED goes out and the next one starts](images/active-led.gif)
 
@@ -47,8 +47,8 @@ Using ceil means *a lit LED always means time remains*, and the last LED goes ou
 
 Used for setting and peeking, never as the running face.
 
-- Under 100 minutes: minutes in a 3×5 font drawn at **2×** (6×10 glyphs, "25" is 14 px wide).
-- 100 minutes and over: **H:MM** in the 3×5 font at 1× wide, 2× tall ("1:45" is 13 px wide).
+- Under 100 minutes: minutes in a 3×5 font drawn **2× wide and 12 rows tall** (the font rows become 2, 3, 2, 3, 2 px), with a 2 px gap, so "25" is 14×12 and exactly centred.
+- 100 minutes and over: **H:MM** in the 3×5 font at 1× wide, 12 rows tall ("1:45" is 13 px wide).
 - Under one minute (peek only): seconds, same 2× font.
 
 ## 4. The LED bars
@@ -58,7 +58,7 @@ The Bottom2's ten SK6812s are treated as two 5-LED columns, position 0 at the bo
 | State | Bars |
 |---|---|
 | Set | Battery level, dim green (USB power only under Auto); animate upward while charging |
-| Running | **Remaining-time gauge.** Each LED is 20 % of the block; the topmost lit LED's brightness carries the remainder, so the bar shrinks continuously. Teal above 20 %, amber ≤ 20 %, red ≤ 5 %. The bottom LED never fades below 15 % while time remains. |
+| Running | **Remaining-time gauge.** Each LED is 20 % of the block; the topmost lit LED's brightness carries the remainder, so the bar shrinks continuously. The LEDs above the bottom one are drawn one step lower than this, because light bleeding through the diffuser made the bar look a LED fuller than meant (desk check, 21 Nov). A fresh block still starts with all five lit; the top one fades out after 15 s. Teal above 20 %, amber ≤ 20 %, red ≤ 5 %. The bottom LED never fades below 15 % while time remains. |
 | Paused | Bottom LED amber, steady, dim |
 | Done | Red, pulsing with the matrix flash |
 | Low battery (< 15 %) | Bottom-left LED blinks red once every 5 s, in any state |
@@ -115,7 +115,7 @@ Entered with A+C held for 2 s from Set; the matrix shows a one-letter code per i
 
 | Item | Values | Default |
 |---|---|---|
-| Matrix brightness | 1–8 (TM1680 duty 1/16–8/16) | 3 |
+| Matrix brightness | 1–8 (TM1680 duty 1/16–8/16) on USB; on battery capped at 2/16 | 4 (desk check, 21 Nov) |
 | Bars | Auto (on with USB, off on battery), On, Off | Auto |
 | Bar brightness | 5, 10, 25 % of full | 10 % |
 | Sound | Chirp, Silent | Chirp |
@@ -142,7 +142,7 @@ Also enabled: **flip to repeat**. In Done, turning the frame upside down (sustai
 
 ### 5.5 Done
 
-Matrix flashes all 256 LEDs on and off at 2 Hz (at the configured brightness, never above it); bars pulse red. Buzzer (IOE1 PWM at ~2.7 kHz, the MLT-8530's resonance) plays three short chirps, repeating every 10 s for 1 minute, then stops; the visual alarm continues at 0.5 Hz until dismissed. **Position taken:** no continuous beeping. This sits next to someone working.
+The matrix (a 6×6 square in the centre, at 1/16 duty) and the red bars **take turns** flashing: 2 Hz alternation for the first minute, then 0.5 Hz until dismissed. Steel picked the alternation, the 1/16 matrix and a small centre square rather than all 256 LEDs on the desk (21 Nov; a checkmark and a triforce were tried first). A Done restored after a reset resumes the quiet slow flash without chirping again. Buzzer (IOE1 PWM at ~2.7 kHz, the MLT-8530's resonance) plays one burst of three short chirps the moment the block finishes, then a single chirp at 15, 30, 45 and 60 s, then stops (Steel, 21 Nov: repeating bursts were too much in a shared room). **Position taken:** no continuous beeping. This sits next to someone working.
 
 ## 6. Timing model
 
@@ -176,7 +176,7 @@ Arduino on arduino-cli, M5Unified + M5GFX, one loop, no RTOS tasks of our own.
 | `Sound` | Buzzer chirps via IOE1 PWM channel | |
 | `App` | State machine of §5.1 | |
 
-**Frame scheduling.** While running, the matrix changes at most twice per second (the active LED's on and off edges) plus once per tick, so schedule wakeups at exactly those edges rather than at a fixed rate: ≤ 3 pushes/s × 0.8 ms, effectively zero bus load and long light-sleep windows. In other states, render on events plus 50 ms ticks for animations (breathing, flash). Bars update at 20 Hz for smooth fades (120-byte SPI burst each, negligible).
+**Frame scheduling.** While running, the matrix changes at most twice per second (the active LED's on and off edges) plus once per tick, so schedule wakeups at exactly those edges rather than at a fixed rate: ≤ 3 pushes/s × 0.8 ms, effectively zero bus load and long light-sleep windows. In other states, render on events plus 50 ms ticks for animations (the Done flash). Bars update at 20 Hz for smooth fades (120-byte SPI burst each, negligible).
 
 **Sleep.** On battery, enable automatic light sleep between frames and wake on the PM1 IRQ (G2) for buttons. On USB, stay awake. In Set, on battery, after 10 minutes without input → PM1 power-off; a click on power brings it back to Set with the last duration.
 

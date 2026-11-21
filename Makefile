@@ -5,6 +5,9 @@
 # clash with other sketches on the same Mac.
 #
 #   make setup                      install the pinned core + libraries (once)
+#   make firmware                   build the timer (firmware/MatrixTimer)
+#   make flash-firmware             build + flash the timer
+#   make test                       host tests for the pure modules
 #   make build SKETCH=bench/check2_i2c_scan
 #   make flash SKETCH=bench/check2_i2c_scan [PORT=/dev/cu.usbmodem101]
 #   make log   [SECS=20] [OUT=bench/logs/x.txt] [SEND="r"]
@@ -39,7 +42,9 @@ SECS          ?= 20
 OUT           ?= bench/logs/$(notdir $(SKETCH)).txt
 SEND          ?=
 
-.PHONY: setup venv build flash upload log bench-all port clean
+FW            := firmware/MatrixTimer
+
+.PHONY: setup venv build flash upload log bench-all port clean firmware flash-firmware test
 
 setup: venv
 	$(ARDUINO_CLI) core update-index
@@ -69,6 +74,17 @@ log: venv
 
 bench-all:
 	@for s in bench/check*/; do $(MAKE) --no-print-directory build SKETCH=$${s%/} || exit 1; done
+
+firmware:
+	$(MAKE) --no-print-directory build SKETCH=$(FW)
+
+flash-firmware:
+	$(MAKE) --no-print-directory flash SKETCH=$(FW)
+
+test:
+	@mkdir -p .build
+	c++ -std=c++17 -Wall -Wextra -O1 -o .build/host_test firmware/test/host_test.cpp
+	.build/host_test
 
 port:
 	@echo "PORT=$(PORT)"

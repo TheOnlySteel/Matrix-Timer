@@ -38,7 +38,7 @@ void loop() {
   if (millis() - lastRec >= 5000 && s_n < 256) {
     lastRec = millis();
     s_ring[s_n++] = {millis() / 1000, M5.Power.M5pm1.getBatteryVoltage(), M5.Power.M5pm1.getVBUSVoltage(),
-                     (int8_t)M5.Power.isCharging(), (int8_t)M5.getIOExpander(0).digitalRead(8),
+                     (int8_t)M5.Power.isCharging(), (int8_t)M5.getIOExpander(0).digitalRead(7 /* IOE1 IO8: M5Unified pin enums are 0-based */),
                      (int8_t)M5.Power.getBatteryLevel()};
     M5.Display.setBrightness(32);
     M5.Display.setTextDatum(middle_center);
@@ -60,7 +60,7 @@ void loop() {
                   (int)M5.Power.getBatteryVoltage(), (int)M5.Power.isCharging(),
                   (int)M5.Power.getChargeState(), M5.Power.M5pm1.getBatteryVoltage(),
                   M5.Power.M5pm1.getVBUSVoltage(), M5.Power.M5pm1.get5VoutVoltage(), (int)src, srcOk,
-                  (int)M5.Power.M5pm1.getExtOutput(), (int)M5.getIOExpander(0).digitalRead(8));
+                  (int)M5.Power.M5pm1.getExtOutput(), (int)M5.getIOExpander(0).digitalRead(7 /* IOE1 IO8: M5Unified pin enums are 0-based */));
   }
   delay(10);
 }
