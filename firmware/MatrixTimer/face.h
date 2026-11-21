@@ -188,30 +188,12 @@ inline Frame peekFrame(double remaining_s) {
   return durationFrame((int)ceil(remaining_s / 60 - 1e-9));
 }
 
-// Done: a 2-px-thick checkmark, so the alarm says "finished" instead of
-// lighting all 256 (Steel, 21 Nov).
-inline Frame checkFrame() {
-  static const int8_t pts[][2] = {{8, 2}, {9, 3}, {10, 4}, {11, 5}, {10, 6}, {9, 7}, {8, 8},
-                                  {7, 9}, {6, 10}, {5, 11}, {4, 12}, {3, 13}};
+// Done: a 4x4 square in the centre (rows/cols 6..9). Chosen on the desk
+// with Steel (21 Nov) after trying all 256 on, a checkmark and a triforce.
+inline Frame doneFrame() {
   Frame f;
-  for (auto& p : pts) { f.set(p[0], p[1], true); f.set(p[0] + 1, p[1], true); }
-  return f;
-}
-
-// Done: three solid triangles stacked into one. It keeps off the outermost
-// ring of LEDs (Steel, 21 Nov), so it is 12x12 in rows/cols 2..13: each
-// triangle is 6 rows with a 2-px apex, widening by 2 every second row. (A
-// 14x14 version can't be symmetric with this shape: two sub-triangles with
-// even bases would need 16 columns.)
-inline Frame triforceFrame() {
-  Frame f;
-  auto tri = [&](int top, int cx) {  // cx = left column of the 2-px apex
-    for (int j = 0; j < 6; ++j)
-      for (int c = cx - j / 2; c <= cx + 1 + j / 2; ++c) f.set(top + j, c, true);
-  };
-  tri(2, 7);   // upper: cols 5..10 at its base
-  tri(8, 4);   // lower left: cols 2..7
-  tri(8, 10);  // lower right: cols 8..13
+  for (int r = 6; r <= 9; ++r)
+    for (int c = 6; c <= 9; ++c) f.set(r, c, true);
   return f;
 }
 

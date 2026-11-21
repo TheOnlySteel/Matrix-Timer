@@ -142,7 +142,7 @@ Also enabled: **flip to repeat**. In Done, turning the frame upside down (sustai
 
 ### 5.5 Done
 
-The matrix (a triforce of three triangles, 12×12 inside the outer ring of LEDs, at 1/16 duty) and the red bars **take turns** flashing: 2 Hz alternation for the first minute, then 0.5 Hz until dismissed. Steel picked the alternation, the 1/16 matrix and a triforce rather than all 256 LEDs on the desk (21 Nov; a checkmark was tried first). A Done restored after a reset resumes the quiet slow flash without chirping again. Buzzer (IOE1 PWM at ~2.7 kHz, the MLT-8530's resonance) plays one burst of three short chirps the moment the block finishes, then a single chirp at 15, 30, 45 and 60 s, then stops (Steel, 21 Nov: repeating bursts were too much in a shared room). **Position taken:** no continuous beeping. This sits next to someone working.
+The matrix (a 4×4 square in the centre, at 1/16 duty) and the red bars **take turns** flashing: 2 Hz alternation for the first minute, then 0.5 Hz until dismissed. Steel picked the alternation, the 1/16 matrix and a small centre square rather than all 256 LEDs on the desk (21 Nov; a checkmark and a triforce were tried first). A Done restored after a reset resumes the quiet slow flash without chirping again. Buzzer (IOE1 PWM at ~2.7 kHz, the MLT-8530's resonance) plays one burst of three short chirps the moment the block finishes, then a single chirp at 15, 30, 45 and 60 s, then stops (Steel, 21 Nov: repeating bursts were too much in a shared room). **Position taken:** no continuous beeping. This sits next to someone working.
 
 ## 6. Timing model
 

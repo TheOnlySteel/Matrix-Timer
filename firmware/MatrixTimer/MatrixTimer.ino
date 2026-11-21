@@ -281,7 +281,7 @@ static Frame currentFrame(uint32_t ms, int64_t now, int* duty) {
     case St::Done: {
       // Matrix at 1/16, alternating with the bars (Steel, 21 Nov).
       *duty = 1;
-      return doneMatrixPhase(ms) ? face::triforceFrame() : Frame{};  // or face::checkFrame()
+      return doneMatrixPhase(ms) ? face::doneFrame() : Frame{};
     }
     case St::Settings: {
       char item, val[4];
