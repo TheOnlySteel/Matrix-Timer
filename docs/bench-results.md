@@ -204,7 +204,7 @@ BAT t=172s level=100% batt=4188mV isCharging=1 chargeState=1
 - At 4.16 V on USB the charger reported **not charging** (terminated, full). Replugging after 80 s on battery (4.13 V under load) **restarted charging** (`isCharging=1`, VBAT up to 4.19 V while charging). Termination at ~4.2 V wasn't observed: the cell started full, and a full run-down and recharge didn't fit in this session.
 - `src=5` = VIN | battery (PM1 `pwr_src_t`). VIN reads 0–76 mV unplugged and ~5.25 V on USB, so **VIN > 4.5 V is a clean "on USB" test** for the bars' Auto setting.
 - **For ~30 s after boot, M5Unified reports battery level and voltage as −1** (`chargeState=-1`, undetermined) while its presence heuristic settles. The raw `M5pm1.getBatteryVoltage()` is valid immediately. The firmware's battery and Auto logic should use the PM1 value, or wait for the M5Unified value to become valid.
-- The sketch's raw `CHG_STAT(IOE1 G8)` column read 0 throughout, even when M5Unified correctly said not charging. My `getIOExpander(0).digitalRead(8)` call evidently doesn't read that pin, so ignore that column and use `M5.Power.isCharging()`.
+- The sketch's raw `CHG_STAT(IOE1 G8)` column is wrong and should be ignored: M5Unified numbers IOE1 pins from 0 (`M5IOE1_Class::gpio8 == 7`), so `digitalRead(8)` read IO9. The sketch now reads index 7. Use `M5.Power.isCharging()`. **The same off-by-one is a hazard:** a raw `2` meant for the buzzer enable (IO2) addresses IO3, which is CHG_PROG, and driving it low selects the 650 mA charge current. Always use the `M5IOE1_Class::gpioN` names.
 - Under the boost-on load with the bars dark, the cell sagged ~30 mV in 80 s from full. That isn't a current measurement (§8's run-down test still applies).
 
 ## Design consequences

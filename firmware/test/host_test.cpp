@@ -1,0 +1,75 @@
+// Host tests for the pure modules (Clock, Face). Build: make test
+#include <assert.h>
+#include <stdio.h>
+
+#include "../MatrixTimer/clock.h"
+#include "../MatrixTimer/face.h"
+
+static int fails = 0;
+#define CHECK(cond)                                                    \
+  do {                                                                 \
+    if (!(cond)) { printf("FAIL %s:%d  %s\n", __FILE__, __LINE__, #cond); ++fails; } \
+  } while (0)
+
+int main() {
+  using namespace face;
+  // ticksLeft: ceil, a lit LED means time remains
+  CHECK(ticksLeft(1500, 1500) == 256);
+  CHECK(ticksLeft(0, 1500) == 0);
+  CHECK(ticksLeft(0.001, 1500) == 1);
+  CHECK(ticksLeft(1500.0 / 256, 1500) == 1);          // exactly one slice left
+  CHECK(ticksLeft(1500.0 / 256 + 0.01, 1500) == 2);
+  CHECK(ticksLeft(750, 1500) == 128);
+  CHECK(ticksLeft(2000, 1500) == 256);                // clamp
+
+  // activeFraction in (0,1]
+  double slice = 1500.0 / 256;
+  CHECK(fabs(activeFraction(slice * 10.5, 1500) - 0.5) < 1e-6);
+  CHECK(fabs(activeFraction(slice * 10, 1500) - 1.0) < 1e-6);
+
+  // grid: count of lit LEDs, active LED blink
+  Frame f = grid(750, 1500, -1);
+  CHECK(f.count() == 128);
+  CHECK(!f.get(0, 0) && !f.get(7, 15) && f.get(8, 0) && f.get(15, 15));
+  // active LED (row 8 col 0) at 50 % of its slice: on in first half-second, off in second
+  double rem = slice * 127.5;   // 128 left, active fraction 0.5
+  CHECK(grid(rem, 1500, 10.2).get(8, 0) == true);
+  CHECK(grid(rem, 1500, 10.7).get(8, 0) == false);
+  // short blocks: steady
+  CHECK(grid(60 * 0.5 + 0.1, 60, 10.9).count() == ticksLeft(30.1, 60));
+
+  // digits
+  Frame d = durationFrame(25);   // "25" at 2x: 14 px wide, 10 tall, centred
+  CHECK(d.count() > 0);
+  int minc = 16, maxc = -1, minr = 16, maxr = -1;
+  for (int r = 0; r < 16; ++r)
+    for (int c = 0; c < 16; ++c)
+      if (d.get(r, c)) { minc = c < minc ? c : minc; maxc = c > maxc ? c : maxc; minr = r < minr ? r : minr; maxr = r > maxr ? r : maxr; }
+  CHECK(maxc - minc + 1 == 13 || maxc - minc + 1 == 14);
+  CHECK(maxr - minr + 1 == 10);
+  Frame hm = durationFrame(105);  // "1:45"
+  CHECK(hm.count() > 0);
+  CHECK(peekFrame(59.2) == textFrame("60", 2, 2));
+  CHECK(peekFrame(30.5) == textFrame("31", 2, 2));
+  CHECK(peekFrame(61) == durationFrame(2));
+
+  // Clock: computed, pause, extend, restore
+  Clock k;
+  k.start(0, 1000000000LL);                 // 1000 s
+  CHECK(k.remaining(400000000LL) == 600000000LL);
+  k.pause(400000000LL);
+  CHECK(k.remaining(900000000LL) == 600000000LL);
+  k.resume(900000000LL);
+  CHECK(k.remaining(1000000000LL) == 500000000LL);
+  k.extend(300000000LL);
+  CHECK(k.remaining(1000000000LL) == 800000000LL);
+  CHECK(k.remaining(5000000000LL) == 0);
+  Clock r;
+  r.restore(123, 1000, 400, true);
+  CHECK(r.paused && r.remaining(99999) == 400);
+  r.resume(99999);
+  CHECK(r.remaining(99999 + 100) == 300);
+
+  printf(fails ? "%d FAILED\n" : "all host tests passed\n", fails);
+  return fails != 0;
+}

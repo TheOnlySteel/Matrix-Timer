@@ -43,6 +43,7 @@ def main() -> int:
     ser.port = port
     ser.baudrate = 115200
     ser.timeout = 0.05
+    ser.write_timeout = 1  # a stale port after unplug/replug must not hang the logger
     ser.dtr = True
     ser.rts = True
     ser.open()
@@ -60,8 +61,11 @@ def main() -> int:
             now = time.monotonic() - t0
             while sched and sched[0][0] <= now:
                 _, text = sched.pop(0)
-                ser.write((text + "\n").encode())
-                emit(f">> {text}")
+                try:
+                    ser.write((text + "\n").encode())
+                    emit(f">> {text}")
+                except serial.SerialException as e:
+                    emit(f"# write failed ({e}): {text}")
             with open(ctl) as c:
                 c.seek(ctl_pos)
                 for text in c.read().splitlines():

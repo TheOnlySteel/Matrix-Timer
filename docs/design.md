@@ -37,7 +37,7 @@ Using ceil means *a lit LED always means time remains*, and the last LED goes ou
 
 **The active LED.** The first lit LED is the one being consumed. It blinks once per second, and its on-time equals the share of its own slice still left: 95 % on just after the previous LED went out, 50 % halfway through, a brief flicker just before it goes dark. So between ticks the display is always moving, and the speed of the shrink tells you the block's length. If a slice is under 2 s (blocks under ~8.5 minutes), the active LED stays steady; at that pace the ticking itself is the motion.
 
-**Paused:** the active LED holds steady and the whole matrix breathes (global brightness sweeping between 1/16 and the set level at 0.5 Hz), which is unmistakable from across a room without drawing a pause glyph over the grid.
+**Paused:** the active LED holds steady and the whole matrix drops to a static 1/16 duty, its dimmest step, while the bars show a dim amber LED at the bottom (§4). Steel tried the original breathing version on the desk (21 Nov) and preferred a static dim. It still reads as "paused" from across a room without a glyph over the grid.
 
 ![Active LED in real time: the blink on-time shrinks, then the LED goes out and the next one starts](images/active-led.gif)
 
@@ -115,7 +115,7 @@ Entered with A+C held for 2 s from Set; the matrix shows a one-letter code per i
 
 | Item | Values | Default |
 |---|---|---|
-| Matrix brightness | 1–8 (TM1680 duty 1/16–8/16) | 3 |
+| Matrix brightness | 1–8 (TM1680 duty 1/16–8/16) on USB; on battery capped at 2/16 | 3 |
 | Bars | Auto (on with USB, off on battery), On, Off | Auto |
 | Bar brightness | 5, 10, 25 % of full | 10 % |
 | Sound | Chirp, Silent | Chirp |
@@ -176,7 +176,7 @@ Arduino on arduino-cli, M5Unified + M5GFX, one loop, no RTOS tasks of our own.
 | `Sound` | Buzzer chirps via IOE1 PWM channel | |
 | `App` | State machine of §5.1 | |
 
-**Frame scheduling.** While running, the matrix changes at most twice per second (the active LED's on and off edges) plus once per tick, so schedule wakeups at exactly those edges rather than at a fixed rate: ≤ 3 pushes/s × 0.8 ms, effectively zero bus load and long light-sleep windows. In other states, render on events plus 50 ms ticks for animations (breathing, flash). Bars update at 20 Hz for smooth fades (120-byte SPI burst each, negligible).
+**Frame scheduling.** While running, the matrix changes at most twice per second (the active LED's on and off edges) plus once per tick, so schedule wakeups at exactly those edges rather than at a fixed rate: ≤ 3 pushes/s × 0.8 ms, effectively zero bus load and long light-sleep windows. In other states, render on events plus 50 ms ticks for animations (the Done flash). Bars update at 20 Hz for smooth fades (120-byte SPI burst each, negligible).
 
 **Sleep.** On battery, enable automatic light sleep between frames and wake on the PM1 IRQ (G2) for buttons. On USB, stay awake. In Set, on battery, after 10 minutes without input → PM1 power-off; a click on power brings it back to Set with the last duration.
 
