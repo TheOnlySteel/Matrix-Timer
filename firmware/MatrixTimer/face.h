@@ -189,17 +189,18 @@ inline Frame checkFrame() {
   return f;
 }
 
-// Done, alternative: three solid triangles (height 4) stacked into one
-// (height 8, 15 wide), centred: Steel asked to try it (21 Nov).
+// Done: three solid triangles stacked into one, full screen (Steel, 21 Nov:
+// the first, 8-row version looked squat). Each triangle is 8 rows tall with a
+// 2-px apex, widening by 2 every second row; the bottom row spans all 16.
 inline Frame triforceFrame() {
   Frame f;
-  const int top = 4;  // rows 4..11
-  for (int r = 0; r < 4; ++r)
-    for (int d = -r; d <= r; ++d) {
-      f.set(top + r, 7 + d, true);        // upper triangle, apex col 7
-      f.set(top + 4 + r, 3 + d, true);    // lower left, apex col 3
-      f.set(top + 4 + r, 11 + d, true);   // lower right, apex col 11
-    }
+  auto tri = [&](int top, int cx) {  // cx = left column of the 2-px apex
+    for (int j = 0; j < 8; ++j)
+      for (int c = cx - j / 2; c <= cx + 1 + j / 2; ++c) f.set(top + j, c, true);
+  };
+  tri(0, 7);   // upper
+  tri(8, 3);   // lower left
+  tri(8, 11);  // lower right
   return f;
 }
 
