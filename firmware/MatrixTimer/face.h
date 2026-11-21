@@ -44,8 +44,8 @@ inline double activeFraction(double remaining_s, double total_s) {
 }
 
 // Lit LEDs = time left, ticked off row 0 left->right, then the next row.
-// The first lit LED blinks with a 3 s cycle; its on-time runs from 2 s down to
-// 1 s with the share of its slice still left (at least 1 s on and 1 s off).
+// The first lit LED blinks with a 2.5 s cycle; its on-time runs from 1.5 s
+// down to 1 s with the share of its slice still left (>= 1 s on and off).
 // t_s < 0 freezes it steady (paused).
 inline Frame grid(double remaining_s, double total_s, double t_s) {
   Frame f;

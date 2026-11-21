@@ -6,12 +6,12 @@ namespace cfg {
 
 // --- grid (design.md §3.1) ---
 constexpr int kW = 16, kH = 16, kN = kW * kH;   // 256 ticks per block
-// Active LED blink (Steel, 21 Nov: at least 1 s on and 1 s off). One 3 s
-// cycle; the on-time shrinks from 2 s to 1 s as the LED's slice is used up,
-// so it still drains visibly but never flickers.
-constexpr double kBlinkPeriodS = 3.0;
-constexpr double kBlinkMinOnS = 1.0, kBlinkMaxOnS = 2.0;
-constexpr double kMinSliceForBlinkS = 3.0;      // below one blink cycle per LED: steady
+// Active LED blink (Steel, 21 Nov: at least 1 s on and 1 s off; 3 s felt a
+// little slow). One 2.5 s cycle; the on-time shrinks from 1.5 s to 1 s as the
+// LED's slice is used up, so it still drains visibly but never flickers.
+constexpr double kBlinkPeriodS = 2.5;
+constexpr double kBlinkMinOnS = 1.0, kBlinkMaxOnS = 1.5;
+constexpr double kMinSliceForBlinkS = 2.5;      // below one blink cycle per LED: steady
 
 // --- durations (design.md §5.2) ---
 constexpr int kMinMinutes = 1, kMaxMinutes = 240, kDefaultMinutes = 25;
