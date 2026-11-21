@@ -30,12 +30,12 @@ These decide the design more than taste does (details in hardware.md §1):
 | Ticks per block | **256** (every LED) |
 | Order | Row 0 left → right, then row 1, … row 15. Row 0 is the top after rotation. |
 | LEDs lit | `ceil(256 × remaining / total)` |
-| One LED | `total / 256`: 5.9 s for 25 min, 14 s for 1 h, 56 s for 4 h |
+| One LED | `total / 256`: 5.9 s for 25 min (about two blink cycles), 14 s for 1 h, 56 s for 4 h |
 | One row | exactly 1/16 of the block: 94 s for 25 min, 3¾ min for 1 h |
 
 Using ceil means *a lit LED always means time remains*, and the last LED goes out at exactly zero. Reading it is arithmetic you can do at a glance: rows left ÷ 16 is the fraction left, and for a 1-hour block each row is 3¾ minutes.
 
-**The active LED.** The first lit LED is the one being consumed. It blinks once per second, and its on-time equals the share of its own slice still left: 95 % on just after the previous LED went out, 50 % halfway through, a brief flicker just before it goes dark. So between ticks the display is always moving, and the speed of the shrink tells you the block's length. If a slice is under 2 s (blocks under ~8.5 minutes), the active LED stays steady; at that pace the ticking itself is the motion.
+**The active LED.** The first lit LED is the one being consumed. It blinks on a slow 3-second cycle. Its on-time shrinks with the share of its own slice still left: 2 s on and 1 s off just after the previous LED went out, 1.5 s / 1.5 s halfway through, and 1 s on and 2 s off just before it goes dark. So between ticks the display is always moving, but it never flickers. Steel asked on the desk (21 Nov) for at least a second on and a second off; the first version blinked once a second and ended in a brief flicker. If a slice is under 3 s (blocks under ~12.8 minutes), the active LED stays steady; at that pace the ticking itself is the motion.
 
 **Paused:** the active LED holds steady and the whole matrix drops to a static 1/16 duty, its dimmest step, while the bars show a dim amber LED at the bottom (§4). Steel tried the original breathing version on the desk (21 Nov) and preferred a static dim. It still reads as "paused" from across a room without a glyph over the grid.
 

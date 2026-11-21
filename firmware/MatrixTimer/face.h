@@ -44,8 +44,9 @@ inline double activeFraction(double remaining_s, double total_s) {
 }
 
 // Lit LEDs = time left, ticked off row 0 left->right, then the next row.
-// The first lit LED blinks once per second with an on-time equal to the
-// share of its slice still left. t_s < 0 freezes it steady (paused).
+// The first lit LED blinks with a 3 s cycle; its on-time runs from 2 s down to
+// 1 s with the share of its slice still left (at least 1 s on and 1 s off).
+// t_s < 0 freezes it steady (paused).
 inline Frame grid(double remaining_s, double total_s, double t_s) {
   Frame f;
   f.fill(true);
@@ -53,8 +54,8 @@ inline Frame grid(double remaining_s, double total_s, double t_s) {
   int gone = cfg::kN - left;
   for (int i = 0; i < gone; ++i) f.set(i / cfg::kW, i % cfg::kW, false);
   if (t_s >= 0 && left > 0 && total_s / cfg::kN >= cfg::kMinSliceForBlinkS) {
-    double phase = fmod(t_s, cfg::kBlinkPeriodS) / cfg::kBlinkPeriodS;
-    f.set(gone / cfg::kW, gone % cfg::kW, phase < activeFraction(remaining_s, total_s));
+    double on = cfg::kBlinkMinOnS + (cfg::kBlinkMaxOnS - cfg::kBlinkMinOnS) * activeFraction(remaining_s, total_s);
+    f.set(gone / cfg::kW, gone % cfg::kW, fmod(t_s, cfg::kBlinkPeriodS) < on);
   }
   return f;
 }
