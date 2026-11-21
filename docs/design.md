@@ -47,8 +47,8 @@ Using ceil means *a lit LED always means time remains*, and the last LED goes ou
 
 Used for setting and peeking, never as the running face.
 
-- Under 100 minutes: minutes in a 3×5 font drawn at **2×** (6×10 glyphs with a 2 px gap, so "25" is 14 px wide and exactly centred).
-- 100 minutes and over: **H:MM** in the 3×5 font at 1× wide, 2× tall ("1:45" is 13 px wide).
+- Under 100 minutes: minutes in a 3×5 font drawn **2× wide and 12 rows tall** (the font rows become 2, 3, 2, 3, 2 px), with a 2 px gap, so "25" is 14×12 and exactly centred.
+- 100 minutes and over: **H:MM** in the 3×5 font at 1× wide, 12 rows tall ("1:45" is 13 px wide).
 - Under one minute (peek only): seconds, same 2× font.
 
 ## 4. The LED bars
@@ -142,7 +142,7 @@ Also enabled: **flip to repeat**. In Done, turning the frame upside down (sustai
 
 ### 5.5 Done
 
-The matrix (a 2-px checkmark, at 1/16 duty) and the red bars **take turns** flashing: 2 Hz alternation for the first minute, then 0.5 Hz until dismissed. Steel picked the alternation, the 1/16 matrix and a checkmark rather than all 256 LEDs on the desk (21 Nov). A Done restored after a reset resumes the quiet slow flash without chirping again. Buzzer (IOE1 PWM at ~2.7 kHz, the MLT-8530's resonance) plays one burst of three short chirps the moment the block finishes, then a single chirp at 15, 30, 45 and 60 s, then stops (Steel, 21 Nov: repeating bursts were too much in a shared room). **Position taken:** no continuous beeping. This sits next to someone working.
+The matrix (a triforce of three triangles, 12×12 inside the outer ring of LEDs, at 1/16 duty) and the red bars **take turns** flashing: 2 Hz alternation for the first minute, then 0.5 Hz until dismissed. Steel picked the alternation, the 1/16 matrix and a triforce rather than all 256 LEDs on the desk (21 Nov; a checkmark was tried first). A Done restored after a reset resumes the quiet slow flash without chirping again. Buzzer (IOE1 PWM at ~2.7 kHz, the MLT-8530's resonance) plays one burst of three short chirps the moment the block finishes, then a single chirp at 15, 30, 45 and 60 s, then stops (Steel, 21 Nov: repeating bursts were too much in a shared room). **Position taken:** no continuous beeping. This sits next to someone working.
 
 ## 6. Timing model
 

@@ -85,7 +85,11 @@ int main() {
       if (d.get(r, c)) { minc = c < minc ? c : minc; maxc = c > maxc ? c : maxc; minr = r < minr ? r : minr; maxr = r > maxr ? r : maxr; }
   CHECK(maxc - minc + 1 == 14);
   CHECK(minc == 1 && maxc == 14);   // exactly centred
-  CHECK(maxr - minr + 1 == 10);
+  CHECK(maxr - minr + 1 == 12);
+  CHECK(minr == 2 && maxr == 13);
+  // triforce stays off the outer ring
+  Frame tf = triforceFrame();
+  for (int k = 0; k < 16; ++k) CHECK(!tf.get(0, k) && !tf.get(15, k) && !tf.get(k, 0) && !tf.get(k, 15));
   Frame hm = durationFrame(105);  // "1:45"
   CHECK(hm.count() > 0);
   CHECK(peekFrame(59.2) == textFrame("60", 2, 2));

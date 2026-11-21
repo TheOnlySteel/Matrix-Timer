@@ -135,19 +135,26 @@ inline int glyphW(char ch) { return ch == ':' ? 1 : 3; }
 // centres vertically. The gap between glyphs scales with sx (2 px at 2x), so
 // two 2x digits are 14 px wide and sit exactly centred; an odd width rounds
 // right rather than left (Steel, 21 Nov: digits looked left-skewed).
+// sy == 2 is the "tall" digit size: the font's five rows become 2,3,2,3,2 px
+// (12 rows, rows 2..13), one row taller at top and bottom than plain 2x and
+// with the bars still 2 px thick (Steel, 21 Nov).
 inline void drawText(Frame& f, const char* s, int sx, int sy, int y0 = -1) {
+  static const int kTall[5] = {2, 3, 2, 3, 2}, kTallOff[5] = {0, 2, 5, 7, 10};
+  bool tall = sy == 2;
+  int height = tall ? 12 : 5 * sy;
   int n = strlen(s), total = 0;
   for (int i = 0; i < n; ++i) total += glyphW(s[i]) * sx + (i ? sx : 0);
   int x = (cfg::kW - total + 1) / 2;
-  int y = y0 >= 0 ? y0 : (cfg::kH - 5 * sy) / 2;
+  int y = y0 >= 0 ? y0 : (cfg::kH - height) / 2;
   for (int i = 0; i < n; ++i) {
     char ch = s[i];
     for (int gy = 0; gy < 5; ++gy)
       for (int gx = 0; gx < glyphW(ch); ++gx) {
         bool on = ch == ':' ? (gy == 1 || gy == 3) : (glyph(ch) && glyph(ch)[gy * 3 + gx] == '1');
-        if (on)
-          for (int dy = 0; dy < sy; ++dy)
-            for (int dx = 0; dx < sx; ++dx) f.set(y + gy * sy + dy, x + gx * sx + dx, true);
+        if (!on) continue;
+        int h = tall ? kTall[gy] : sy, oy = tall ? kTallOff[gy] : gy * sy;
+        for (int dy = 0; dy < h; ++dy)
+          for (int dx = 0; dx < sx; ++dx) f.set(y + oy + dy, x + gx * sx + dx, true);
       }
     x += glyphW(ch) * sx + sx;
   }
@@ -191,18 +198,20 @@ inline Frame checkFrame() {
   return f;
 }
 
-// Done: three solid triangles stacked into one, full screen (Steel, 21 Nov:
-// the first, 8-row version looked squat). Each triangle is 8 rows tall with a
-// 2-px apex, widening by 2 every second row; the bottom row spans all 16.
+// Done: three solid triangles stacked into one. It keeps off the outermost
+// ring of LEDs (Steel, 21 Nov), so it is 12x12 in rows/cols 2..13: each
+// triangle is 6 rows with a 2-px apex, widening by 2 every second row. (A
+// 14x14 version can't be symmetric with this shape: two sub-triangles with
+// even bases would need 16 columns.)
 inline Frame triforceFrame() {
   Frame f;
   auto tri = [&](int top, int cx) {  // cx = left column of the 2-px apex
-    for (int j = 0; j < 8; ++j)
+    for (int j = 0; j < 6; ++j)
       for (int c = cx - j / 2; c <= cx + 1 + j / 2; ++c) f.set(top + j, c, true);
   };
-  tri(0, 7);   // upper
-  tri(8, 3);   // lower left
-  tri(8, 11);  // lower right
+  tri(2, 7);   // upper: cols 5..10 at its base
+  tri(8, 4);   // lower left: cols 2..7
+  tri(8, 10);  // lower right: cols 8..13
   return f;
 }
 
