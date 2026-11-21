@@ -47,7 +47,7 @@ Using ceil means *a lit LED always means time remains*, and the last LED goes ou
 
 Used for setting and peeking, never as the running face.
 
-- Under 100 minutes: minutes in a 3×5 font drawn at **2×** (6×10 glyphs, "25" is 14 px wide).
+- Under 100 minutes: minutes in a 3×5 font drawn at **2×** (6×10 glyphs with a 2 px gap, so "25" is 14 px wide and exactly centred).
 - 100 minutes and over: **H:MM** in the 3×5 font at 1× wide, 2× tall ("1:45" is 13 px wide).
 - Under one minute (peek only): seconds, same 2× font.
 

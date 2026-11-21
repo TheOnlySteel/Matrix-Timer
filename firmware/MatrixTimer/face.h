@@ -132,11 +132,13 @@ inline const char* glyph(char ch) {
 inline int glyphW(char ch) { return ch == ':' ? 1 : 3; }
 
 // Draw `s` with each font pixel scaled sx by sy, centred horizontally; y0 < 0
-// centres vertically.
+// centres vertically. The gap between glyphs scales with sx (2 px at 2x), so
+// two 2x digits are 14 px wide and sit exactly centred; an odd width rounds
+// right rather than left (Steel, 21 Nov: digits looked left-skewed).
 inline void drawText(Frame& f, const char* s, int sx, int sy, int y0 = -1) {
   int n = strlen(s), total = 0;
-  for (int i = 0; i < n; ++i) total += glyphW(s[i]) * sx + (i ? 1 : 0);
-  int x = (cfg::kW - total) / 2;
+  for (int i = 0; i < n; ++i) total += glyphW(s[i]) * sx + (i ? sx : 0);
+  int x = (cfg::kW - total + 1) / 2;
   int y = y0 >= 0 ? y0 : (cfg::kH - 5 * sy) / 2;
   for (int i = 0; i < n; ++i) {
     char ch = s[i];
@@ -147,7 +149,7 @@ inline void drawText(Frame& f, const char* s, int sx, int sy, int y0 = -1) {
           for (int dy = 0; dy < sy; ++dy)
             for (int dx = 0; dx < sx; ++dx) f.set(y + gy * sy + dy, x + gx * sx + dx, true);
       }
-    x += glyphW(ch) * sx + 1;
+    x += glyphW(ch) * sx + sx;
   }
 }
 

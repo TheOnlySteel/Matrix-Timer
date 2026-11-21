@@ -86,8 +86,8 @@ def text_frame(s: str, sx: int, sy: int):
     f = [[False] * W for _ in range(H)]
     glyphs = [FONT3x5[ch] for ch in s]
     widths = [len(g[0]) * sx for g in glyphs]
-    total = sum(widths) + (len(glyphs) - 1)
-    x = (W - total) // 2
+    total = sum(widths) + (len(glyphs) - 1) * sx   # gap scales with sx
+    x = (W - total + 1) // 2                        # odd widths round right
     y = (H - 5 * sy) // 2
     for g, w in zip(glyphs, widths):
         for gy, row in enumerate(g):
@@ -96,7 +96,7 @@ def text_frame(s: str, sx: int, sy: int):
                     for dy in range(sy):
                         for dx in range(sx):
                             f[y + gy * sy + dy][x + gx * sx + dx] = True
-        x += w + 1
+        x += w + sx
     return f
 
 

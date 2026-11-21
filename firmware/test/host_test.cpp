@@ -83,7 +83,8 @@ int main() {
   for (int r = 0; r < 16; ++r)
     for (int c = 0; c < 16; ++c)
       if (d.get(r, c)) { minc = c < minc ? c : minc; maxc = c > maxc ? c : maxc; minr = r < minr ? r : minr; maxr = r > maxr ? r : maxr; }
-  CHECK(maxc - minc + 1 == 13 || maxc - minc + 1 == 14);
+  CHECK(maxc - minc + 1 == 14);
+  CHECK(minc == 1 && maxc == 14);   // exactly centred
   CHECK(maxr - minr + 1 == 10);
   Frame hm = durationFrame(105);  // "1:45"
   CHECK(hm.count() > 0);
