@@ -1,0 +1,35 @@
+[   0.00] # serlog /dev/cu.usbmodem101 2026-11-21 12:27:34
+[   0.45] 
+[   0.45] BOOT #1 (PM1 RTC RAM counter) esp_reset_reason=11 wake_src=0x00
+[   0.45] REG [boot] BTN_CFG_1=0x2a (DL_LOCK=0 DBL_DLY=1 LONG_DLY=1 CLK_DLY=1 SINGLE_RST_DIS=0) BTN_CFG_2=0x00 (DOUBLE_OFF_DIS=0) BTN_STATUS=0x80
+[   3.01] >> r
+[   3.07] REG [now] BTN_CFG_1=0x2a (DL_LOCK=0 DBL_DLY=1 LONG_DLY=1 CLK_DLY=1 SINGLE_RST_DIS=0) BTN_CFG_2=0x00 (DOUBLE_OFF_DIS=0) BTN_STATUS=0x00
+[  44.62] # port error: read failed: [Errno 6] Device not configured; reopening
+[  46.14] E (1076) MSPI Timing: Failed to allocate dummy cacheline for PSRAM memory barrier!
+[  47.73] 
+[  47.73] BOOT #2 (PM1 RTC RAM counter) esp_reset_reason=1 wake_src=0x08
+[  47.73] REG [boot] BTN_CFG_1=0x2a (DL_LOCK=0 DBL_DLY=1 LONG_DLY=1 CLK_DLY=1 SINGLE_RST_DIS=0) BTN_CFG_2=0x00 (DOUBLE_OFF_DIS=0) BTN_STATUS=0x80
+[  55.02] # port error: read failed: [Errno 6] Device not configured; reopening
+[  62.62] E (1076) MSPI Timing: Failed to allocate dummy cacheline for PSRAM memory barrier!
+[  64.22] 
+[  64.22] BOOT #3 (PM1 RTC RAM counter) esp_reset_reason=1 wake_src=0x0c
+[  64.28] REG [boot] BTN_CFG_1=0x2a (DL_LOCK=0 DBL_DLY=1 LONG_DLY=1 CLK_DLY=1 SINGLE_RST_DIS=0) BTN_CFG_2=0x00 (DOUBLE_OFF_DIS=0) BTN_STATUS=0x80
+[  69.20] # port error: read failed: [Errno 6] Device not configured; reopening
+[   0.00] # serlog /dev/cu.usbmodem101 2026-11-21 12:29:23
+[   2.04] >> r
+[   3.05] >> D
+[   0.00] # serlog /dev/cu.usbmodem101 2026-11-21 12:30:11
+[   1.02] >> r
+[   1.09] REG [now] BTN_CFG_1=0x2a (DL_LOCK=0 DBL_DLY=1 LONG_DLY=1 CLK_DLY=1 SINGLE_RST_DIS=0) BTN_CFG_2=0x00 (DOUBLE_OFF_DIS=0) BTN_STATUS=0x00
+[   2.04] >> D
+[   2.09] REG [after disable] BTN_CFG_1=0x2b (DL_LOCK=0 DBL_DLY=1 LONG_DLY=1 CLK_DLY=1 SINGLE_RST_DIS=1) BTN_CFG_2=0x00 (DOUBLE_OFF_DIS=0) BTN_STATUS=0x00
+[  24.52] # port error: read failed: [Errno 6] Device not configured; reopening
+[  26.03] E (1076) MSPI Timing: Failed to allocate dummy cacheline for PSRAM memory barrier!
+[  27.63] 
+[  27.63] BOOT #5 (PM1 RTC RAM counter) esp_reset_reason=1 wake_src=0x0c
+[  27.63] REG [boot] BTN_CFG_1=0x2b (DL_LOCK=0 DBL_DLY=1 LONG_DLY=1 CLK_DLY=1 SINGLE_RST_DIS=1) BTN_CFG_2=0x00 (DOUBLE_OFF_DIS=0) BTN_STATUS=0x80
+[  29.93] EVENT BtnPWR.wasClicked()
+[  48.45] EVENT BtnPWR.wasClicked()
+[  51.24] EVENT BtnPWR.wasClicked()
+[  79.16] >> E
+[  79.21] REG [after enable] BTN_CFG_1=0x2a (DL_LOCK=0 DBL_DLY=1 LONG_DLY=1 CLK_DLY=1 SINGLE_RST_DIS=0) BTN_CFG_2=0x00 (DOUBLE_OFF_DIS=0) BTN_STATUS=0x80

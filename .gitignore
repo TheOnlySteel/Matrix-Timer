@@ -1,0 +1,6 @@
+# arduino-cli data/user dirs (core, toolchain, libraries), see Makefile
+.arduino/
+.build/
+.venv/
+bench/logs/*.ctl
+.DS_Store

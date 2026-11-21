@@ -1,0 +1,199 @@
+[   0.00] # serlog /dev/cu.usbmodem101 2026-11-21 11:55:32
+[   2.01] >> a
+[   2.07] 
+[   2.07] == check3 auto sequence
+[   2.34] BOOST ON : set=1 readback=1 5VOUT=5370mV
+[   2.34] INIT 0x68: begin -> spec=0  CHIP_ID=0x00 INTERNAL_STATUS=0x00 ACC_RANGE=0 PWR_CTRL=0x00
+[   2.34] INIT 0x69: begin -> spec=0  CHIP_ID=0x00 INTERNAL_STATUS=0x00 ACC_RANGE=0 PWR_CTRL=0x00
+[   2.34] PROBE [boost on, after init] boost=1
+[   2.34]   0x68: ack=1 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x00 ERR=0x00
+[   2.34]   0x69: ack=0 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x00 ERR=0x00
+[   2.45]   SENSORTIME 0x68: backwards=0 stalls=40 of 40, span=0 ticks (expect ~2304) seq: 0 0 0 0 0 0 0 0 0 0 0 0
+[   2.45] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   2.56] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   2.61] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   2.72] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   2.82] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   2.93] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   3.04] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   3.15] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   3.26] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   3.37] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   3.42] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   3.53] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   3.63] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   3.74] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   3.86] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   3.97] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   4.08] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   4.13] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   4.23] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   4.34] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   4.73] BOOST OFF: set=1 readback=0 5VOUT=5370mV
+[   4.73] PROBE [boost off] boost=0
+[   4.73]   0x68: ack=1 CHIP_ID=0x24 INTERNAL_STATUS=0x00 PWR_CTRL=0x00 ERR=0x00
+[   4.73]   0x69: ack=0 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x00 ERR=0x00
+[   4.84]   SENSORTIME 0x68: backwards=0 stalls=40 of 40, span=0 ticks (expect ~2304) seq: 88 88 88 88 88 88 88 88 88 88 88 88
+[   4.84] ACC 0x68 boost=0 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   4.95] ACC 0x68 boost=0 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   5.07] ACC 0x68 boost=0 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   5.12] ACC 0x68 boost=0 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   5.23] ACC 0x68 boost=0 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   5.35] ACC 0x68 boost=0 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   5.46] ACC 0x68 boost=0 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   5.57] ACC 0x68 boost=0 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   5.62] ACC 0x68 boost=0 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   5.73] ACC 0x68 boost=0 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   5.85] ACC 0x68 boost=0 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   5.96] ACC 0x68 boost=0 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   6.07] ACC 0x68 boost=0 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   6.18] ACC 0x68 boost=0 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   6.23] ACC 0x68 boost=0 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   6.35] ACC 0x68 boost=0 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   6.45] ACC 0x68 boost=0 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   6.56] ACC 0x68 boost=0 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   6.68] ACC 0x68 boost=0 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   6.79] ACC 0x68 boost=0 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   7.16] BOOST ON : set=1 readback=1 5VOUT=5372mV
+[   7.16] PROBE [boost back on, BEFORE re-init] boost=1
+[   7.16]   0x68: ack=1 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x00 ERR=0x00
+[   7.16]   0x69: ack=0 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x00 ERR=0x00
+[   7.22]   SENSORTIME 0x68: backwards=0 stalls=40 of 40, span=0 ticks (expect ~2304) seq: 0 0 0 0 0 0 0 0 0 0 0 0
+[   7.27] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   7.32] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   7.43] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   7.54] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   7.65] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   7.75] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   7.86] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   7.97] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   8.08] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   8.13] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   8.24] INIT 0x68: begin -> spec=0  CHIP_ID=0x00 INTERNAL_STATUS=0x00 ACC_RANGE=0 PWR_CTRL=0x00
+[   8.24] PROBE [boost on, after re-init] boost=1
+[   8.24]   0x68: ack=1 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x00 ERR=0x00
+[   8.24]   0x69: ack=0 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x00 ERR=0x00
+[   8.34]   SENSORTIME 0x68: backwards=0 stalls=40 of 40, span=0 ticks (expect ~2304) seq: 0 0 0 0 0 0 0 0 0 0 0 0
+[   8.34] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   8.46] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   8.57] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   8.67] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   8.72] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   8.83] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   8.94] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   9.05] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   9.16] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   9.27] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   9.38] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   9.43] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   9.53] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   9.64] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   9.75] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   9.86] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   9.97] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[  10.07] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[  10.18] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[  10.23] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[  10.34] == auto done
+[  22.03] # end
+[   0.00] # serlog /dev/cu.usbmodem101 2026-11-21 11:56:46
+[   2.03] >> a
+[   2.08] 
+[   2.08] == check3 auto sequence
+[   2.34] BOOST ON : set=1 readback=1 5VOUT=5362mV
+[   2.34] WHO 0x68: reg00(BMI270 CHIP_ID,0x24)=0x00 reg75(MPU6886 WHO_AM_I,0x19)=0x00 reg6B=0x00 ack=1 | 0x69 ack=0
+[   2.34] INIT 0x68: begin -> spec=0  CHIP_ID=0x00 INTERNAL_STATUS=0x00 ACC_RANGE=0 PWR_CTRL=0x00
+[   2.34] INIT 0x69: begin -> spec=0  CHIP_ID=0x00 INTERNAL_STATUS=0x00 ACC_RANGE=0 PWR_CTRL=0x00
+[   2.34] PROBE [boost on, after init] boost=1
+[   2.34]   0x68: ack=1 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x00 ERR=0x00
+[   2.34]   0x69: ack=0 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x00 ERR=0x00
+[   2.45]   SENSORTIME 0x68: backwards=0 stalls=40 of 40, span=0 ticks (expect ~2304) seq: 0 0 0 0 0 0 0 0 0 0 0 0
+[   2.45] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   2.56] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   2.67] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   2.78] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   2.83] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   2.93] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   3.04] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   3.15] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   3.26] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   3.37] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   3.48] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   3.53] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   3.64] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   3.75] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   3.85] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   3.96] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   4.07] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   4.18] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   4.29] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   4.34] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   4.76] BOOST OFF: set=1 readback=0 5VOUT=5370mV
+[   4.76] WHO 0x68: reg00(BMI270 CHIP_ID,0x24)=0x24 reg75(MPU6886 WHO_AM_I,0x19)=0x00 reg6B=0x00 ack=1 | 0x69 ack=0
+[   4.98] INIT 0x68: begin -> spec=3  CHIP_ID=0x24 INTERNAL_STATUS=0x01 ACC_RANGE=2 PWR_CTRL=0x0e
+[   4.98] PROBE [boost off, after init] boost=0
+[   4.98]   0x68: ack=1 CHIP_ID=0x24 INTERNAL_STATUS=0x01 PWR_CTRL=0x0e ERR=0x80
+[   4.98]   0x69: ack=0 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x00 ERR=0x00
+[   5.03]   SENSORTIME 0x68: backwards=0 stalls=0 of 40, span=2078 ticks (expect ~2304) seq: 5056 5108 5160 5211 5263 5315 5366 5418 5470 5522 5574 5625
+[   5.03] ACC 0x68 boost=0 raw= -4065     52     48  g=-0.992 +0.013 +0.012 |g|=0.993
+[   5.14] ACC 0x68 boost=0 raw= -4078     26     75  g=-0.996 +0.006 +0.018 |g|=0.996
+[   5.24] ACC 0x68 boost=0 raw= -4092     43     -2  g=-0.999 +0.010 -0.000 |g|=0.999
+[   5.35] ACC 0x68 boost=0 raw= -4089     40    -11  g=-0.998 +0.010 -0.003 |g|=0.998
+[   5.46] ACC 0x68 boost=0 raw= -4087     43     17  g=-0.998 +0.010 +0.004 |g|=0.998
+[   5.57] ACC 0x68 boost=0 raw= -4067     45     39  g=-0.993 +0.011 +0.010 |g|=0.993
+[   5.68] ACC 0x68 boost=0 raw= -4085     43     21  g=-0.997 +0.010 +0.005 |g|=0.997
+[   5.73] ACC 0x68 boost=0 raw= -4090     40     10  g=-0.999 +0.010 +0.002 |g|=0.999
+[   5.84] ACC 0x68 boost=0 raw= -4088     39     16  g=-0.998 +0.010 +0.004 |g|=0.998
+[   5.95] ACC 0x68 boost=0 raw= -4082     41     15  g=-0.997 +0.010 +0.004 |g|=0.997
+[   6.06] ACC 0x68 boost=0 raw= -4081     36     34  g=-0.996 +0.009 +0.008 |g|=0.996
+[   6.16] ACC 0x68 boost=0 raw= -4081     40     30  g=-0.996 +0.010 +0.007 |g|=0.996
+[   6.27] ACC 0x68 boost=0 raw= -4083     38     14  g=-0.997 +0.009 +0.003 |g|=0.997
+[   6.38] ACC 0x68 boost=0 raw= -4096     49     -8  g=-1.000 +0.012 -0.002 |g|=1.000
+[   6.43] ACC 0x68 boost=0 raw= -4088     33     15  g=-0.998 +0.008 +0.004 |g|=0.998
+[   6.54] ACC 0x68 boost=0 raw= -4078     45     41  g=-0.996 +0.011 +0.010 |g|=0.996
+[   6.65] ACC 0x68 boost=0 raw= -4078     44     29  g=-0.996 +0.011 +0.007 |g|=0.996
+[   6.75] ACC 0x68 boost=0 raw= -4088     37     18  g=-0.998 +0.009 +0.004 |g|=0.998
+[   6.86] ACC 0x68 boost=0 raw= -4093     36     11  g=-0.999 +0.009 +0.003 |g|=0.999
+[   6.96] ACC 0x68 boost=0 raw= -4081     43     48  g=-0.996 +0.010 +0.012 |g|=0.996
+[   7.34] BOOST ON : set=1 readback=1 5VOUT=5360mV
+[   7.39] PROBE [boost back on, BEFORE re-init] boost=1
+[   7.39]   0x68: ack=1 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x02 ERR=0x00
+[   7.39]   0x69: ack=0 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x00 ERR=0x00
+[   7.45]   SENSORTIME 0x68: backwards=0 stalls=40 of 40, span=0 ticks (expect ~2304) seq: 0 0 0 0 0 0 0 0 0 0 0 0
+[   7.45] ACC 0x68 boost=1 raw= 20480     20     16  g=+1.250 +0.001 +0.001 |g|=1.250
+[   7.56] ACC 0x68 boost=1 raw= 20480     12     32  g=+1.250 +0.001 +0.002 |g|=1.250
+[   7.66] ACC 0x68 boost=1 raw= 20480      4     32  g=+1.250 +0.000 +0.002 |g|=1.250
+[   7.78] ACC 0x68 boost=1 raw= 20482      9     16  g=+1.250 +0.001 +0.001 |g|=1.250
+[   7.88] ACC 0x68 boost=1 raw= 20482      1 -21840  g=+1.250 +0.000 -1.333 |g|=1.827
+[   7.94] ACC 0x68 boost=1 raw= 20480      9      0  g=+1.250 +0.001 +0.000 |g|=1.250
+[   8.04] ACC 0x68 boost=1 raw= 20480      8     16  g=+1.250 +0.000 +0.001 |g|=1.250
+[   8.15] ACC 0x68 boost=1 raw= 20482      1     48  g=+1.250 +0.000 +0.003 |g|=1.250
+[   8.26] ACC 0x68 boost=1 raw= 20480     12     32  g=+1.250 +0.001 +0.002 |g|=1.250
+[   8.36] ACC 0x68 boost=1 raw= 20480      9      0  g=+1.250 +0.001 +0.000 |g|=1.250
+[   8.47] INIT 0x68: begin -> spec=0  CHIP_ID=0x00 INTERNAL_STATUS=0x00 ACC_RANGE=0 PWR_CTRL=0x02
+[   8.47] PROBE [boost on, after re-init] boost=1
+[   8.47]   0x68: ack=1 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x02 ERR=0x00
+[   8.47]   0x69: ack=0 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x00 ERR=0x00
+[   8.53]   SENSORTIME 0x68: backwards=0 stalls=40 of 40, span=0 ticks (expect ~2304) seq: 0 0 0 0 0 0 0 0 0 0 0 0
+[   8.53] ACC 0x68 boost=1 raw= 20482      9      0  g=+1.250 +0.001 +0.000 |g|=1.250
+[   8.63] ACC 0x68 boost=1 raw= 20482      0     16  g=+1.250 +0.000 +0.001 |g|=1.250
+[   8.74] ACC 0x68 boost=1 raw= 20480     16     16  g=+1.250 +0.001 +0.001 |g|=1.250
+[   8.85] ACC 0x68 boost=1 raw= 20480      5     32  g=+1.250 +0.000 +0.002 |g|=1.250
+[   8.95] ACC 0x68 boost=1 raw= 20480      5     16  g=+1.250 +0.000 +0.001 |g|=1.250
+[   9.06] ACC 0x68 boost=1 raw= 20480      5      0  g=+1.250 +0.000 +0.000 |g|=1.250
+[   9.17] ACC 0x68 boost=1 raw= 20482      4     16  g=+1.250 +0.000 +0.001 |g|=1.250
+[   9.22] ACC 0x68 boost=1 raw= 20482      9     16  g=+1.250 +0.001 +0.001 |g|=1.250
+[   9.33] ACC 0x68 boost=1 raw= 20480      8     32  g=+1.250 +0.000 +0.002 |g|=1.250
+[   9.43] ACC 0x68 boost=1 raw= 20482      5     32  g=+1.250 +0.000 +0.002 |g|=1.250
+[   9.53] ACC 0x68 boost=1 raw= 20480      8     32  g=+1.250 +0.000 +0.002 |g|=1.250
+[   9.64] ACC 0x68 boost=1 raw= 20482      5     16  g=+1.250 +0.000 +0.001 |g|=1.250
+[   9.75] ACC 0x68 boost=1 raw= 20480      9     16  g=+1.250 +0.001 +0.001 |g|=1.250
+[   9.86] ACC 0x68 boost=1 raw= 20480      4     16  g=+1.250 +0.000 +0.001 |g|=1.250
+[   9.97] ACC 0x68 boost=1 raw= 20482      8     16  g=+1.250 +0.000 +0.001 |g|=1.250
+[  10.08] ACC 0x68 boost=1 raw= 20480      1     32  g=+1.250 +0.000 +0.002 |g|=1.250
+[  10.13] ACC 0x68 boost=1 raw= 20480     12      0  g=+1.250 +0.001 +0.000 |g|=1.250
+[  10.24] ACC 0x68 boost=1 raw= 20480      1     16  g=+1.250 +0.000 +0.001 |g|=1.250
+[  10.35] ACC 0x68 boost=1 raw= 20482      9      0  g=+1.250 +0.001 +0.000 |g|=1.250
+[  10.46] ACC 0x68 boost=1 raw= 20482      5     16  g=+1.250 +0.000 +0.001 |g|=1.250
+[  10.57] == auto done
+[  25.05] # end

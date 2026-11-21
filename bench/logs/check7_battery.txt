@@ -1,0 +1,179 @@
+[   0.00] # serlog /dev/cu.usbmodem101 2026-11-21 12:31:48
+[   0.83] BAT t=2s level=-1% batt=-1mV isCharging=0 chargeState=-1 | PM1 VBAT=4162mV VIN=5252mV 5VOUT=5368mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[   1.87] BAT t=3s level=-1% batt=-1mV isCharging=0 chargeState=-1 | PM1 VBAT=4160mV VIN=5252mV 5VOUT=5358mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[   2.85] BAT t=4s level=100% batt=4170mV isCharging=0 chargeState=2 | PM1 VBAT=4170mV VIN=5264mV 5VOUT=5370mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[   3.84] BAT t=5s level=100% batt=4160mV isCharging=0 chargeState=2 | PM1 VBAT=4160mV VIN=5252mV 5VOUT=5360mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[   4.82] BAT t=6s level=100% batt=4162mV isCharging=0 chargeState=2 | PM1 VBAT=4162mV VIN=5254mV 5VOUT=5362mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[   5.86] BAT t=7s level=100% batt=4164mV isCharging=0 chargeState=2 | PM1 VBAT=4164mV VIN=5250mV 5VOUT=5366mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[   6.86] BAT t=8s level=100% batt=4164mV isCharging=0 chargeState=2 | PM1 VBAT=4164mV VIN=5252mV 5VOUT=5374mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[   7.90] BAT t=9s level=100% batt=4164mV isCharging=0 chargeState=2 | PM1 VBAT=4164mV VIN=5260mV 5VOUT=5370mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[   8.89] BAT t=10s level=100% batt=4168mV isCharging=0 chargeState=2 | PM1 VBAT=4168mV VIN=5264mV 5VOUT=5380mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[   9.86] BAT t=11s level=100% batt=4170mV isCharging=0 chargeState=2 | PM1 VBAT=4170mV VIN=5252mV 5VOUT=5366mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  10.89] BAT t=12s level=100% batt=4168mV isCharging=0 chargeState=2 | PM1 VBAT=4168mV VIN=5264mV 5VOUT=5368mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  11.88] BAT t=13s level=100% batt=4162mV isCharging=0 chargeState=2 | PM1 VBAT=4162mV VIN=5250mV 5VOUT=5370mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  12.92] BAT t=14s level=100% batt=4162mV isCharging=0 chargeState=2 | PM1 VBAT=4162mV VIN=5256mV 5VOUT=5368mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  13.90] BAT t=15s level=100% batt=4162mV isCharging=0 chargeState=2 | PM1 VBAT=4162mV VIN=5250mV 5VOUT=5354mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  14.88] BAT t=16s level=100% batt=4160mV isCharging=0 chargeState=2 | PM1 VBAT=4160mV VIN=5252mV 5VOUT=5354mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  15.91] BAT t=17s level=100% batt=4160mV isCharging=0 chargeState=2 | PM1 VBAT=4160mV VIN=5252mV 5VOUT=5364mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  16.89] BAT t=18s level=100% batt=4162mV isCharging=0 chargeState=2 | PM1 VBAT=4162mV VIN=5254mV 5VOUT=5360mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  17.94] BAT t=19s level=100% batt=4168mV isCharging=0 chargeState=2 | PM1 VBAT=4168mV VIN=5256mV 5VOUT=5372mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  18.91] BAT t=20s level=100% batt=4164mV isCharging=0 chargeState=2 | PM1 VBAT=4164mV VIN=5248mV 5VOUT=5356mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  19.95] BAT t=21s level=100% batt=4164mV isCharging=0 chargeState=2 | PM1 VBAT=4164mV VIN=5256mV 5VOUT=5366mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  20.92] BAT t=22s level=100% batt=4164mV isCharging=0 chargeState=2 | PM1 VBAT=4164mV VIN=5256mV 5VOUT=5352mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  21.95] BAT t=23s level=100% batt=4166mV isCharging=0 chargeState=2 | PM1 VBAT=4166mV VIN=5260mV 5VOUT=5370mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  22.94] BAT t=24s level=100% batt=4164mV isCharging=0 chargeState=2 | PM1 VBAT=4164mV VIN=5254mV 5VOUT=5362mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  23.97] BAT t=25s level=100% batt=4166mV isCharging=0 chargeState=2 | PM1 VBAT=4166mV VIN=5252mV 5VOUT=5376mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  24.94] BAT t=26s level=100% batt=4164mV isCharging=0 chargeState=2 | PM1 VBAT=4164mV VIN=5252mV 5VOUT=5370mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  25.99] BAT t=27s level=100% batt=4166mV isCharging=0 chargeState=2 | PM1 VBAT=4166mV VIN=5260mV 5VOUT=5372mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  26.96] BAT t=28s level=100% batt=4174mV isCharging=0 chargeState=2 | PM1 VBAT=4174mV VIN=5258mV 5VOUT=5380mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  28.00] BAT t=29s level=100% batt=4160mV isCharging=0 chargeState=2 | PM1 VBAT=4160mV VIN=5252mV 5VOUT=5364mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  29.00] BAT t=30s level=100% batt=4164mV isCharging=0 chargeState=2 | PM1 VBAT=4164mV VIN=5258mV 5VOUT=5372mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  29.98] BAT t=31s level=100% batt=4162mV isCharging=0 chargeState=2 | PM1 VBAT=4162mV VIN=5256mV 5VOUT=5368mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  31.04] BAT t=32s level=100% batt=4164mV isCharging=0 chargeState=2 | PM1 VBAT=4164mV VIN=5252mV 5VOUT=5368mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  32.01] BAT t=33s level=100% batt=4160mV isCharging=0 chargeState=2 | PM1 VBAT=4160mV VIN=5252mV 5VOUT=5362mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  33.00] BAT t=34s level=100% batt=4164mV isCharging=0 chargeState=2 | PM1 VBAT=4164mV VIN=5254mV 5VOUT=5372mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  34.02] BAT t=35s level=100% batt=4168mV isCharging=0 chargeState=2 | PM1 VBAT=4168mV VIN=5254mV 5VOUT=5370mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  35.03] BAT t=36s level=100% batt=4168mV isCharging=0 chargeState=2 | PM1 VBAT=4164mV VIN=5250mV 5VOUT=5360mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  36.07] BAT t=37s level=100% batt=4164mV isCharging=0 chargeState=2 | PM1 VBAT=4160mV VIN=5250mV 5VOUT=5354mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  37.03] BAT t=38s level=100% batt=4160mV isCharging=0 chargeState=2 | PM1 VBAT=4160mV VIN=5250mV 5VOUT=5354mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  38.05] BAT t=39s level=100% batt=4166mV isCharging=0 chargeState=2 | PM1 VBAT=4166mV VIN=5252mV 5VOUT=5374mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  39.07] BAT t=40s level=100% batt=4168mV isCharging=0 chargeState=2 | PM1 VBAT=4168mV VIN=5256mV 5VOUT=5374mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  40.04] BAT t=41s level=100% batt=4160mV isCharging=0 chargeState=2 | PM1 VBAT=4160mV VIN=5252mV 5VOUT=5360mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  41.10] BAT t=42s level=100% batt=4162mV isCharging=0 chargeState=2 | PM1 VBAT=4162mV VIN=5256mV 5VOUT=5370mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  42.09] BAT t=43s level=100% batt=4162mV isCharging=0 chargeState=2 | PM1 VBAT=4162mV VIN=5256mV 5VOUT=5360mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  43.07] BAT t=44s level=100% batt=4170mV isCharging=0 chargeState=2 | PM1 VBAT=4170mV VIN=5258mV 5VOUT=5376mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  44.09] BAT t=45s level=100% batt=4164mV isCharging=0 chargeState=2 | PM1 VBAT=4164mV VIN=5254mV 5VOUT=5370mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  45.11] BAT t=46s level=100% batt=4162mV isCharging=0 chargeState=2 | PM1 VBAT=4162mV VIN=5254mV 5VOUT=5370mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  46.10] BAT t=47s level=100% batt=4168mV isCharging=0 chargeState=2 | PM1 VBAT=4168mV VIN=5258mV 5VOUT=5378mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  47.10] BAT t=48s level=100% batt=4162mV isCharging=0 chargeState=2 | PM1 VBAT=4162mV VIN=5256mV 5VOUT=5360mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  48.13] BAT t=49s level=100% batt=4164mV isCharging=0 chargeState=2 | PM1 VBAT=4164mV VIN=5252mV 5VOUT=5360mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  49.12] BAT t=50s level=100% batt=4166mV isCharging=0 chargeState=2 | PM1 VBAT=4166mV VIN=5256mV 5VOUT=5374mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  50.16] BAT t=51s level=100% batt=4158mV isCharging=0 chargeState=2 | PM1 VBAT=4158mV VIN=5248mV 5VOUT=5368mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  51.14] BAT t=52s level=100% batt=4168mV isCharging=0 chargeState=2 | PM1 VBAT=4168mV VIN=5264mV 5VOUT=5370mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  52.14] BAT t=53s level=100% batt=4162mV isCharging=0 chargeState=2 | PM1 VBAT=4162mV VIN=5250mV 5VOUT=5370mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  53.16] BAT t=54s level=100% batt=4164mV isCharging=0 chargeState=2 | PM1 VBAT=4164mV VIN=5256mV 5VOUT=5370mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  54.17] BAT t=55s level=100% batt=4164mV isCharging=0 chargeState=2 | PM1 VBAT=4164mV VIN=5252mV 5VOUT=5368mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  55.17] BAT t=56s level=100% batt=4160mV isCharging=0 chargeState=2 | PM1 VBAT=4160mV VIN=5252mV 5VOUT=5354mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  56.15] BAT t=57s level=100% batt=4172mV isCharging=0 chargeState=2 | PM1 VBAT=4172mV VIN=5262mV 5VOUT=5368mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  57.15] BAT t=58s level=100% batt=4160mV isCharging=0 chargeState=2 | PM1 VBAT=4160mV VIN=5252mV 5VOUT=5364mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[  57.95] # port error: read failed: [Errno 6] Device not configured; reopening
+[  68.54] # port error: Attempting to use a port that is not open; reopening
+[  78.98] # port error: Attempting to use a port that is not open; reopening
+[  89.44] # port error: Attempting to use a port that is not open; reopening
+[  99.88] # port error: Attempting to use a port that is not open; reopening
+[ 110.30] # port error: Attempting to use a port that is not open; reopening
+[ 120.71] # port error: Attempting to use a port that is not open; reopening
+[ 131.10] # port error: Attempting to use a port that is not open; reopening
+[ 138.67] BAT t=139s level=100% batt=4188mV isCharging=1 chargeState=1 | PM1 VBAT=4188mV VIN=5218mV 5VOUT=5356mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 139.65] BAT t=140s level=100% batt=4194mV isCharging=1 chargeState=1 | PM1 VBAT=4194mV VIN=5226mV 5VOUT=5362mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 140.69] BAT t=141s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5222mV 5VOUT=5358mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 141.67] BAT t=142s level=100% batt=4186mV isCharging=1 chargeState=1 | PM1 VBAT=4186mV VIN=5214mV 5VOUT=5356mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 142.66] BAT t=143s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5224mV 5VOUT=5366mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 143.69] BAT t=144s level=100% batt=4194mV isCharging=1 chargeState=1 | PM1 VBAT=4194mV VIN=5230mV 5VOUT=5366mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 144.67] BAT t=145s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5226mV 5VOUT=5356mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 145.65] BAT t=146s level=100% batt=4188mV isCharging=1 chargeState=1 | PM1 VBAT=4188mV VIN=5220mV 5VOUT=5364mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 146.68] BAT t=147s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5226mV 5VOUT=5364mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 146.96] >> P
+[ 147.01] RING 29 records (t s, VBAT mV, VIN mV, isCharging, CHG_STAT, level%)
+[ 147.01] REC t=5s VBAT=4160 VIN=5252 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=10s VBAT=4168 VIN=5264 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=15s VBAT=4162 VIN=5250 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=20s VBAT=4168 VIN=5256 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=25s VBAT=4164 VIN=5254 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=30s VBAT=4160 VIN=5252 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=35s VBAT=4164 VIN=5254 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=40s VBAT=4168 VIN=5256 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=45s VBAT=4164 VIN=5254 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=50s VBAT=4166 VIN=5256 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=55s VBAT=4164 VIN=5252 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=60s VBAT=4156 VIN=76 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=65s VBAT=4148 VIN=2 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=70s VBAT=4150 VIN=0 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=75s VBAT=4150 VIN=0 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=80s VBAT=4148 VIN=0 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=85s VBAT=4142 VIN=0 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=90s VBAT=4144 VIN=0 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=95s VBAT=4136 VIN=0 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=100s VBAT=4136 VIN=0 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=105s VBAT=4138 VIN=0 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=110s VBAT=4132 VIN=0 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=115s VBAT=4136 VIN=0 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=120s VBAT=4136 VIN=24 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=125s VBAT=4136 VIN=2 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=130s VBAT=4126 VIN=2 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=135s VBAT=4130 VIN=2 isCharging=0 CHG_STAT=0 level=100
+[ 147.01] REC t=140s VBAT=4188 VIN=5218 isCharging=1 CHG_STAT=0 level=100
+[ 147.01] REC t=145s VBAT=4194 VIN=5230 isCharging=1 CHG_STAT=0 level=100
+[ 147.71] BAT t=148s level=100% batt=4192mV isCharging=1 chargeState=1 | PM1 VBAT=4192mV VIN=5232mV 5VOUT=5366mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 148.72] BAT t=149s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5228mV 5VOUT=5366mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 149.71] BAT t=150s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5226mV 5VOUT=5366mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 150.72] BAT t=151s level=100% batt=4188mV isCharging=1 chargeState=1 | PM1 VBAT=4188mV VIN=5224mV 5VOUT=5366mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 151.70] BAT t=152s level=100% batt=4188mV isCharging=1 chargeState=1 | PM1 VBAT=4188mV VIN=5224mV 5VOUT=5366mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 152.68] BAT t=153s level=100% batt=4194mV isCharging=1 chargeState=1 | PM1 VBAT=4194mV VIN=5234mV 5VOUT=5372mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 153.73] BAT t=154s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5230mV 5VOUT=5366mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 154.72] BAT t=155s level=100% batt=4192mV isCharging=1 chargeState=1 | PM1 VBAT=4192mV VIN=5232mV 5VOUT=5374mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 155.71] BAT t=156s level=100% batt=4194mV isCharging=1 chargeState=1 | PM1 VBAT=4194mV VIN=5236mV 5VOUT=5374mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 156.70] BAT t=157s level=100% batt=4188mV isCharging=1 chargeState=1 | PM1 VBAT=4188mV VIN=5230mV 5VOUT=5364mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 157.70] BAT t=158s level=100% batt=4188mV isCharging=1 chargeState=1 | PM1 VBAT=4188mV VIN=5226mV 5VOUT=5360mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 158.75] BAT t=159s level=100% batt=4188mV isCharging=1 chargeState=1 | PM1 VBAT=4188mV VIN=5226mV 5VOUT=5364mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 159.73] BAT t=160s level=100% batt=4194mV isCharging=1 chargeState=1 | PM1 VBAT=4194mV VIN=5238mV 5VOUT=5374mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 160.71] BAT t=161s level=100% batt=4194mV isCharging=1 chargeState=1 | PM1 VBAT=4194mV VIN=5238mV 5VOUT=5376mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 161.73] BAT t=162s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5234mV 5VOUT=5356mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 162.73] BAT t=163s level=100% batt=4194mV isCharging=1 chargeState=1 | PM1 VBAT=4194mV VIN=5238mV 5VOUT=5372mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 163.76] BAT t=164s level=100% batt=4186mV isCharging=1 chargeState=1 | PM1 VBAT=4186mV VIN=5230mV 5VOUT=5362mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 164.74] BAT t=165s level=100% batt=4188mV isCharging=1 chargeState=1 | PM1 VBAT=4188mV VIN=5230mV 5VOUT=5362mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 165.74] BAT t=166s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5230mV 5VOUT=5368mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 166.78] BAT t=167s level=100% batt=4192mV isCharging=1 chargeState=1 | PM1 VBAT=4192mV VIN=5234mV 5VOUT=5362mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 167.75] BAT t=168s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5234mV 5VOUT=5368mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 168.79] BAT t=169s level=100% batt=4192mV isCharging=1 chargeState=1 | PM1 VBAT=4192mV VIN=5236mV 5VOUT=5362mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 169.75] BAT t=170s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5238mV 5VOUT=5372mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 170.79] BAT t=171s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5236mV 5VOUT=5364mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 171.77] BAT t=172s level=100% batt=4188mV isCharging=1 chargeState=1 | PM1 VBAT=4188mV VIN=5236mV 5VOUT=5366mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 172.80] BAT t=173s level=100% batt=4186mV isCharging=1 chargeState=1 | PM1 VBAT=4186mV VIN=5230mV 5VOUT=5354mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 173.79] BAT t=174s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5236mV 5VOUT=5362mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 174.76] BAT t=175s level=100% batt=4188mV isCharging=1 chargeState=1 | PM1 VBAT=4188mV VIN=5236mV 5VOUT=5354mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 175.81] BAT t=176s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5230mV 5VOUT=5362mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 176.79] BAT t=177s level=100% batt=4186mV isCharging=1 chargeState=1 | PM1 VBAT=4186mV VIN=5236mV 5VOUT=5362mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 177.81] BAT t=178s level=100% batt=4194mV isCharging=1 chargeState=1 | PM1 VBAT=4194mV VIN=5240mV 5VOUT=5370mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 178.78] BAT t=179s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5236mV 5VOUT=5360mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 179.80] BAT t=180s level=100% batt=4188mV isCharging=1 chargeState=1 | PM1 VBAT=4188mV VIN=5236mV 5VOUT=5368mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 180.81] BAT t=181s level=100% batt=4194mV isCharging=1 chargeState=1 | PM1 VBAT=4194mV VIN=5238mV 5VOUT=5364mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 181.83] BAT t=182s level=100% batt=4194mV isCharging=1 chargeState=1 | PM1 VBAT=4194mV VIN=5244mV 5VOUT=5380mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 182.83] BAT t=184s level=100% batt=4194mV isCharging=1 chargeState=1 | PM1 VBAT=4194mV VIN=5240mV 5VOUT=5368mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 183.81] BAT t=185s level=100% batt=4200mV isCharging=1 chargeState=1 | PM1 VBAT=4200mV VIN=5250mV 5VOUT=5378mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 184.84] BAT t=186s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5234mV 5VOUT=5356mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 185.81] BAT t=187s level=100% batt=4192mV isCharging=1 chargeState=1 | PM1 VBAT=4192mV VIN=5236mV 5VOUT=5354mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 186.84] BAT t=188s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5244mV 5VOUT=5362mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 187.83] BAT t=189s level=100% batt=4188mV isCharging=1 chargeState=1 | PM1 VBAT=4188mV VIN=5234mV 5VOUT=5354mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 188.82] BAT t=190s level=100% batt=4196mV isCharging=1 chargeState=1 | PM1 VBAT=4196mV VIN=5250mV 5VOUT=5370mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 189.82] BAT t=191s level=100% batt=4192mV isCharging=1 chargeState=1 | PM1 VBAT=4192mV VIN=5244mV 5VOUT=5372mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 190.87] BAT t=192s level=100% batt=4188mV isCharging=1 chargeState=1 | PM1 VBAT=4188mV VIN=5236mV 5VOUT=5366mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 191.83] BAT t=193s level=100% batt=4194mV isCharging=1 chargeState=1 | PM1 VBAT=4194mV VIN=5244mV 5VOUT=5372mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 192.88] BAT t=194s level=100% batt=4194mV isCharging=1 chargeState=1 | PM1 VBAT=4194mV VIN=5250mV 5VOUT=5378mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 193.87] BAT t=195s level=100% batt=4198mV isCharging=1 chargeState=1 | PM1 VBAT=4198mV VIN=5244mV 5VOUT=5378mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 194.84] BAT t=196s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5236mV 5VOUT=5366mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 195.88] BAT t=197s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5234mV 5VOUT=5362mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 196.89] BAT t=198s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5234mV 5VOUT=5362mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 197.88] BAT t=199s level=100% batt=4192mV isCharging=1 chargeState=1 | PM1 VBAT=4192mV VIN=5234mV 5VOUT=5362mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 198.87] BAT t=200s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5238mV 5VOUT=5366mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 199.86] BAT t=201s level=100% batt=4188mV isCharging=1 chargeState=1 | PM1 VBAT=4188mV VIN=5238mV 5VOUT=5362mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 200.90] BAT t=202s level=100% batt=4200mV isCharging=1 chargeState=1 | PM1 VBAT=4200mV VIN=5244mV 5VOUT=5376mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 201.90] BAT t=203s level=100% batt=4198mV isCharging=1 chargeState=1 | PM1 VBAT=4198mV VIN=5250mV 5VOUT=5370mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 202.90] BAT t=204s level=100% batt=4194mV isCharging=1 chargeState=1 | PM1 VBAT=4194mV VIN=5246mV 5VOUT=5370mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 203.88] BAT t=205s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5242mV 5VOUT=5360mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 204.91] BAT t=206s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5236mV 5VOUT=5360mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 205.88] BAT t=207s level=100% batt=4194mV isCharging=1 chargeState=1 | PM1 VBAT=4194mV VIN=5244mV 5VOUT=5374mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 206.92] BAT t=208s level=100% batt=4194mV isCharging=1 chargeState=1 | PM1 VBAT=4194mV VIN=5244mV 5VOUT=5360mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 207.92] BAT t=209s level=100% batt=4198mV isCharging=1 chargeState=1 | PM1 VBAT=4198mV VIN=5250mV 5VOUT=5374mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 208.94] BAT t=210s level=100% batt=4196mV isCharging=1 chargeState=1 | PM1 VBAT=4196mV VIN=5252mV 5VOUT=5372mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 209.93] BAT t=211s level=100% batt=4192mV isCharging=1 chargeState=1 | PM1 VBAT=4192mV VIN=5244mV 5VOUT=5358mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 210.91] BAT t=212s level=100% batt=4190mV isCharging=1 chargeState=1 | PM1 VBAT=4190mV VIN=5244mV 5VOUT=5366mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 211.94] BAT t=213s level=100% batt=4192mV isCharging=1 chargeState=1 | PM1 VBAT=4192mV VIN=5244mV 5VOUT=5360mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 212.92] BAT t=214s level=100% batt=4194mV isCharging=1 chargeState=1 | PM1 VBAT=4194mV VIN=5246mV 5VOUT=5358mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 213.96] BAT t=215s level=100% batt=4192mV isCharging=1 chargeState=1 | PM1 VBAT=4192mV VIN=5236mV 5VOUT=5362mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 214.93] BAT t=216s level=100% batt=4194mV isCharging=1 chargeState=1 | PM1 VBAT=4194mV VIN=5250mV 5VOUT=5380mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 215.92] BAT t=217s level=100% batt=4188mV isCharging=1 chargeState=1 | PM1 VBAT=4188mV VIN=5242mV 5VOUT=5366mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 216.96] BAT t=218s level=100% batt=4192mV isCharging=1 chargeState=1 | PM1 VBAT=4192mV VIN=5244mV 5VOUT=5366mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 217.94] BAT t=219s level=100% batt=4198mV isCharging=1 chargeState=1 | PM1 VBAT=4198mV VIN=5252mV 5VOUT=5370mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 218.97] BAT t=220s level=100% batt=4188mV isCharging=1 chargeState=1 | PM1 VBAT=4188mV VIN=5238mV 5VOUT=5354mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0
+[ 219.95] BAT t=221s level=100% batt=4198mV isCharging=1 chargeState=1 | PM1 VBAT=4198mV VIN=5254mV 5VOUT=5376mV src=5(1) ext=1 | CHG_STAT(IOE1 G8)=0

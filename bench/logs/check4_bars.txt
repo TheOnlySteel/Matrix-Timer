@@ -1,0 +1,132 @@
+[   0.00] # serlog /dev/cu.usbmodem101 2026-11-21 12:10:19
+[   1.97] LED index 1 on (white 25/255)
+[   4.93] LED index 2 on (white 25/255)
+[   7.97] LED index 3 on (white 25/255)
+[  11.00] LED index 4 on (white 25/255)
+[  14.00] LED index 5 on (white 25/255)
+[  16.98] LED index 6 on (white 25/255)
+[  19.98] LED index 7 on (white 25/255)
+[  22.98] LED index 8 on (white 25/255)
+[  25.99] LED index 9 on (white 25/255)
+[  29.09] V [boost on] boost=1 5VOUT=5372mV VBUS=5258mV VBAT=4184mV
+[  29.09] SHOW boost test: all on, boost ON
+[  33.10] V [boost off] boost=0 5VOUT=5364mV VBUS=5240mV VBAT=4178mV
+[  33.10] SHOW boost test: all on, boost OFF
+[  37.17] V [boost on] boost=1 5VOUT=0mV VBUS=5252mV VBAT=4178mV
+[  37.17] SHOW boost test: all on, boost ON
+[  41.23] V [boost off] boost=0 5VOUT=5360mV VBUS=5240mV VBAT=4176mV
+[  41.23] SHOW boost test: all on, boost OFF
+[  41.28] V [boost on] boost=1 5VOUT=20mV VBUS=5240mV VBAT=4176mV
+[  45.26] LED index 0 on (white 25/255)
+[  48.27] LED index 1 on (white 25/255)
+[  51.28] LED index 2 on (white 25/255)
+[  54.29] LED index 3 on (white 25/255)
+[  57.26] LED index 4 on (white 25/255)
+[  60.27] LED index 5 on (white 25/255)
+[  63.32] LED index 6 on (white 25/255)
+[  66.33] LED index 7 on (white 25/255)
+[  69.28] LED index 8 on (white 25/255)
+[  72.32] LED index 9 on (white 25/255)
+[  75.39] V [boost on] boost=1 5VOUT=5366mV VBUS=5250mV VBAT=4176mV
+[  75.39] SHOW boost test: all on, boost ON
+[  79.42] V [boost off] boost=0 5VOUT=0mV VBUS=0mV VBAT=0mV
+[  79.42] SHOW boost test: all on, boost OFF
+[  83.52] V [boost on] boost=1 5VOUT=0mV VBUS=5256mV VBAT=4174mV
+[  83.52] SHOW boost test: all on, boost ON
+[  87.52] V [boost off] boost=0 5VOUT=5348mV VBUS=5240mV VBAT=4172mV
+[  87.52] SHOW boost test: all on, boost OFF
+[  87.63] V [boost on] boost=1 5VOUT=16mV VBUS=5240mV VBAT=4172mV
+[  91.57] LED index 0 on (white 25/255)
+[  94.58] LED index 1 on (white 25/255)
+[  97.57] LED index 2 on (white 25/255)
+[ 100.57] LED index 3 on (white 25/255)
+[ 103.57] LED index 4 on (white 25/255)
+[ 106.57] LED index 5 on (white 25/255)
+[ 109.62] LED index 6 on (white 25/255)
+[ 112.61] LED index 7 on (white 25/255)
+[ 115.59] LED index 8 on (white 25/255)
+[ 118.64] LED index 9 on (white 25/255)
+[ 121.71] V [boost on] boost=1 5VOUT=5368mV VBUS=5244mV VBAT=4172mV
+[ 121.71] SHOW boost test: all on, boost ON
+[ 125.75] V [boost off] boost=0 5VOUT=5354mV VBUS=5242mV VBAT=4168mV
+[ 125.75] SHOW boost test: all on, boost OFF
+[ 129.78] V [boost on] boost=1 5VOUT=0mV VBUS=5268mV VBAT=4182mV
+[ 129.78] SHOW boost test: all on, boost ON
+[ 133.86] V [boost off] boost=0 5VOUT=5366mV VBUS=5248mV VBAT=4180mV
+[ 133.86] SHOW boost test: all on, boost OFF
+[ 133.91] V [boost on] boost=1 5VOUT=18mV VBUS=5248mV VBAT=4180mV
+[ 137.85] LED index 0 on (white 25/255)
+[ 140.87] LED index 1 on (white 25/255)
+[ 143.85] LED index 2 on (white 25/255)
+[ 146.88] LED index 3 on (white 25/255)
+[ 149.89] LED index 4 on (white 25/255)
+[ 152.90] LED index 5 on (white 25/255)
+[ 155.92] LED index 6 on (white 25/255)
+[ 158.89] LED index 7 on (white 25/255)
+[ 161.94] LED index 8 on (white 25/255)
+[ 164.92] LED index 9 on (white 25/255)
+[ 167.97] V [boost on] boost=1 5VOUT=5364mV VBUS=5254mV VBAT=4174mV
+[ 167.97] SHOW boost test: all on, boost ON
+[ 172.04] V [boost off] boost=0 5VOUT=5370mV VBUS=5242mV VBAT=4176mV
+[ 172.04] SHOW boost test: all on, boost OFF
+[ 176.12] V [boost on] boost=1 5VOUT=5368mV VBUS=5260mV VBAT=4176mV
+[ 176.12] SHOW boost test: all on, boost ON
+[ 180.16] V [boost off] boost=0 5VOUT=310mV VBUS=5252mV VBAT=4172mV
+[ 180.16] SHOW boost test: all on, boost OFF
+[ 180.22] V [boost on] boost=1 5VOUT=18mV VBUS=5252mV VBAT=4172mV
+[ 184.15] LED index 0 on (white 25/255)
+[ 187.20] LED index 1 on (white 25/255)
+[ 190.16] LED index 2 on (white 25/255)
+[ 193.18] LED index 3 on (white 25/255)
+[ 196.19] LED index 4 on (white 25/255)
+[ 199.20] LED index 5 on (white 25/255)
+[ 202.18] LED index 6 on (white 25/255)
+[ 205.21] LED index 7 on (white 25/255)
+[ 208.25] LED index 8 on (white 25/255)
+[ 211.22] LED index 9 on (white 25/255)
+[ 214.29] V [boost on] boost=1 5VOUT=5362mV VBUS=5250mV VBAT=4172mV
+[ 214.29] SHOW boost test: all on, boost ON
+[ 218.33] V [boost off] boost=0 5VOUT=5362mV VBUS=5234mV VBAT=4172mV
+[ 218.33] SHOW boost test: all on, boost OFF
+[ 222.41] V [boost on] boost=1 5VOUT=0mV VBUS=5260mV VBAT=4172mV
+[ 222.41] SHOW boost test: all on, boost ON
+[ 226.45] V [boost off] boost=0 5VOUT=5360mV VBUS=5244mV VBAT=4176mV
+[ 226.45] SHOW boost test: all on, boost OFF
+[ 226.50] V [boost on] boost=1 5VOUT=18mV VBUS=5244mV VBAT=4176mV
+[ 230.46] LED index 0 on (white 25/255)
+[ 233.48] LED index 1 on (white 25/255)
+[ 236.47] LED index 2 on (white 25/255)
+[ 239.47] LED index 3 on (white 25/255)
+[ 242.48] LED index 4 on (white 25/255)
+[ 245.52] LED index 5 on (white 25/255)
+[ 248.53] LED index 6 on (white 25/255)
+[ 251.51] LED index 7 on (white 25/255)
+[ 254.51] LED index 8 on (white 25/255)
+[ 257.56] LED index 9 on (white 25/255)
+[ 260.61] V [boost on] boost=1 5VOUT=5366mV VBUS=5254mV VBAT=4168mV
+[ 260.61] SHOW boost test: all on, boost ON
+[ 264.67] V [boost off] boost=0 5VOUT=5364mV VBUS=5240mV VBAT=4176mV
+[ 264.67] SHOW boost test: all on, boost OFF
+[ 268.72] V [boost on] boost=1 5VOUT=0mV VBUS=5260mV VBAT=4172mV
+[ 268.72] SHOW boost test: all on, boost ON
+[ 272.78] V [boost off] boost=0 5VOUT=5362mV VBUS=5252mV VBAT=4176mV
+[ 272.78] SHOW boost test: all on, boost OFF
+[ 272.83] V [boost on] boost=1 5VOUT=18mV VBUS=5252mV VBAT=4176mV
+[ 276.75] LED index 0 on (white 25/255)
+[ 279.80] LED index 1 on (white 25/255)
+[ 282.78] LED index 2 on (white 25/255)
+[ 283.22] BTN A (KEY1) pressed
+[ 284.73] BTN B (KEY2) pressed
+[ 285.82] LED index 3 on (white 25/255)
+[ 286.47] BTN B (KEY2) pressed
+[ 287.67] BTN C (KEY3) pressed
+[ 288.79] LED index 4 on (white 25/255)
+[ 291.82] LED index 5 on (white 25/255)
+[ 294.84] LED index 6 on (white 25/255)
+[ 297.81] LED index 7 on (white 25/255)
+[ 300.83] LED index 8 on (white 25/255)
+[ 303.86] LED index 9 on (white 25/255)
+[ 306.90] V [boost on] boost=1 5VOUT=5362mV VBUS=5252mV VBAT=4166mV
+[ 306.90] SHOW boost test: all on, boost ON
+[ 310.98] V [boost off] boost=0 5VOUT=5356mV VBUS=5240mV VBAT=4172mV
+[ 310.98] SHOW boost test: all on, boost OFF

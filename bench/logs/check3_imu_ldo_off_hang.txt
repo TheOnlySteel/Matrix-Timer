@@ -1,0 +1,30 @@
+[   0.00] # serlog /dev/cu.usbmodem101 2026-11-21 11:57:21
+[   1.03] >> b
+[   1.08] 
+[   1.08] == check3 Bottom2-alone sequence
+[   1.35] BOOST ON : set=1 readback=1 5VOUT=5356mV
+[   1.35] WHO 0x68: reg00(BMI270 CHIP_ID,0x24)=0x00 reg75(MPU6886 WHO_AM_I,0x19)=0x00 reg6B=0x00 ack=1 | 0x69 ack=0
+[   1.67] LDO OFF: set=1
+[   1.78] WHO 0x68: reg00(BMI270 CHIP_ID,0x24)=0x00 reg75(MPU6886 WHO_AM_I,0x19)=0x00 reg6B=0x00 ack=0 | 0x69 ack=0
+[   1.84] DUMP 0x68 boost=0 ok=0
+[   1.84]   00: 5a 17 01 42 00 00 00 00 5c d2 84 40 20 d5 84 40
+[   1.84]   10: 57 48 4f 20 30 78 36 38 3a 20 72 65 67 30 30 28
+[   1.84]   20: 42 4d 49 32 37 30 20 43 48 49 50 5f 49 44 2c 30
+[   1.84]   30: 78 32 34 29 3d 30 78 30 30 20 72 65 67 37 35 28
+[   1.84]   40: 4d 50 55 36 38 38 36 20 57 48 4f 5f 41 4d 5f 00
+[   1.84]   50: cf fb 33 28 00 00 04 42 64 00 00 00 00 20 81 40
+[   1.84]   60: 70 00 00 00 64 00 00 00 00 00 81 40 62 00 00 00
+[   1.84]   70: 8a 17 01 42 14 00 00 00 00 20 81 40 00 20 81 40
+[   2.00] INIT 0x68: begin -> spec=0  CHIP_ID=0x00 INTERNAL_STATUS=0x00 ACC_RANGE=0 PWR_CTRL=0x00
+[   2.05] PROBE [LDO off (internal IMU unpowered), boost on] boost=0
+[   2.16]   0x68: ack=0 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x00 ERR=0x00
+[   2.27]   0x69: ack=0 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x00 ERR=0x00
+[   3.41]   SENSORTIME 0x68: backwards=0 stalls=40 of 40, span=0 ticks (expect ~2304) seq: 0 0 0 0 0 0 0 0 0 0 0 0
+[   5.59] LDO ON : set=0
+[   5.69] WHO 0x68: reg00(BMI270 CHIP_ID,0x24)=0x00 reg75(MPU6886 WHO_AM_I,0x19)=0x00 reg6B=0x00 ack=0 | 0x69 ack=0
+[   5.75] PROBE [LDO back on, both powered] boost=0
+[   5.86]   0x68: ack=0 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x00 ERR=0x00
+[   5.96]   0x69: ack=0 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x00 ERR=0x00
+[   7.10]   SENSORTIME 0x68: backwards=0 stalls=40 of 40, span=0 ticks (expect ~2304) seq: 0 0 0 0 0 0 0 0 0 0 0 0
+[   8.17] == bottom-alone done
+[  10.05] # end
