@@ -115,7 +115,7 @@ Entered with A+C held for 2 s from Set; the matrix shows a one-letter code per i
 
 | Item | Values | Default |
 |---|---|---|
-| Matrix brightness | 1–8 (TM1680 duty 1/16–8/16) on USB; on battery capped at 2/16 | 3 |
+| Matrix brightness | 1–8 (TM1680 duty 1/16–8/16) on USB; on battery capped at 2/16 | 4 (desk check, 21 Nov) |
 | Bars | Auto (on with USB, off on battery), On, Off | Auto |
 | Bar brightness | 5, 10, 25 % of full | 10 % |
 | Sound | Chirp, Silent | Chirp |

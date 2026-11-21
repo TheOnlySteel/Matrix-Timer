@@ -52,7 +52,7 @@ inline bool load(Record* out) {
 }
 
 struct Settings {
-  uint8_t brightness = 3;   // matrix duty 1..8 (/16)
+  uint8_t brightness = 4;   // matrix duty 1..8 (/16); 4/16 on USB per Steel's desk check
   uint8_t bars = 0;         // 0 Auto, 1 On, 2 Off
   uint8_t barLevel = 1;     // 0: 5 %, 1: 10 %, 2: 25 %
   uint8_t sound = 1;        // 1 chirp, 0 silent
@@ -70,7 +70,7 @@ inline void loadSettings(Settings* s) {
   s->orientation = p.getUChar("ori", s->orientation);
   s->minutes = p.getUShort("min", s->minutes);
   p.end();
-  if (s->brightness < 1 || s->brightness > 8) s->brightness = 3;
+  if (s->brightness < 1 || s->brightness > 8) s->brightness = 4;
   if (s->bars > 2) s->bars = 0;
   if (s->barLevel > 2) s->barLevel = 1;
   if (s->sound > 1) s->sound = 1;
