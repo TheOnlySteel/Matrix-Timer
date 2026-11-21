@@ -1,0 +1,12 @@
+[   0.00] # serlog /dev/cu.usbmodem101 2026-11-21 11:57:51
+[   1.90] 
+[   1.90] == check2 i2c scan, board=0, ext(boost)=0
+[   2.16] SCAN boost-on     write-probe(0):
+[   2.16] SCAN boost-on     read-probe (0):
+[   2.70] setExtOutput(false) -> 0, readback=0
+[   2.70] SCAN boost-off    write-probe(0):
+[   2.70] SCAN boost-off    read-probe (0):
+[   3.19] SCAN boost-on-2   write-probe(0):
+[   3.19] SCAN boost-on-2   read-probe (0):
+[   3.19] == done
+[   8.00] # end

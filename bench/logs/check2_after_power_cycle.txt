@@ -1,0 +1,14 @@
+[   0.00] # serlog /dev/cu.usbmodem101 2026-11-21 12:03:01
+[   1.04] >> r
+[   1.09] 
+[   1.09] == check2 i2c scan, board=152, ext(boost)=1
+[   1.42] SCAN boost-on     write-probe(4): 0x4f 0x68 0x6e 0x72
+[   1.42] SCAN boost-on     read-probe (3): 0x4f 0x68 0x6e
+[   1.91] setExtOutput(false) -> 1, readback=0
+[   1.96] SCAN boost-off    write-probe(4): 0x4f 0x68 0x6e 0x72
+[   1.96] SCAN boost-off    read-probe (3): 0x4f 0x68 0x6e
+[   2.45] SCAN boost-on-2   write-probe(4): 0x4f 0x68 0x6e 0x72
+[   2.45] SCAN boost-on-2   read-probe (3): 0x4f 0x68 0x6e
+[   2.45] == done
+[   2.73] # port error: read failed: [Errno 6] Device not configured; reopening
+[   6.04] # end

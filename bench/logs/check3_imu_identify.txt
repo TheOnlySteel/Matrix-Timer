@@ -1,0 +1,122 @@
+[   0.00] # serlog /dev/cu.usbmodem101 2026-11-21 12:03:29
+[   1.03] >> m
+[   1.67] # port error: read failed: [Errno 6] Device not configured; reopening
+[   3.20] E (1076) MSPI Timing: Failed to allocate dummy cacheline for PSRAM memory barrier!
+[  12.91] # port error: read failed: [Errno 6] Device not configured; reopening
+[  23.31] # end
+[   0.00] # serlog /dev/cu.usbmodem101 2026-11-21 12:05:21
+[   2.04] >> m
+[   2.09] IDENT boost=1 (want 1: Bottom2 powered)
+[   2.09] IDENT 0x68 before: r72=0x00 r75=0x00 | after writing 0xFF: r72=0x00 r75=0x19 -> second chip looks like MPU6886 (WHO_AM_I 0x19)
+[   4.01] >> a
+[   4.07] 
+[   4.07] == check3 auto sequence
+[   4.33] BOOST ON : set=1 readback=1 5VOUT=5372mV
+[   4.33] WHO 0x68: reg00(BMI270 CHIP_ID,0x24)=0x00 reg75(MPU6886 WHO_AM_I,0x19)=0x00 reg6B=0x00 ack=1 | 0x69 ack=0
+[   4.33] INIT 0x68: begin -> spec=0  CHIP_ID=0x00 INTERNAL_STATUS=0x00 ACC_RANGE=0 PWR_CTRL=0x00
+[   4.33] INIT 0x69: begin -> spec=0  CHIP_ID=0x00 INTERNAL_STATUS=0x00 ACC_RANGE=0 PWR_CTRL=0x00
+[   4.33] PROBE [boost on, after init] boost=1
+[   4.33]   0x68: ack=1 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x00 ERR=0x00
+[   4.33]   0x69: ack=0 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x00 ERR=0x00
+[   4.44]   SENSORTIME 0x68: backwards=0 stalls=40 of 40, span=0 ticks (expect ~2304) seq: 0 0 0 0 0 0 0 0 0 0 0 0
+[   4.44] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   4.55] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   4.66] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   4.71] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   4.82] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   4.92] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   5.03] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   5.14] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   5.25] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   5.36] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   5.47] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   5.52] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   5.63] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   5.74] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   5.85] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   5.96] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   6.07] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   6.12] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   6.23] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   6.34] ACC 0x68 boost=1 raw=     0      0      0  g=+0.000 +0.000 +0.000 |g|=0.000
+[   6.77] BOOST OFF: set=1 readback=0 5VOUT=5370mV
+[   6.77] WHO 0x68: reg00(BMI270 CHIP_ID,0x24)=0x24 reg75(MPU6886 WHO_AM_I,0x19)=0x00 reg6B=0x00 ack=1 | 0x69 ack=0
+[   6.94] INIT 0x68: begin -> spec=3  CHIP_ID=0x24 INTERNAL_STATUS=0x01 ACC_RANGE=2 PWR_CTRL=0x0e
+[   6.94] PROBE [boost off, after init] boost=0
+[   6.94]   0x68: ack=1 CHIP_ID=0x24 INTERNAL_STATUS=0x01 PWR_CTRL=0x0e ERR=0x80
+[   6.94]   0x69: ack=0 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x00 ERR=0x00
+[   7.04]   SENSORTIME 0x68: backwards=0 stalls=0 of 40, span=2077 ticks (expect ~2304) seq: 5057 5108 5160 5212 5263 5315 5367 5419 5470 5522 5574 5626
+[   7.04] ACC 0x68 boost=0 raw=   -18     30   4057  g=-0.004 +0.007 +0.990 |g|=0.991
+[   7.15] ACC 0x68 boost=0 raw=    -3     19   4060  g=-0.001 +0.005 +0.991 |g|=0.991
+[   7.26] ACC 0x68 boost=0 raw=    20      8   4075  g=+0.005 +0.002 +0.995 |g|=0.995
+[   7.31] ACC 0x68 boost=0 raw=   -61     12   4076  g=-0.015 +0.003 +0.995 |g|=0.995
+[   7.42] ACC 0x68 boost=0 raw=   -13      7   4079  g=-0.003 +0.002 +0.996 |g|=0.996
+[   7.53] ACC 0x68 boost=0 raw=   -26     18   4062  g=-0.006 +0.004 +0.992 |g|=0.992
+[   7.63] ACC 0x68 boost=0 raw=    45      8   4070  g=+0.011 +0.002 +0.994 |g|=0.994
+[   7.74] ACC 0x68 boost=0 raw=     3     10   4069  g=+0.001 +0.002 +0.993 |g|=0.993
+[   7.85] ACC 0x68 boost=0 raw=    16     13   4072  g=+0.004 +0.003 +0.994 |g|=0.994
+[   7.96] ACC 0x68 boost=0 raw=   -49     11   4074  g=-0.012 +0.003 +0.995 |g|=0.995
+[   8.07] ACC 0x68 boost=0 raw=   -26     -5   4066  g=-0.006 -0.001 +0.993 |g|=0.993
+[   8.12] ACC 0x68 boost=0 raw=   -45     19   4067  g=-0.011 +0.005 +0.993 |g|=0.993
+[   8.23] ACC 0x68 boost=0 raw=     5      4   4072  g=+0.001 +0.001 +0.994 |g|=0.994
+[   8.34] ACC 0x68 boost=0 raw=   -17      5   4075  g=-0.004 +0.001 +0.995 |g|=0.995
+[   8.45] ACC 0x68 boost=0 raw=    -3     30   4067  g=-0.001 +0.007 +0.993 |g|=0.993
+[   8.55] ACC 0x68 boost=0 raw=    -1    -17   4065  g=-0.000 -0.004 +0.992 |g|=0.992
+[   8.66] ACC 0x68 boost=0 raw=   -17     31   4060  g=-0.004 +0.008 +0.991 |g|=0.991
+[   8.77] ACC 0x68 boost=0 raw=   -37    -21   4066  g=-0.009 -0.005 +0.993 |g|=0.993
+[   8.88] ACC 0x68 boost=0 raw=   -17     21   4065  g=-0.004 +0.005 +0.992 |g|=0.992
+[   8.93] ACC 0x68 boost=0 raw=     2     -4   4081  g=+0.000 -0.001 +0.996 |g|=0.996
+[   9.35] BOOST ON : set=1 readback=1 5VOUT=5368mV
+[   9.35] PROBE [boost back on, BEFORE re-init] boost=1
+[   9.35]   0x68: ack=1 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x02 ERR=0x00
+[   9.35]   0x69: ack=0 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x00 ERR=0x00
+[   9.45]   SENSORTIME 0x68: backwards=0 stalls=40 of 40, span=0 ticks (expect ~2304) seq: 0 0 0 0 0 0 0 0 0 0 0 0
+[   9.45] ACC 0x68 boost=1 raw=     0      0   2704  g=+0.000 +0.000 +0.165 |g|=0.165
+[   9.57] ACC 0x68 boost=1 raw= 24322      5   2736  g=+1.484 +0.000 +0.167 |g|=1.494
+[   9.62] ACC 0x68 boost=1 raw=     0      1   2720  g=+0.000 +0.000 +0.166 |g|=0.166
+[   9.72] ACC 0x68 boost=1 raw= 24320     17   2720  g=+1.484 +0.001 +0.166 |g|=1.494
+[   9.83] ACC 0x68 boost=1 raw= 24322      1   2704  g=+1.484 +0.000 +0.165 |g|=1.494
+[   9.93] ACC 0x68 boost=1 raw= 24320     21   2720  g=+1.484 +0.001 +0.166 |g|=1.494
+[  10.04] ACC 0x68 boost=1 raw= 24320      5   2720  g=+1.484 +0.000 +0.166 |g|=1.494
+[  10.15] ACC 0x68 boost=1 raw= 24322     25   2720  g=+1.484 +0.002 +0.166 |g|=1.494
+[  10.27] ACC 0x68 boost=1 raw= 24320      5   2720  g=+1.484 +0.000 +0.166 |g|=1.494
+[  10.33] ACC 0x68 boost=1 raw=     2     13   2720  g=+0.000 +0.001 +0.166 |g|=0.166
+[  10.43] INIT 0x68: begin -> spec=0  CHIP_ID=0x00 INTERNAL_STATUS=0x00 ACC_RANGE=0 PWR_CTRL=0x02
+[  10.43] PROBE [boost on, after re-init] boost=1
+[  10.43]   0x68: ack=1 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x02 ERR=0x00
+[  10.43]   0x69: ack=0 CHIP_ID=0x00 INTERNAL_STATUS=0x00 PWR_CTRL=0x00 ERR=0x00
+[  10.54]   SENSORTIME 0x68: backwards=0 stalls=40 of 40, span=0 ticks (expect ~2304) seq: 0 0 0 0 0 0 0 0 0 0 0 0
+[  10.54] ACC 0x68 boost=1 raw= 24320     16   2720  g=+1.484 +0.001 +0.166 |g|=1.494
+[  10.64] ACC 0x68 boost=1 raw= 24322      5   2720  g=+1.484 +0.000 +0.166 |g|=1.494
+[  10.75] ACC 0x68 boost=1 raw= 24322  29528   2736  g=+1.484 +1.802 +0.167 |g|=2.341
+[  10.86] ACC 0x68 boost=1 raw=     2     28   2736  g=+0.000 +0.002 +0.167 |g|=0.167
+[  10.91] ACC 0x68 boost=1 raw= 24320  29512   2688  g=+1.484 +1.801 +0.164 |g|=2.340
+[  11.02] ACC 0x68 boost=1 raw=     0     12   2736  g=+0.000 +0.001 +0.167 |g|=0.167
+[  11.12] ACC 0x68 boost=1 raw= 24322  29520   2736  g=+1.484 +1.802 +0.167 |g|=2.341
+[  11.23] ACC 0x68 boost=1 raw= 24320     21   2720  g=+1.484 +0.001 +0.166 |g|=1.494
+[  11.34] ACC 0x68 boost=1 raw= 24320     12   2720  g=+1.484 +0.001 +0.166 |g|=1.494
+[  11.44] ACC 0x68 boost=1 raw=     2  29504   2720  g=+0.000 +1.801 +0.166 |g|=1.808
+[  11.55] ACC 0x68 boost=1 raw= 24320     64   2704  g=+1.484 +0.004 +0.165 |g|=1.494
+[  11.66] ACC 0x68 boost=1 raw=     2  29521   2720  g=+0.000 +1.802 +0.166 |g|=1.809
+[  11.77] ACC 0x68 boost=1 raw= 24320     20   2688  g=+1.484 +0.001 +0.164 |g|=1.493
+[  11.82] ACC 0x68 boost=1 raw= 24320     12   2720  g=+1.484 +0.001 +0.166 |g|=1.494
+[  11.93] ACC 0x68 boost=1 raw= 24320     21   2720  g=+1.484 +0.001 +0.166 |g|=1.494
+[  12.04] ACC 0x68 boost=1 raw= 24322     12   2720  g=+1.484 +0.001 +0.166 |g|=1.494
+[  12.15] ACC 0x68 boost=1 raw=     2     21   2720  g=+0.000 +0.001 +0.166 |g|=0.166
+[  12.26] ACC 0x68 boost=1 raw= 24322     17   2720  g=+1.484 +0.001 +0.166 |g|=1.494
+[  12.36] ACC 0x68 boost=1 raw=     2     13   2720  g=+0.000 +0.001 +0.166 |g|=0.166
+[  12.47] ACC 0x68 boost=1 raw= 24322     21   2720  g=+1.484 +0.001 +0.166 |g|=1.494
+[  12.53] == auto done
+[  16.03] # end
+[   0.00] # serlog /dev/cu.usbmodem101 2026-11-21 12:05:51
+[   1.03] >> 0
+[   1.36] BOOST OFF: set=1 readback=0 5VOUT=5368mV
+[   1.52] >> m
+[   1.58] IDENT boost=0 (want 1: Bottom2 powered)
+[   1.58] IDENT 0x68 before: r72=0x00 r75=0x00 | after writing 0xFF: r72=0xff r75=0xff -> all BMI270
+[   2.51] >> 1
+[   2.83] BOOST ON : set=1 readback=1 5VOUT=374mV
+[   3.00] >> m
+[   3.05] IDENT boost=1 (want 1: Bottom2 powered)
+[   3.05] IDENT 0x68 before: r72=0x00 r75=0x00 | after writing 0xFF: r72=0x00 r75=0x19 -> second chip looks like MPU6886 (WHO_AM_I 0x19)
+[   5.05] # end
