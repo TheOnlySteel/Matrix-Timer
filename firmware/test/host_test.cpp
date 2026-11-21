@@ -87,9 +87,9 @@ int main() {
   CHECK(minc == 1 && maxc == 14);   // exactly centred
   CHECK(maxr - minr + 1 == 12);
   CHECK(minr == 2 && maxr == 13);
-  // done: a centred 4x4 square
+  // done: a centred 6x6 square
   Frame df = doneFrame();
-  CHECK(df.count() == 16 && df.get(6, 6) && df.get(9, 9) && !df.get(5, 6) && !df.get(10, 9));
+  CHECK(df.count() == 36 && df.get(5, 5) && df.get(10, 10) && !df.get(4, 5) && !df.get(11, 10));
   Frame hm = durationFrame(105);  // "1:45"
   CHECK(hm.count() > 0);
   CHECK(peekFrame(59.2) == textFrame("60", 2, 2));

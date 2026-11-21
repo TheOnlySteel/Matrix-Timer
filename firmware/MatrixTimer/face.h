@@ -188,12 +188,12 @@ inline Frame peekFrame(double remaining_s) {
   return durationFrame((int)ceil(remaining_s / 60 - 1e-9));
 }
 
-// Done: a 4x4 square in the centre (rows/cols 6..9). Chosen on the desk
-// with Steel (21 Nov) after trying all 256 on, a checkmark and a triforce.
+// Done: a 6x6 square in the centre (rows/cols 5..10). Chosen on the desk
+// with Steel (21 Nov) after trying all 256 on, a checkmark, a triforce and a 4x4 square.
 inline Frame doneFrame() {
   Frame f;
-  for (int r = 6; r <= 9; ++r)
-    for (int c = 6; c <= 9; ++c) f.set(r, c, true);
+  for (int r = 5; r <= 10; ++r)
+    for (int c = 5; c <= 10; ++c) f.set(r, c, true);
   return f;
 }
 

@@ -52,7 +52,7 @@ State changes are logged as `STATE A -> B`.
 - **On battery** the matrix is capped at duty 2/16, whatever the brightness setting (pause stays at 1/16).
 - **Lay flat to pause** fires only on a real transition into "flat" (dwell 1 s). A block restored after a reset is not paused just because the device happens to be lying down.
 - **Peek** shows whole minutes rounded up, and seconds under one minute. C-hold (+5 min) also peeks, so the new total is visible.
-- **Done**: a centred 4×4 square on the matrix (at 1/16) and the red bars alternate, at 2 Hz with a 3-chirp burst at the finish and single chirps at 15, 30, 45 and 60 s, then at 0.5 Hz until dismissed. Flip-to-repeat needs the opposite edge down for 0.8 s.
+- **Done**: a centred 6×6 square on the matrix (at 1/16) and the red bars alternate, at 2 Hz with a 3-chirp burst at the finish and single chirps at 15, 30, 45 and 60 s, then at 0.5 Hz until dismissed. Flip-to-repeat needs the opposite edge down for 0.8 s.
 - **Settings** (A+C 2 s in Set) items are `M` matrix brightness 1–8, `B` bars A/1/0 (Auto/On/Off), `I` bar intensity 5/10/25 %, `S` sound 1/0, and `O` orientation A/0–3. B advances, and B on the last item saves and exits.
 - **Bars under Auto** run only on USB. On battery the 5 V boost is off, which also removes the IMU collision. The battery gauge in Set is therefore only visible on USB.
 
