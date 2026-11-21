@@ -242,10 +242,10 @@ void loop() {
 | Same with automatic light sleep, waking ~15×/s | 2–5 mA average | [I] |
 | Matrix, ~70 of 256 pixels at 3–4/16 duty | ~5–15 mA | [I] scaled from the 128 mA vendor full-load figure; very uncertain |
 | SK6812 × 10 idle (boost on) | 5–10 mA at 5 V → ~8–15 mA from the cell | [I] |
-| SK6812 lit (gauge, ≤ 25 % brightness cap) | +5–15 mA | [I] |
+| SK6812 lit (full teal gauge at 10 % cap → shrinking to 0) | ~17 mA at 5 V when full → ~12 mA average from the cell over a block; ~3× that at 25 % | [I] ≈12 mA per channel at full scale |
 | PM1 + IOE1 + boost quiescent | ~1–2 mA | [I] |
 
-Implication: on the 500 mAh cell, **roughly 10–15 h with bars on and CPU awake, 25–40 h with light sleep and bars off.** Enough for a working day either way; measure with a USB power meter (on USB) and by run-down test (on battery).
+Implication: on the 500 mAh cell, **roughly 9–12 h with bars on (10 % cap), 25–40 h with light sleep and the bars' 5 V rail off.** The rail, not the brightness, is the larger share of the bars' cost, which is why the design turns it off on battery. Enough for a working day either way; measure with a USB power meter (on USB) and by run-down test (on battery).
 
 ## 9. Bench checks before writing app code
 

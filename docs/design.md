@@ -57,13 +57,15 @@ The Bottom2's ten SK6812s are treated as two 5-LED columns, index 0 at the botto
 
 | State | Bars |
 |---|---|
-| Set | Battery level, dim green; animate upward while charging |
+| Set | Battery level, dim green (USB power only under Auto); animate upward while charging |
 | Running | **Remaining-time gauge.** Each LED is 20 % of the block; the topmost lit LED's brightness carries the remainder, so the bar shrinks continuously. Teal above 20 %, amber ≤ 20 %, red ≤ 5 %. The bottom LED never fades below 15 % while time remains. |
 | Paused | Bottom LED amber, steady, dim |
 | Done | Red, pulsing with the matrix flash |
 | Low battery (< 15 %) | Bottom-left LED blinks red once every 5 s, in any state |
 
-Brightness cap 25 % of full scale with gamma 2.2: SK6812s at full power are glaring on a desk and cost ~12 mA per channel. Colour shifts cross-fade over 2 s rather than snapping.
+**Power, and why the bars are off on battery by default.** An SK6812 at full white draws ~36 mA (≈12 mA per colour) and is glaring on a desk, so brightness is capped at **10 %** of full scale with gamma 2.2; through the Bottom2's diffuser that is still clearly visible indoors (to confirm on the bench). Even capped, a full teal gauge is ~17 mA at 5 V, ~25 mA from the cell after the boost, ~12 mA averaged over a block as it shrinks. The bigger, less obvious cost is the 5 V rail itself: the ten SK6812s idle at ~5–10 mA *while dark*, plus boost losses, for as long as the rail is on. Together the bars can double the device's consumption, so the default is **Auto: gauge on USB power, bars and their 5 V rail off on battery** (hardware.md §8). Turning the rail off also unpowers the Bottom2's IMU, which removes the 0x68 collision, so on battery the Core Matrix's own IMU becomes usable.
+
+Colour shifts cross-fade over 2 s rather than snapping.
 
 **Position taken:** gauge on both bars, not "left = elapsed, right = remaining". Mirrored bars read as one instrument from any angle; split semantics need a legend.
 
@@ -112,7 +114,8 @@ Entered with A+C held for 2 s from Set; the matrix shows a one-letter code per i
 | Item | Values | Default |
 |---|---|---|
 | Matrix brightness | 1–8 (TM1680 duty 1/16–8/16) | 3 |
-| Bars | On, Off (boost off on battery, saves ~15 mA) | On |
+| Bars | Auto (on with USB, off on battery), On, Off | Auto |
+| Bar brightness | 5, 10, 25 % of full | 10 % |
 | Sound | Chirp, Silent | Chirp |
 | Orientation | Auto (IMU, only if check passes), 0°, 90°, 180°, 270° | Auto, else 0° |
 
@@ -157,7 +160,7 @@ Arduino on arduino-cli, M5Unified + M5GFX, one loop, no RTOS tasks of our own.
 | `Bars` | Logical gauge → 10 RGB → SK6812 over SPI2 on G5; gamma, cap, cross-fade | hardware.md §6; owns `bar_index` mapping |
 | `Input` | `M5.update()`; clicks, holds, chords; PWR button; tilt events if enabled | Debounced by M5Unified |
 | `Persist` | RTC RAM session record (M5PM1 lib); NVS for settings and last duration | |
-| `Power` | Battery %, charging, LVP 3.3 V, idle auto-off, boost off when bars disabled | |
+| `Power` | Battery %, charging, LVP 3.3 V, idle auto-off; 5 V boost off whenever bars are off (Auto on battery) | |
 | `Sound` | Buzzer chirps via IOE1 PWM channel | |
 | `App` | State machine of §5.1 | |
 
