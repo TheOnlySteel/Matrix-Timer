@@ -90,7 +90,7 @@ static void enter(St s) {
     doneAt = ms;
     lastChirp = ms;
     doneDown = tilt.downEdge();
-    sound.chirps(cfg::kDoneChirps);
+    sound.chirps(cfg::kDoneFirstChirps);  // one 3-chirp burst when it first finishes
   }
   if (from == St::Done && s != St::Done) sound.stop();
   if (s == St::Set) { clk.cancel(); pausedByFlat = false; }

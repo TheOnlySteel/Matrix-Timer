@@ -40,7 +40,8 @@ constexpr double kBarTopHoldS = 15;  // a fresh block shows all 5, top one fades
 // --- done (design.md §5.5) ---
 constexpr uint32_t kDoneFastMs = 60000;   // 2 Hz flash + chirps for 1 minute, then 0.5 Hz
 constexpr uint32_t kChirpEveryMs = 10000;
-constexpr int kDoneChirps = 1;              // per burst (Steel: a single chirp every 10 s)
+constexpr int kDoneFirstChirps = 3;         // the moment it finishes: one 3-chirp burst
+constexpr int kDoneChirps = 1;              // then a single chirp every 10 s (Steel)
 constexpr uint16_t kBuzzerHz = 2700;
 
 // --- power (design.md §7, hardware.md §2.4) ---
