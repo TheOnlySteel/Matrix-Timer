@@ -26,9 +26,9 @@ OUT = os.path.join(os.path.dirname(__file__), "..", "..", "docs", "images")
 # Row 0 is the top of the matrix after rotation.
 ORDER = [(r, c) for r in range(H) for c in range(W)]
 
-BLINK_PERIOD_S = 2.5     # active LED blink cycle (>= 1 s on and >= 1 s off)
-BLINK_MIN_ON_S, BLINK_MAX_ON_S = 1.0, 1.5
-MIN_SLICE_FOR_BLINK = 2.5  # below one blink cycle per LED the active LED is steady
+BLINK_PERIOD_S = 1.5     # active LED blink cycle: 1 s on, 0.5 s off
+BLINK_MIN_ON_S, BLINK_MAX_ON_S = 1.0, 1.0  # equal = no shrinking on-time
+MIN_SLICE_FOR_BLINK = 1.5  # below one blink cycle per LED the active LED is steady
 
 
 def ticks_left(remaining_s: float, total_s: float) -> int:
@@ -49,9 +49,9 @@ def active_fraction(remaining_s: float, total_s: float) -> float:
 
 def grid(remaining_s: float, total_s: float, t_s: float | None = None):
     """16x16 bool frame. Lit LEDs = time left. The first lit LED (the one
-    being consumed) blinks on a 2.5 s cycle whose on-time shrinks from 1.5 s
-    to 1 s with the share of its slice still left, so it visibly drains before
-    it goes out without ever flickering.
+    being consumed) blinks 1 s on, 0.5 s off (tuned on the desk). Setting
+    BLINK_MIN_ON_S < BLINK_MAX_ON_S makes the on-time shrink with the share
+    of its slice still left.
     t_s=None freezes it steady on (setup preview, paused)."""
     f = [[True] * W for _ in range(H)]
     left = ticks_left(remaining_s, total_s)

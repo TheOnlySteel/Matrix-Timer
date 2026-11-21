@@ -31,15 +31,12 @@ int main() {
   Frame f = grid(750, 1500, -1);
   CHECK(f.count() == 128);
   CHECK(!f.get(0, 0) && !f.get(7, 15) && f.get(8, 0) && f.get(15, 15));
-  // active LED (row 8 col 0) at 50 % of its slice: 2.5 s cycle, on for 1.25 s
-  double rem = slice * 127.5;   // 128 left, active fraction 0.5
-  CHECK(grid(rem, 1500, 11.2).get(8, 0) == true);    // 11.2 mod 2.5 = 1.2 < 1.25
-  CHECK(grid(rem, 1500, 11.3).get(8, 0) == false);   // 1.3
-  // never less than 1 s on / 1 s off
-  double justStarted = slice * 128;   // fraction 1.0 -> on 1.5 s
-  double nearlyGone = slice * 127.01; // fraction ~0 -> on ~1.0 s
-  CHECK(grid(justStarted, 1500, 1.45).get(8, 0) == true && grid(justStarted, 1500, 1.55).get(8, 0) == false);
-  CHECK(grid(nearlyGone, 1500, 0.95).get(8, 0) == true && grid(nearlyGone, 1500, 1.05).get(8, 0) == false);
+  // active LED (row 8 col 0): 1 s on, 0.5 s off, whatever the fraction
+  double rem = slice * 127.5;   // 128 left
+  CHECK(grid(rem, 1500, 10.4).get(8, 0) == true);    // 10.4 mod 1.5 = 0.9 < 1.0
+  CHECK(grid(rem, 1500, 10.6).get(8, 0) == false);   // 1.1
+  CHECK(grid(slice * 127.01, 1500, 0.95).get(8, 0) == true);
+  CHECK(grid(slice * 128, 1500, 1.05).get(8, 0) == false);
   // short blocks: steady
   CHECK(grid(60 * 0.5 + 0.1, 60, 10.9).count() == ticksLeft(30.1, 60));
 

@@ -6,7 +6,7 @@ Companion to [hardware.md](hardware.md), which this doc relies on for every pin,
 
 ## 1. What it is
 
-A utilitarian desk timer for work blocks: a digital hourglass without the hourglass styling. You set a duration and press start. All 256 LEDs light, then tick off one at a time, left to right along the top row, then along the next row down, until the last LED in the bottom-right corner goes out. The LEDs still lit *are* the time remaining. The LED that is currently being used up blinks with a shrinking on-time, so the display is visibly moving between ticks. The LED bars on the Bottom2 show the same quantity as a smooth analogue gauge and shift colour as the block ends. When the last LED goes out, the matrix flashes and chirps.
+A utilitarian desk timer for work blocks: a digital hourglass without the hourglass styling. You set a duration and press start. All 256 LEDs light, then tick off one at a time, left to right along the top row, then along the next row down, until the last LED in the bottom-right corner goes out. The LEDs still lit *are* the time remaining. The LED that is currently being used up blinks, so the display is visibly moving between ticks. The LED bars on the Bottom2 show the same quantity as a smooth analogue gauge and shift colour as the block ends. When the last LED goes out, the matrix flashes and chirps.
 
 **Goals:** glanceable remaining time from across a desk; a sense of continuous motion; durations from 1 minute to 4 hours set in seconds with three buttons; a full workday on battery; survive an accidental reset without losing the block.
 
@@ -30,12 +30,12 @@ These decide the design more than taste does (details in hardware.md §1):
 | Ticks per block | **256** (every LED) |
 | Order | Row 0 left → right, then row 1, … row 15. Row 0 is the top after rotation. |
 | LEDs lit | `ceil(256 × remaining / total)` |
-| One LED | `total / 256`: 5.9 s for 25 min (about 2½ blink cycles), 14 s for 1 h, 56 s for 4 h |
+| One LED | `total / 256`: 5.9 s for 25 min (about 4 blinks), 14 s for 1 h, 56 s for 4 h |
 | One row | exactly 1/16 of the block: 94 s for 25 min, 3¾ min for 1 h |
 
 Using ceil means *a lit LED always means time remains*, and the last LED goes out at exactly zero. Reading it is arithmetic you can do at a glance: rows left ÷ 16 is the fraction left, and for a 1-hour block each row is 3¾ minutes.
 
-**The active LED.** The first lit LED is the one being consumed. It blinks on a 2.5-second cycle, and its on-time shrinks with the share of its own slice still left: 1.5 s on and 1 s off just after the previous LED went out, and 1 s on and 1.5 s off just before it goes dark. So between ticks the display is always moving, but it never flickers. This was tuned on the desk on 21 Nov. The first version blinked once a second and ended in a brief flicker. Steel asked for at least a second on and a second off, then found a 3 s cycle a little slow. If a slice is under 2.5 s (blocks under ~10.7 minutes), the active LED stays steady; at that pace the ticking itself is the motion.
+**The active LED.** The first lit LED is the one being consumed. It blinks **1 s on, 0.5 s off**, so between ticks the display is always moving and you can pick out the LED being used up. This was tuned on the desk with Steel on 21 Nov. The original design shrank the on-time within a 1 s cycle, so the LED "drained", but it ended in a flicker. Slower 3 s and 2.5 s cycles with a gentler shrink felt slow. A plain steady rhythm won. The shrink is still available (`kBlinkMinOnS` < `kBlinkMaxOnS` in `config.h`). If a slice is under 1.5 s (blocks under ~6.4 minutes), the active LED stays steady; at that pace the ticking itself is the motion.
 
 **Paused:** the active LED holds steady and the whole matrix drops to a static 1/16 duty, its dimmest step, while the bars show a dim amber LED at the bottom (§4). Steel tried the original breathing version on the desk (21 Nov) and preferred a static dim. It still reads as "paused" from across a room without a glyph over the grid.
 
