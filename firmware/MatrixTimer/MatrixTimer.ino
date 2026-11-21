@@ -90,7 +90,7 @@ static void enter(St s) {
     doneAt = ms;
     lastChirp = ms;
     doneDown = tilt.downEdge();
-    sound.chirps(3);
+    sound.chirps(cfg::kDoneChirps);
   }
   if (from == St::Done && s != St::Done) sound.stop();
   if (s == St::Set) { clk.cancel(); pausedByFlat = false; }
@@ -216,7 +216,7 @@ static void handleDone(uint32_t ms) {
   }
   if (ms - doneAt < cfg::kDoneFastMs && ms - lastChirp >= cfg::kChirpEveryMs) {
     lastChirp = ms;
-    sound.chirps(3);
+    sound.chirps(cfg::kDoneChirps);
   }
 }
 

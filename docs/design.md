@@ -142,7 +142,7 @@ Also enabled: **flip to repeat**. In Done, turning the frame upside down (sustai
 
 ### 5.5 Done
 
-The matrix (a 2-px checkmark, at 1/16 duty) and the red bars **take turns** flashing: 2 Hz alternation for the first minute, then 0.5 Hz until dismissed. Steel picked the alternation, the 1/16 matrix and a checkmark rather than all 256 LEDs on the desk (21 Nov). A Done restored after a reset resumes the quiet slow flash without chirping again. Buzzer (IOE1 PWM at ~2.7 kHz, the MLT-8530's resonance) plays three short chirps, repeating every 10 s for 1 minute, then stops. **Position taken:** no continuous beeping. This sits next to someone working.
+The matrix (a 2-px checkmark, at 1/16 duty) and the red bars **take turns** flashing: 2 Hz alternation for the first minute, then 0.5 Hz until dismissed. Steel picked the alternation, the 1/16 matrix and a checkmark rather than all 256 LEDs on the desk (21 Nov). A Done restored after a reset resumes the quiet slow flash without chirping again. Buzzer (IOE1 PWM at ~2.7 kHz, the MLT-8530's resonance) plays a single short chirp every 10 s for 1 minute, then stops (Steel, 21 Nov: three was too much in a shared room). **Position taken:** no continuous beeping. This sits next to someone working.
 
 ## 6. Timing model
 
