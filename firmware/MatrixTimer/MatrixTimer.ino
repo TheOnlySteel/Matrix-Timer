@@ -55,6 +55,7 @@ static bool chord = false;          // A+C chord in progress (Set)
 static int minutesBeforeChord = 0;
 static uint32_t lastRepeatA = 0, lastRepeatC = 0;
 static Tilt::Pose lastPose = Tilt::kUnknown;
+static face::SmoothGrid smooth;
 static uint32_t lastBarsMs = 0;
 
 static int64_t nowUs() { return esp_timer_get_time() + warpUs; }
@@ -103,6 +104,7 @@ static void startBlock(int64_t durationUs) {
   lastSavedTicks = -1;
   pausedByFlat = false;
   peekUntil = 0;
+  smooth.reset();
   enter(St::Running);
 }
 
@@ -166,7 +168,7 @@ static void handleRunPause(uint32_t ms, int64_t now) {
   if (a.pressed) peekUntil = ms + cfg::kPeekMs;
   if (b.down && !b.consumed && b.heldFor(ms) >= cfg::kHoldCancelMs) {
     b.consumed = true;
-    cancelFrom = face::ticksLeft(clk.remaining(now) / 1e6, clk.duration_us / 1e6);
+    cancelFrom = smooth.shown >= 0 ? smooth.shown : face::ticksLeft(clk.remaining(now) / 1e6, clk.duration_us / 1e6);
     cancelAt = ms;
     clk.cancel();
     enter(St::Cancelling);
@@ -261,13 +263,13 @@ static Frame currentFrame(uint32_t ms, int64_t now, int* duty) {
     case St::Set: return face::durationFrame(minutes);
     case St::Running:
       if ((int32_t)(peekUntil - ms) > 0) return face::peekFrame(rem);
-      return face::grid(rem, total, now / 1e6);
+      return smooth.frame(rem, total, clk.elapsed(now) / 1e6, false);
     case St::Paused:
       // Paused: static at the lowest duty, 1/16 (Steel preferred this to
       // breathing, 21 Nov). Peek shows at the normal level.
       if ((int32_t)(peekUntil - ms) > 0) return face::peekFrame(rem);
       *duty = 1;
-      return face::grid(rem, total, -1);
+      return smooth.frame(rem, total, clk.elapsed(now) / 1e6, true);
     case St::Done: {
       bool fast = ms - doneAt < cfg::kDoneFastMs;
       bool on = fast ? ((ms - doneAt) % 500) < 250 : ((ms - doneAt) % 2000) < 1000;

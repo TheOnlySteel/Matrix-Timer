@@ -6,13 +6,13 @@ namespace cfg {
 
 // --- grid (design.md §3.1) ---
 constexpr int kW = 16, kH = 16, kN = kW * kH;   // 256 ticks per block
-// Active LED blink, tuned on the desk with Steel (21 Nov): a plain 1 s on,
-// 0.5 s off. (Earlier tries: 1 s cycle with a shrinking on-time ended in a
-// flicker; 3 s and 2.5 s cycles felt slow.) kBlinkMinOnS == kBlinkMaxOnS
-// means the on-time no longer shrinks; set them apart to bring that back.
-constexpr double kBlinkPeriodS = 1.5;
-constexpr double kBlinkMinOnS = 1.0, kBlinkMaxOnS = 1.0;
-constexpr double kMinSliceForBlinkS = 1.5;      // below one blink cycle per LED: steady
+// Active LED blink, tuned on the desk with Steel (21 Nov): 1.5 s on, 0.5 s
+// off, in a rhythm that never breaks. The display advances to the next LED
+// only at the start of a blink cycle (MatrixTimer.ino, smooth grid), so an
+// LED can lag the true time by up to one cycle but the flashing never jumps.
+constexpr double kBlinkPeriodS = 2.0;
+constexpr double kBlinkOnS = 1.5;
+constexpr double kMinSliceForBlinkS = 2.0;      // below one blink cycle per LED: steady
 
 // --- durations (design.md §5.2) ---
 constexpr int kMinMinutes = 1, kMaxMinutes = 240, kDefaultMinutes = 25;

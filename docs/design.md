@@ -30,12 +30,12 @@ These decide the design more than taste does (details in hardware.md §1):
 | Ticks per block | **256** (every LED) |
 | Order | Row 0 left → right, then row 1, … row 15. Row 0 is the top after rotation. |
 | LEDs lit | `ceil(256 × remaining / total)` |
-| One LED | `total / 256`: 5.9 s for 25 min (about 4 blinks), 14 s for 1 h, 56 s for 4 h |
+| One LED | `total / 256`: 5.9 s for 25 min (about 3 blinks), 14 s for 1 h, 56 s for 4 h |
 | One row | exactly 1/16 of the block: 94 s for 25 min, 3¾ min for 1 h |
 
 Using ceil means *a lit LED always means time remains*, and the last LED goes out at exactly zero. Reading it is arithmetic you can do at a glance: rows left ÷ 16 is the fraction left, and for a 1-hour block each row is 3¾ minutes.
 
-**The active LED.** The first lit LED is the one being consumed. It blinks **1 s on, 0.5 s off**, so between ticks the display is always moving and you can pick out the LED being used up. This was tuned on the desk with Steel on 21 Nov. The original design shrank the on-time within a 1 s cycle, so the LED "drained", but it ended in a flicker. Slower 3 s and 2.5 s cycles with a gentler shrink felt slow. A plain steady rhythm won. The shrink is still available (`kBlinkMinOnS` < `kBlinkMaxOnS` in `config.h`). If a slice is under 1.5 s (blocks under ~6.4 minutes), the active LED stays steady; at that pace the ticking itself is the motion.
+**The active LED.** The first lit LED is the one being consumed. It blinks **1.5 s on, 0.5 s off** in an unbroken rhythm. The display moves on to the next LED (or the next row) only at the start of a blink cycle, so the flashing never stutters at a hand-over. The price is that an LED can go out up to one cycle (2 s) after its exact time. That is invisible at 5.9 s per LED, and Done still fires at the exact time. This was tuned on the desk with Steel on 21 Nov. The original design shrank the on-time within a 1 s cycle, so the LED "drained", but it ended in a flicker and jumped at hand-overs. Steel preferred a slower steady rhythm with smooth hand-overs. If a slice is under 2 s (blocks under ~8.5 minutes), the active LED stays steady; at that pace the ticking itself is the motion.
 
 **Paused:** the active LED holds steady and the whole matrix drops to a static 1/16 duty, its dimmest step, while the bars show a dim amber LED at the bottom (§4). Steel tried the original breathing version on the desk (21 Nov) and preferred a static dim. It still reads as "paused" from across a room without a glyph over the grid.
 

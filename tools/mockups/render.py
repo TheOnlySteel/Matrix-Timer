@@ -26,9 +26,9 @@ OUT = os.path.join(os.path.dirname(__file__), "..", "..", "docs", "images")
 # Row 0 is the top of the matrix after rotation.
 ORDER = [(r, c) for r in range(H) for c in range(W)]
 
-BLINK_PERIOD_S = 1.5     # active LED blink cycle: 1 s on, 0.5 s off
-BLINK_MIN_ON_S, BLINK_MAX_ON_S = 1.0, 1.0  # equal = no shrinking on-time
-MIN_SLICE_FOR_BLINK = 1.5  # below one blink cycle per LED the active LED is steady
+BLINK_PERIOD_S = 2.0     # active LED blink cycle: 1.5 s on, 0.5 s off
+BLINK_ON_S = 1.5
+MIN_SLICE_FOR_BLINK = 2.0  # below one blink cycle per LED the active LED is steady
 
 
 def ticks_left(remaining_s: float, total_s: float) -> int:
@@ -49,9 +49,9 @@ def active_fraction(remaining_s: float, total_s: float) -> float:
 
 def grid(remaining_s: float, total_s: float, t_s: float | None = None):
     """16x16 bool frame. Lit LEDs = time left. The first lit LED (the one
-    being consumed) blinks 1 s on, 0.5 s off (tuned on the desk). Setting
-    BLINK_MIN_ON_S < BLINK_MAX_ON_S makes the on-time shrink with the share
-    of its slice still left.
+    being consumed) blinks 1.5 s on, 0.5 s off (tuned on the desk). This is
+    the exact-time model; the firmware additionally holds each LED until the
+    next blink cycle starts so the rhythm never breaks (face.h SmoothGrid).
     t_s=None freezes it steady on (setup preview, paused)."""
     f = [[True] * W for _ in range(H)]
     left = ticks_left(remaining_s, total_s)
@@ -59,8 +59,7 @@ def grid(remaining_s: float, total_s: float, t_s: float | None = None):
         f[r][c] = False
     if t_s is not None and left > 0 and total_s / N >= MIN_SLICE_FOR_BLINK:
         r, c = ORDER[N - left]
-        on = BLINK_MIN_ON_S + (BLINK_MAX_ON_S - BLINK_MIN_ON_S) * active_fraction(remaining_s, total_s)
-        f[r][c] = (t_s % BLINK_PERIOD_S) < on
+        f[r][c] = (t_s % BLINK_PERIOD_S) < BLINK_ON_S
     return f
 
 

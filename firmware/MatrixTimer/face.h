@@ -44,22 +44,44 @@ inline double activeFraction(double remaining_s, double total_s) {
 }
 
 // Lit LEDs = time left, ticked off row 0 left->right, then the next row.
-// The first lit LED blinks: on-time from kBlinkMaxOnS down to kBlinkMinOnS
-// with the share of its slice still left, in a kBlinkPeriodS cycle (currently
-// a plain 1 s on / 0.5 s off, see config.h).
-// t_s < 0 freezes it steady (paused).
-inline Frame grid(double remaining_s, double total_s, double t_s) {
+// The first lit LED blinks kBlinkOnS on / (period - on) off. t_s < 0 freezes
+// it steady (paused). This is the exact-time reference (render.py's grid());
+// the device draws gridLeft() through the cycle-aligned smoothing in the app.
+inline Frame gridLeft(int left, bool activeOn) {
   Frame f;
   f.fill(true);
-  int left = ticksLeft(remaining_s, total_s);
   int gone = cfg::kN - left;
   for (int i = 0; i < gone; ++i) f.set(i / cfg::kW, i % cfg::kW, false);
-  if (t_s >= 0 && left > 0 && total_s / cfg::kN >= cfg::kMinSliceForBlinkS) {
-    double on = cfg::kBlinkMinOnS + (cfg::kBlinkMaxOnS - cfg::kBlinkMinOnS) * activeFraction(remaining_s, total_s);
-    f.set(gone / cfg::kW, gone % cfg::kW, fmod(t_s, cfg::kBlinkPeriodS) < on);
-  }
+  if (left > 0 && !activeOn) f.set(gone / cfg::kW, gone % cfg::kW, false);
   return f;
 }
+
+inline bool blinkOn(double t_s) { return fmod(t_s, cfg::kBlinkPeriodS) < cfg::kBlinkOnS; }
+
+inline Frame grid(double remaining_s, double total_s, double t_s) {
+  int left = ticksLeft(remaining_s, total_s);
+  bool blinking = t_s >= 0 && total_s / cfg::kN >= cfg::kMinSliceForBlinkS;
+  return gridLeft(left, !blinking || blinkOn(t_s));
+}
+
+// Cycle-aligned display (Steel, 21 Nov): the shown LED count only changes at
+// the start of a blink cycle, so the rhythm never breaks between LEDs or rows.
+// Feed it the block's elapsed time (pauses excluded) so every block starts
+// with a full "on". Resyncs at once if the true count moves by more than one
+// step or goes up (+5 min).
+struct SmoothGrid {
+  int shown = -1;
+  long cycle = -1;
+  void reset() { shown = -1; cycle = -1; }
+  Frame frame(double remaining_s, double total_s, double elapsed_s, bool paused) {
+    int left = ticksLeft(remaining_s, total_s);
+    if (total_s / cfg::kN < cfg::kMinSliceForBlinkS) { shown = left; return gridLeft(left, true); }
+    long c = (long)floor(elapsed_s / cfg::kBlinkPeriodS);
+    if (shown < 0 || left > shown || shown - left > 1 || (!paused && c != cycle)) shown = left;
+    cycle = c;
+    return gridLeft(shown, paused || blinkOn(elapsed_s));
+  }
+};
 
 // Grid with only the first `lit` LEDs (in tick order from the end) kept:
 // used by the cancel wipe.
