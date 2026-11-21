@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""Render design mockups for the Matrix-Timer hourglass.
+"""Render design mockups for the Matrix-Timer row-by-row timer.
 
 This file doubles as the reference implementation of the rendering model in
-docs/design.md: geometry, grain order tables, the remaining-time -> pixels
-mapping, the falling-grain animation and the LED-bar gauge. Firmware should
+docs/design.md: tick order, the remaining-time -> pixels mapping, the
+shrinking-blink "active LED", digits and the LED-bar gauge. Firmware should
 port these functions rather than reinvent them, so the images and the device
 agree.
 
 Usage: python3 tools/mockups/render.py   (writes into docs/images/)
-Requires Pillow.
+Requires Pillow and numpy.
 """
 from __future__ import annotations
 
@@ -19,92 +19,46 @@ from dataclasses import dataclass
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 W = H = 16
+N = W * H  # 256 ticks per block
 OUT = os.path.join(os.path.dirname(__file__), "..", "..", "docs", "images")
 
-# ---------------------------------------------------------------------------
-# Geometry. Row 0 is the top of the matrix *after* gravity rotation.
-#
-# Top chamber: rows 0..6, row r spans cols r..15-r   (16,14,...,4 = 70 cells)
-# Neck:        rows 7..8, cols 7..8                  (stream channel only)
-# Bottom:      rows 9..15, row r spans cols 15-r..r   (4,6,...,16 = 70 cells)
-# ---------------------------------------------------------------------------
-TOP = [(r, c) for r in range(0, 7) for c in range(r, 16 - r)]
-BOTTOM = [(r, c) for r in range(9, 16) for c in range(15 - r, r + 1)]
-GRAINS = len(TOP)
-assert GRAINS == len(BOTTOM) == 70
+# Tick-off order: row 0 first, left to right, then the next row down.
+# Row 0 is the top of the matrix after rotation.
+ORDER = [(r, c) for r in range(H) for c in range(W)]
 
-CENTER = 7.5
+BLINK_PERIOD_S = 1.0     # active LED blink period
+MIN_SLICE_FOR_BLINK = 2.0  # below this per-LED interval the active LED is steady
 
 
-def _top_drain_order():
-    """Order in which top-chamber cells go dark: the surface falls row by row
-    with a shallow dip at the centre (sand funnels toward the neck)."""
-    return sorted(TOP, key=lambda rc: (rc[0] + 0.25 * abs(rc[1] - CENTER), rc[1]))
-
-
-def _bottom_fill_order():
-    """Order in which bottom-chamber cells light: a mound that grows from the
-    centre of the floor."""
-    return sorted(BOTTOM, key=lambda rc: ((15 - rc[0]) + 0.5 * abs(rc[1] - CENTER), rc[1]))
-
-
-TOP_DRAIN = _top_drain_order()
-BOTTOM_FILL = _bottom_fill_order()
-
-# Level face: all 256 pixels, draining row by row from the top, left to right.
-LEVEL_DRAIN = [(r, c) for r in range(16) for c in range(16)]
-
-
-def grains_left(remaining_s: float, total_s: float, n: int = GRAINS) -> int:
-    """ceil() so a lit grain means time remains; 0 only at exactly zero."""
+def ticks_left(remaining_s: float, total_s: float) -> int:
+    """ceil() so a lit LED means time remains; 0 only at exactly zero."""
     if remaining_s <= 0:
         return 0
-    return min(n, math.ceil(n * remaining_s / total_s))
+    return min(N, math.ceil(N * remaining_s / total_s))
 
 
-def hourglass(remaining_s: float, total_s: float, t_anim_s: float | None = None):
-    """Return a 16x16 bool frame for the hourglass face.
-
-    t_anim_s drives the decorative falling grain; None means stream stopped
-    (paused / done / setup)."""
-    f = [[False] * W for _ in range(H)]
-    left = grains_left(remaining_s, total_s)
-    for r, c in TOP_DRAIN[GRAINS - left:]:
-        f[r][c] = True
-    for r, c in BOTTOM_FILL[: GRAINS - left]:
-        f[r][c] = True
-    if t_anim_s is not None and left > 0:
-        _falling_grain(f, t_anim_s)
-    return f
+def active_fraction(remaining_s: float, total_s: float) -> float:
+    """How much of the currently-ticking LED's own slice is left, in (0, 1]."""
+    left = ticks_left(remaining_s, total_s)
+    if left == 0:
+        return 0.0
+    slice_s = total_s / N
+    return (remaining_s - (left - 1) * slice_s) / slice_s
 
 
-FALL_ROW_MS = 70  # one row per 70 ms; a grain falls in ~0.5 s
-
-
-def _falling_grain(f, t_s: float):
-    """One pixel travels from the neck to the pile surface, alternating
-    columns 7/8 each trip. Purely an 'it is running' cue."""
-    step = int(t_s * 1000 // FALL_ROW_MS)
-    # landing row: first lit cell going down from the neck in that column
-    col = 7 + ((step // 9) % 2)
-    land = 16
-    for r in range(9, 16):
-        if f[r][col]:
-            land = r
-            break
-    path = list(range(7, land))  # rows the grain visits
-    if not path:
-        return
-    pos = step % (len(path) + 2)  # +2 frames of rest at the neck = rhythm
-    if pos < len(path):
-        f[path[pos]][col] = True
-
-
-def level(remaining_s: float, total_s: float):
+def grid(remaining_s: float, total_s: float, t_s: float | None = None):
+    """16x16 bool frame. Lit LEDs = time left. The first lit LED (the one
+    being consumed) blinks once per second with an on-time equal to the share
+    of its slice still left, so it visibly drains before it goes out.
+    t_s=None freezes it steady on (setup preview, paused)."""
     f = [[True] * W for _ in range(H)]
-    left = grains_left(remaining_s, total_s, 256)
-    for r, c in LEVEL_DRAIN[: 256 - left]:
+    left = ticks_left(remaining_s, total_s)
+    for r, c in ORDER[: N - left]:
         f[r][c] = False
+    if t_s is not None and left > 0 and total_s / N >= MIN_SLICE_FOR_BLINK:
+        r, c = ORDER[N - left]
+        phase = (t_s % BLINK_PERIOD_S) / BLINK_PERIOD_S
+        f[r][c] = phase < active_fraction(remaining_s, total_s)
     return f
 
 
@@ -150,10 +104,6 @@ def duration_frame(minutes: int):
         return text_frame(f"{minutes:d}", 2, 2)
     h, m = divmod(minutes, 60)
     return text_frame(f"{h}:{m:02d}", 1, 2)
-
-
-def invert(f):
-    return [[not v for v in row] for row in f]
 
 
 # ---------------------------------------------------------------------------
@@ -284,7 +234,7 @@ def _add(a: Image.Image, b: Image.Image):
     return np.clip(x, 0, 255).astype("uint8")
 
 
-def grid(images, cols):
+def grid_img(images, cols):
     w, h = images[0].size
     rows = math.ceil(len(images) / cols)
     out = Image.new("RGB", (w * cols, h * rows), BG)
@@ -309,11 +259,15 @@ def battery_bars(level_: float, charging: bool = False):
     return b + b
 
 
-def run_scene(minutes: float, frac: float, t_anim: float, title: str, sub: str = ""):
+def run_scene(minutes: float, frac: float, t_anim, title: str, sub: str = ""):
     total = minutes * 60
     rem = total * frac
     bars = gauge(frac, run_color(frac), cap=0.6)
-    return Scene(hourglass(rem, total, t_anim), bars + bars, title, sub)
+    return Scene(grid(rem, total, t_anim), bars + bars, title, sub)
+
+
+def all_(v):
+    return [[v] * W for _ in range(H)]
 
 
 def main():
@@ -325,65 +279,59 @@ def main():
                           "A / C adjust  ·  B start  ·  bars = battery"),
         "02-setup-long": Scene(duration_frame(105), battery_bars(0.8), "SET  1:45",
                                "≥ 100 min shows H:MM"),
-        "03-start": run_scene(T, 1.0, 0.21, "RUN  100 %", "70 grains, one every 21 s"),
-        "04-run-60": run_scene(T, 0.60, 0.35, "RUN  60 %  (15 min left)", "bars fade continuously"),
-        "05-run-15": run_scene(T, 0.15, 0.14, "RUN  15 %", "bars turn amber ≤ 20 %"),
-        "06-run-3": run_scene(T, 0.03, 0.07, "RUN  3 %", "red ≤ 5 %"),
+        "03-start": run_scene(T, 1.0, 0.1, "RUN  100 %", "256 LEDs, one every 5.9 s"),
+        "04-run-60": run_scene(T, 0.60, 0.1, "RUN  60 %  (15 min left)",
+                               "each row = 1/16 of the block"),
+        "05-run-15": run_scene(T, 0.15, 0.1, "RUN  15 %", "bars turn amber ≤ 20 %"),
+        "06-run-3": run_scene(T, 0.03, 0.1, "RUN  3 %", "red ≤ 5 %"),
     }
-    paused = run_scene(T, 0.45, None, "PAUSED", "stream stops, matrix breathes")
+    paused = run_scene(T, 0.45, None, "PAUSED", "active LED steady, matrix breathes")
     paused.brightness = 0.45
-    paused.bars = [AMBER if i == 0 else OFF for i in range(5)] * 2
-    paused.bars = [tuple(int(v * 0.4) for v in c) for c in paused.bars]
+    paused.bars = [tuple(int(v * 0.4) for v in (AMBER if i == 0 else OFF)) for i in range(5)] * 2
     scenes["07-paused"] = paused
-
-    done_a = Scene(hourglass(0, T * 60), [RED] * 10, "DONE", "flashes 2 Hz + chirp")
-    done_b = Scene(invert(hourglass(0, T * 60)), [OFF] * 10, "DONE (alt frame)", "any key acknowledges")
-    scenes["08-done-a"] = done_a
-    scenes["09-done-b"] = done_b
-
-    peek = Scene(text_frame("11", 2, 2), gauge(0.45, TEAL, 0.6) * 2, "PEEK  11 min left",
-                 "short A while running, 2 s")
-    scenes["10-peek"] = peek
-    lvl = Scene(level(T * 60 * 0.6, T * 60), gauge(0.6, TEAL, 0.6) * 2, "LEVEL FACE  60 %",
-                "256 steps, one row = 1/16 of the block")
-    scenes["11-level"] = lvl
+    scenes["08-done-a"] = Scene(all_(True), [RED] * 10, "DONE", "full-matrix flash 2 Hz + chirp")
+    scenes["09-done-b"] = Scene(all_(False), [OFF] * 10, "DONE (alt frame)", "any key acknowledges")
+    scenes["10-peek"] = Scene(text_frame("11", 2, 2), gauge(0.45, TEAL, 0.6) * 2, "PEEK  11 min left",
+                              "short A while running, 2 s")
 
     imgs = {k: draw_device(v) for k, v in scenes.items()}
     for k, im in imgs.items():
         save(im, f"{k}.png", width=520)
 
-    lifecycle = grid([imgs[k] for k in ["01-setup", "03-start", "04-run-60", "05-run-15",
-                                        "06-run-3", "08-done-a"]], 3)
-    save(lifecycle, "lifecycle.png", width=1500)
-    others = grid([imgs[k] for k in ["02-setup-long", "07-paused", "09-done-b", "10-peek",
-                                     "11-level"]], 5)
-    save(others, "other-states.png", width=1800)
+    save(grid_img([imgs[k] for k in ["01-setup", "03-start", "04-run-60", "05-run-15",
+                                     "06-run-3", "08-done-a"]], 3), "lifecycle.png", width=1500)
+    save(grid_img([imgs[k] for k in ["02-setup-long", "07-paused", "09-done-b", "10-peek"]], 4),
+         "other-states.png", width=1600)
 
-    # Animated GIF: a 25-minute block compressed to ~12 s, plus real-time stream
-    frames = []
-    n = 110
+    # Time-lapse: a 25-minute block compressed to ~10 s
+    frames, n = [], 128
     for i in range(n + 1):
         frac = 1 - i / n
-        sc = run_scene(T, frac, i * 0.08, f"{math.ceil(T * frac):d} min left", "time-lapse")
+        sc = run_scene(T, frac, None, f"{math.ceil(T * frac):d} min left", "time-lapse")
         if frac == 0:
-            sc = Scene(hourglass(0, T * 60), [RED] * 10, "DONE", "time-lapse")
+            sc = Scene(all_(True), [RED] * 10, "DONE", "time-lapse")
         frames.append(draw_device(sc, scale=14).convert("P", palette=Image.ADAPTIVE, colors=64))
     for j in range(8):
-        sc = Scene(invert(hourglass(0, T * 60)) if j % 2 else hourglass(0, T * 60),
-                   [OFF] * 10 if j % 2 else [RED] * 10, "DONE", "time-lapse")
+        sc = Scene(all_(j % 2 == 0), [RED] * 10 if j % 2 == 0 else [OFF] * 10, "DONE", "time-lapse")
         frames.append(draw_device(sc, scale=14).convert("P", palette=Image.ADAPTIVE, colors=64))
     gif = os.path.join(OUT, "timelapse.gif")
-    frames[0].save(gif, save_all=True, append_images=frames[1:], duration=[80] * (n + 1) + [250] * 8,
+    frames[0].save(gif, save_all=True, append_images=frames[1:], duration=[75] * (n + 1) + [250] * 8,
                    loop=0, optimize=True)
     print("wrote", os.path.relpath(gif))
 
-    # Real-time close-up of the falling grain at 60 % (shows the cadence)
-    frames = []
-    for i in range(40):
-        sc = run_scene(T, 0.6, i * 0.07, "Falling grain, real time", "one row per 70 ms")
+    # Real time: 13 s of a 25-minute block around the 60 % mark (5.9 s per LED)
+    frames, fps = [], 10
+    total = T * 60
+    rem0 = total * 0.6 - 0.2
+    for i in range(13 * fps):
+        t = i / fps
+        rem = rem0 - t
+        frac = rem / total
+        sc = Scene(grid(rem, total, t), gauge(frac, run_color(frac), 0.6) * 2,
+                   "Active LED, real time", "blink on-time shrinks, then it goes out")
         frames.append(draw_device(sc, scale=14).convert("P", palette=Image.ADAPTIVE, colors=64))
-    gif = os.path.join(OUT, "falling-grain.gif")
-    frames[0].save(gif, save_all=True, append_images=frames[1:], duration=70, loop=0, optimize=True)
+    gif = os.path.join(OUT, "active-led.gif")
+    frames[0].save(gif, save_all=True, append_images=frames[1:], duration=1000 // fps, loop=0, optimize=True)
     print("wrote", os.path.relpath(gif))
 
 
