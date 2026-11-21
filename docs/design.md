@@ -18,7 +18,7 @@ These decide the design more than taste does (details in hardware.md §1):
 
 - **Matrix pixels are 1-bit white.** "Continuous" can't come from dimming individual pixels. It comes from timing (the active LED's blink duty, §3.1) and from the bars, which have 8-bit RGB per LED.
 - **Bars need our own SPI driver** (no RMT on the C61) and exist only while the PM1 5 V boost is on.
-- **The IMU may be unusable** if the Bottom2's IMU collides with the Core Matrix's at 0x68. Nothing essential may depend on it.
+- **Two IMUs share 0x68 whenever the 5 V boost is on** (the Bottom2's MPU6886 and the Core Matrix's BMI270). A bench-verified register trick makes the BMI270's accelerometer readable anyway (hardware.md §5.4), but it is a trick: nothing essential may depend on the IMU.
 - **The power button resets by default.** Either embrace it or disable it; this design disables single-click reset and also persists state so a reset is harmless anyway.
 
 ## 3. The display
@@ -53,7 +53,7 @@ Used for setting and peeking, never as the running face.
 
 ## 4. The LED bars
 
-The Bottom2's ten SK6812s are treated as two 5-LED columns, index 0 at the bottom, drawn identically on both sides. The physical chain order is mapped once at bring-up (hardware.md §9 check 4).
+The Bottom2's ten SK6812s are treated as two 5-LED columns, position 0 at the bottom, drawn identically on both sides. The physical chain is a U (hardware.md §5.3); `Bars` maps logical positions to chain indices from the current rotation, so the gauge fills from whichever edge stands down. The bars need the 5 V boost on USB as well as on battery.
 
 | State | Bars |
 |---|---|
@@ -63,7 +63,7 @@ The Bottom2's ten SK6812s are treated as two 5-LED columns, index 0 at the botto
 | Done | Red, pulsing with the matrix flash |
 | Low battery (< 15 %) | Bottom-left LED blinks red once every 5 s, in any state |
 
-**Power, and why the bars are off on battery by default.** An SK6812 at full white draws ~36 mA (≈12 mA per colour) and is glaring on a desk, so brightness is capped at **10 %** of full scale with gamma 2.2; through the Bottom2's diffuser that is still clearly visible indoors (to confirm on the bench). Even capped, a full teal gauge is ~17 mA at 5 V, ~25 mA from the cell after the boost, ~12 mA averaged over a block as it shrinks. The bigger, less obvious cost is the 5 V rail itself: the ten SK6812s idle at ~5–10 mA *while dark*, plus boost losses, for as long as the rail is on. Together the bars can double the device's consumption, so the default is **Auto: gauge on USB power, bars and their 5 V rail off on battery** (hardware.md §8). Turning the rail off also unpowers the Bottom2's IMU, which removes the 0x68 collision, so on battery the Core Matrix's own IMU becomes usable.
+**Power, and why the bars are off on battery by default.** An SK6812 at full white draws ~36 mA (≈12 mA per colour) and is glaring on a desk, so brightness is capped at **10 %** of full scale with gamma 2.2; through the Bottom2's diffuser that is still clearly visible indoors (to confirm on the bench). Even capped, a full teal gauge is ~17 mA at 5 V, ~25 mA from the cell after the boost, ~12 mA averaged over a block as it shrinks. The bigger, less obvious cost is the 5 V rail itself: the ten SK6812s idle at ~5–10 mA *while dark*, plus boost losses, for as long as the rail is on. Together the bars can double the device's consumption, so the default is **Auto: gauge on USB power, bars and their 5 V rail off on battery** (hardware.md §8). Turning the rail off also unpowers the Bottom2's IMU, which removes the 0x68 collision outright, so on battery the Core Matrix's IMU is read with no workaround at all.
 
 Colour shifts cross-fade over 2 s rather than snapping.
 
@@ -94,7 +94,7 @@ stateDiagram-v2
 
 ### 5.2 Buttons
 
-KEY1/2/3 are A/B/C in physical left-to-right order (to be confirmed on the bench). B is always the primary action.
+KEY1/2/3 are A/B/C in order along the button edge (confirmed on the bench). B is always the primary action. One B press registered twice on the bench, so `Input` adds its own 50 ms lockout per button on top of M5Unified's debounce.
 
 | State | A (left) | B (middle) | C (right) | Power |
 |---|---|---|---|---|
@@ -119,7 +119,7 @@ Entered with A+C held for 2 s from Set; the matrix shows a one-letter code per i
 | Bars | Auto (on with USB, off on battery), On, Off | Auto |
 | Bar brightness | 5, 10, 25 % of full | 10 % |
 | Sound | Chirp, Silent | Chirp |
-| Orientation | Auto (IMU, only if check passes), 0°, 90°, 180°, 270° | Auto, else 0° |
+| Orientation | Auto (IMU), 0°, 90°, 180°, 270° | Auto, else 0° (up = button edge) |
 
 ### 5.4 Lay flat to pause
 
@@ -129,16 +129,16 @@ Detection is plain gravity, no motion learning needed. Standing, gravity lies in
 
 A pause from laying flat looks the same as a B pause (§3.1) and is stored the same way, so a reset while lying down resumes paused.
 
-**The one thing to test first** (hardware.md §5.4, bench check 3): your Bottom2 is v1.3, so its BMI270 sits on the same bus as the Core Matrix's, either at 0x69 (fine, just pin the address) or at 0x68 (collision). The schematic text doesn't show which.
+**Bench result: it works in every power state.** Steel's Bottom2 turned out to carry an MPU6886 at 0x68, colliding with the Core Matrix's BMI270 whenever the bars' rail is on. The workaround (hardware.md §5.4) holds through a full tilt routine, so the collision no longer forces a trade between bars and tilt:
 
-| Check result | On battery (bars' rail off under Auto) | On USB with bars on |
+| | On battery (bars' rail off under Auto) | On USB with bars on |
 |---|---|---|
-| Bottom2 IMU at 0x69 | Works | Works |
-| Bottom2 IMU at 0x68 | Works: the Bottom2 IMU is unpowered, so the Core Matrix's is alone | **Collision.** Lay-flat pause and auto-rotate need the bars' rail off, so if the check finds a collision, the Bars default becomes Off and a setting trades pause-by-tilt for bars on USB. |
+| IMU read | BMI270 alone on the bus, plain reads | BMI270 through the 0xFF fill; accel burst only |
+| Lay-flat pause, auto-rotate | Works | Works (verified: 1,384 samples, no corrupt reads) |
 
-Either way the gesture works in the case you care most about, on battery. If the IMU is unusable in some state, the device falls back silently to the B button and the manual orientation setting.
+What the firmware must get right: initialise the BMI270 with the boost off, then turn the boost on and write the fill; redo the fill after *every* boost off→on transition (Auto turning the bars back on when USB is plugged in) before the next read; read only the 6-byte accel block while the boost is on. A boot-time CHIP_ID check with the boost off still gates the feature, and a failed or implausible read (|g| outside 0.5–1.5 g at rest) disables tilt silently, falling back to the B button and the manual orientation setting.
 
-Also enabled once the check passes: **flip to repeat**. In Done, turning the frame upside down (sustained 180° change, > 0.8 s) restarts the same duration.
+Also enabled: **flip to repeat**. In Done, turning the frame upside down (sustained 180° change, > 0.8 s) restarts the same duration.
 
 ### 5.5 Done
 
@@ -157,7 +157,7 @@ Rendering and the gauge are pure functions of `remaining / duration`, so a skipp
 
 **Persistence across resets.** Every row completed (1/16 of the block) and every state change writes a 16-byte record to the PM1's RTC RAM (hardware.md §2.4): magic, state, duration_s, remaining_ms, CRC8. It survives ESP resets and ESP power-off, not PM1 power loss. On boot, a valid Running record resumes with `remaining` as saved (losing at most one row's worth, e.g. 94 s of a 25-minute block; write per LED instead if that matters, since RTC RAM writes are cheap); a Paused record resumes paused; a Done record shows Done. Monotonic time does not survive a reset, so the record stores *remaining*, not a timestamp.
 
-**Power-button single click** is set to *not* reset (`SINGLE_RESET_DIS`) at boot and is used as matrix on/off. Double-click power-off and long-press download mode stay as the PM1 provides them, so a hung firmware is always recoverable without tools.
+**Power-button single click** is set to *not* reset (`SINGLE_RST_DIS`) at **every** boot and is used as matrix on/off. On the bench the first click after setting the bit still reset once, so the setting is reasserted each boot rather than trusted to persist, and a stray reset is covered by the RTC RAM record anyway. Double-click power-off and long-press download mode stay as the PM1 provides them, so a hung firmware is always recoverable without tools.
 
 ## 7. Firmware architecture
 
@@ -168,10 +168,11 @@ Arduino on arduino-cli, M5Unified + M5GFX, one loop, no RTOS tasks of our own.
 | `Clock` | `remaining()`, start/pause/resume/cancel/extend | Pure; unit-testable on the host |
 | `Face` | `frame(remaining, total, t) → uint16_t[16]`: lit LEDs, active-LED blink, digits | Port of `render.py`'s `grid()`, `text_frame()` |
 | `Matrix` | 1-bit canvas → TM1680; push only if the 32-byte frame changed; global brightness | Draw into a 16-row `uint16_t` bitmap, push once via `startWrite()/endWrite()` (hardware.md §2.2) |
-| `Bars` | Logical gauge → 10 RGB → SK6812 over SPI2 on G5; gamma, cap, cross-fade | hardware.md §6; owns `bar_index` mapping |
-| `Input` | `M5.update()`; clicks, holds, chords; PWR button; tilt events if enabled | Debounced by M5Unified |
+| `Bars` | Logical gauge → 10 RGB → SK6812 over SPI2 on G5; gamma, cap, cross-fade | IDF `spi_master`, MOSI only (arduino `SPI.begin` fails on the C61; hardware.md §6); owns the U-chain `bar_index` mapping |
+| `Input` | `M5.update()`; clicks, holds, chords; PWR button; tilt events if enabled | Own 50 ms lockout per button on top of M5Unified's debounce |
+| `Tilt` | BMI270 accel → gravity vector → flat / upright / edge-down; dwell and hysteresis | Owns the boost-on 0xFF fill (hardware.md §5.4); `Power` calls it after every boost enable |
 | `Persist` | RTC RAM session record (M5PM1 lib); NVS for settings and last duration | |
-| `Power` | Battery %, charging, LVP 3.3 V, idle auto-off; 5 V boost off whenever bars are off (Auto on battery) | |
+| `Power` | Battery %, charging, LVP 3.3 V, idle auto-off; 5 V boost off whenever bars are off (Auto on battery) | Battery voltage reads −1 for ~30 s after boot: show "unknown", not empty. Never touch the PM1 LDO (it locks the I2C bus). |
 | `Sound` | Buzzer chirps via IOE1 PWM channel | |
 | `App` | State machine of §5.1 | |
 
@@ -197,8 +198,8 @@ The bars are drawn flanking the matrix as they appear with the stack standing up
 
 ## 9. Open questions
 
-1. **Bottom2 IMU address** (0x68 or 0x69) decides whether lay-flat pause also works on USB with bars on (§5.4). Resolved by bench check 3.
-2. **Which edge stands down** is handled by auto-rotation; the remaining question is only where the cable exits (bench check 5).
+1. ~~Bottom2 IMU address~~ Resolved on the bench: MPU6886 at 0x68, worked around; lay-flat pause works with bars on (§5.4).
+2. ~~Which edge stands down~~ Handled by auto-rotation; rotation 0 puts up at the button edge with USB-C on the left (hardware.md §2.2). If it stands on the button edge the buttons are underneath, so standing it USB-side down is the likely choice; worth a look on the desk.
 3. **Start full or start empty?** This design starts with all LEDs on and turns them off (the lit area is what's left). The inverse, filling up, reads as progress made rather than time left. Lit-means-left matches your description; easy to flip if it feels wrong on the desk.
 4. **Pomodoro sequencing** (work → 5 min break → work) is a small extension of the state machine; worth doing only if you'd use it.
 5. **Companion app.** Not in v1. If wanted later, the cheapest path is a BLE GATT service (duration, start/stop, state notifications) driven from a Mac menu-bar app or a Web Bluetooth page; the C61 supports BLE 5.
