@@ -31,10 +31,10 @@ int main() {
   Frame f = grid(750, 1500, -1);
   CHECK(f.count() == 128);
   CHECK(!f.get(0, 0) && !f.get(7, 15) && f.get(8, 0) && f.get(15, 15));
-  // active LED (row 8 col 0): 1.5 s on, 0.5 s off
+  // active LED (row 8 col 0): 1 s on, 0.5 s off
   double rem = slice * 127.5;   // 128 left
-  CHECK(grid(rem, 1500, 9.4).get(8, 0) == true);     // 9.4 mod 2 = 1.4 < 1.5
-  CHECK(grid(rem, 1500, 9.6).get(8, 0) == false);    // 1.6
+  CHECK(grid(rem, 1500, 9.9).get(8, 0) == true);     // 9.9 mod 1.5 = 0.9 < 1.0
+  CHECK(grid(rem, 1500, 10.2).get(8, 0) == false);   // 1.2
 
   // SmoothGrid: the shown count changes only at cycle starts, never mid-cycle
   {
@@ -43,18 +43,29 @@ int main() {
     int changes_mid = 0, prevShown = -1;
     bool prevOn = true;
     int glitches = 0;      // on->off->on faster than the 0.5 s off phase
+    int pairMiss = 0, pairs = 0;
     double lastToggle = 0;
     for (double t = 0; t < 120; t += 0.01) {
       Frame f = sg.frame(total - t, total, t, false);
       int shown = sg.shown;
-      double phase = fmod(t, 2.0);
+      double phase = fmod(t, 1.5);
       if (prevShown >= 0 && shown != prevShown && phase > 0.011) ++changes_mid;
       bool on = f.get((256 - shown) / 16, (256 - shown) % 16);
       if (on != prevOn) { if (t - lastToggle < 0.49 && t > 0.02) ++glitches; lastToggle = t; prevOn = on; }
+      // off phase just before a hand-over: the incoming LED is dark as well
+      if (!on && shown > 1) {
+        double toNext = (floor(t / 1.5) + 1) * 1.5 - t;
+        int idx = 256 - shown + 1;
+        bool handover = ticksLeft(total - t - toNext, total) < shown;
+        if (handover != !f.get(idx / 16, idx % 16)) ++pairMiss;
+        if (handover) ++pairs;
+      }
       prevShown = shown;
     }
     CHECK(changes_mid == 0);
     CHECK(glitches == 0);
+    CHECK(pairMiss == 0);
+    CHECK(pairs > 0);
     // lags the true count by at most one LED
     sg.frame(total - 119.0, total, 119.0, false);
     CHECK(sg.shown - ticksLeft(total - 119.0, total) <= 1);

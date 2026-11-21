@@ -66,6 +66,8 @@ inline Frame grid(double remaining_s, double total_s, double t_s) {
 
 // Cycle-aligned display (Steel, 21 Nov): the shown LED count only changes at
 // the start of a blink cycle, so the rhythm never breaks between LEDs or rows.
+// In the off phase right before a hand-over, the outgoing active LED and the
+// next one go dark together; the next one then blinks on at the cycle start.
 // Feed it the block's elapsed time (pauses excluded) so every block starts
 // with a full "on". Resyncs at once if the true count moves by more than one
 // step or goes up (+5 min).
@@ -79,7 +81,18 @@ struct SmoothGrid {
     long c = (long)floor(elapsed_s / cfg::kBlinkPeriodS);
     if (shown < 0 || left > shown || shown - left > 1 || (!paused && c != cycle)) shown = left;
     cycle = c;
-    return gridLeft(shown, paused || blinkOn(elapsed_s));
+    if (paused) return gridLeft(shown, true);
+    bool on = blinkOn(elapsed_s);
+    Frame f = gridLeft(shown, on);
+    if (!on && shown > 1) {
+      // will the next cycle start hand over? then darken the incoming LED too
+      double toNext = (c + 1) * cfg::kBlinkPeriodS - elapsed_s;
+      if (ticksLeft(remaining_s - toNext, total_s) < shown) {
+        int next = cfg::kN - shown + 1;
+        f.set(next / cfg::kW, next % cfg::kW, false);
+      }
+    }
+    return f;
   }
 };
 

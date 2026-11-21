@@ -6,13 +6,15 @@ namespace cfg {
 
 // --- grid (design.md §3.1) ---
 constexpr int kW = 16, kH = 16, kN = kW * kH;   // 256 ticks per block
-// Active LED blink, tuned on the desk with Steel (21 Nov): 1.5 s on, 0.5 s
-// off, in a rhythm that never breaks. The display advances to the next LED
-// only at the start of a blink cycle (MatrixTimer.ino, smooth grid), so an
-// LED can lag the true time by up to one cycle but the flashing never jumps.
-constexpr double kBlinkPeriodS = 2.0;
-constexpr double kBlinkOnS = 1.5;
-constexpr double kMinSliceForBlinkS = 2.0;      // below one blink cycle per LED: steady
+// Active LED blink, tuned on the desk with Steel (21 Nov): 1 s on, 0.5 s off,
+// in a rhythm that never breaks. The display advances to the next LED only at
+// the start of a blink cycle (face.h SmoothGrid), and in the off phase just
+// before a hand-over the outgoing and the incoming LED go dark together, so
+// the new active LED blinks back on, on schedule. An LED can lag the true
+// time by up to one cycle; Done still uses the exact time.
+constexpr double kBlinkPeriodS = 1.5;
+constexpr double kBlinkOnS = 1.0;
+constexpr double kMinSliceForBlinkS = 1.5;      // below one blink cycle per LED: steady
 
 // --- durations (design.md §5.2) ---
 constexpr int kMinMinutes = 1, kMaxMinutes = 240, kDefaultMinutes = 25;

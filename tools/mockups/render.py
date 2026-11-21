@@ -26,9 +26,9 @@ OUT = os.path.join(os.path.dirname(__file__), "..", "..", "docs", "images")
 # Row 0 is the top of the matrix after rotation.
 ORDER = [(r, c) for r in range(H) for c in range(W)]
 
-BLINK_PERIOD_S = 2.0     # active LED blink cycle: 1.5 s on, 0.5 s off
-BLINK_ON_S = 1.5
-MIN_SLICE_FOR_BLINK = 2.0  # below one blink cycle per LED the active LED is steady
+BLINK_PERIOD_S = 1.5     # active LED blink cycle: 1 s on, 0.5 s off
+BLINK_ON_S = 1.0
+MIN_SLICE_FOR_BLINK = 1.5  # below one blink cycle per LED the active LED is steady
 
 
 def ticks_left(remaining_s: float, total_s: float) -> int:
@@ -49,7 +49,7 @@ def active_fraction(remaining_s: float, total_s: float) -> float:
 
 def grid(remaining_s: float, total_s: float, t_s: float | None = None):
     """16x16 bool frame. Lit LEDs = time left. The first lit LED (the one
-    being consumed) blinks 1.5 s on, 0.5 s off (tuned on the desk). This is
+    being consumed) blinks 1 s on, 0.5 s off (tuned on the desk). This is
     the exact-time model; the firmware additionally holds each LED until the
     next blink cycle starts so the rhythm never breaks (face.h SmoothGrid).
     t_s=None freezes it steady on (setup preview, paused)."""

@@ -18,7 +18,7 @@ There is one Arduino sketch, and every module is a header (one translation unit)
 | File | Module (design.md §7) | Notes |
 |---|---|---|
 | `clock.h` | Clock | `remaining = duration − (now − started − paused_total)`. Pure, host-tested. |
-| `face.h` | Face | Port of `tools/mockups/render.py`: `ticksLeft` (ceil), `grid`, `durationFrame`, `peekFrame`, plus the settings frame. `SmoothGrid` advances the shown LED only at blink-cycle starts (1.5 s on / 0.5 s off), so hand-overs never stutter. Pure, host-tested. |
+| `face.h` | Face | Port of `tools/mockups/render.py`: `ticksLeft` (ceil), `grid`, `durationFrame`, `peekFrame`, plus the settings frame. `SmoothGrid` advances the shown LED only at blink-cycle starts (1 s on / 0.5 s off). In the off phase before a hand-over both LEDs go dark together, so hand-overs never stutter. Pure, host-tested. |
 | `matrix.h` | Matrix | Frame → TM1680 at M5GFX rotation 0. The firmware rotates in software (`up` 0–3), so the orientation is exactly the bench-measured one. It pushes only on change. `applyDuty(n)` sets TM1680 duty n/16. |
 | `bars.h` | Bars | IDF `spi_master` on G5 with SCLK unassigned, 3.2 MHz, 4-bit symbols, GRB. Gamma 2.2, cap 5/10/25 %, hard cap 64/255. The U-chain map (4/5 at the USB-C end, desk-confirmed) follows the current orientation, and a 2 s cross-fade is implemented as easing (τ 0.6 s). |
 | `input.h` | Input | `M5.update()` plus a 50 ms lockout per key, holds, chords, and simulated presses from the console. |
