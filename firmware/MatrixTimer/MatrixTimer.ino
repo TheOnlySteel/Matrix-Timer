@@ -280,9 +280,7 @@ static Frame currentFrame(uint32_t ms, int64_t now, int* duty) {
     case St::Done: {
       // Matrix at 1/16, alternating with the bars (Steel, 21 Nov).
       *duty = 1;
-      Frame f;
-      f.fill(doneMatrixPhase(ms));
-      return f;
+      return doneMatrixPhase(ms) ? face::checkFrame() : Frame{};
     }
     case St::Settings: {
       char item, val[4];
@@ -422,7 +420,8 @@ void setup() {
     lastDurationUs = dur;
     if (r.state == persist::kDone) {
       st = St::Done;
-      doneAt = lastChirp = millis();
+      // already alarmed before the reset: resume the quiet slow flash, no chirps
+      doneAt = lastChirp = millis() - cfg::kDoneFastMs;
     } else {
       clk.restore(now, dur, rem, r.state == persist::kPaused);
       pausedByFlat = r.flags & 1;

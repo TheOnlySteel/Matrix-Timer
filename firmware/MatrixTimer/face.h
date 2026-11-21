@@ -179,6 +179,16 @@ inline Frame peekFrame(double remaining_s) {
   return durationFrame((int)ceil(remaining_s / 60 - 1e-9));
 }
 
+// Done: a 2-px-thick checkmark, so the alarm says "finished" instead of
+// lighting all 256 (Steel, 21 Nov).
+inline Frame checkFrame() {
+  static const int8_t pts[][2] = {{8, 2}, {9, 3}, {10, 4}, {11, 5}, {10, 6}, {9, 7}, {8, 8},
+                                  {7, 9}, {6, 10}, {5, 11}, {4, 12}, {3, 13}};
+  Frame f;
+  for (auto& p : pts) { f.set(p[0], p[1], true); f.set(p[0] + 1, p[1], true); }
+  return f;
+}
+
 // Settings: item letter on top, value underneath, both 3x5 at 1x.
 inline Frame settingsFrame(char item, const char* value) {
   Frame f;
