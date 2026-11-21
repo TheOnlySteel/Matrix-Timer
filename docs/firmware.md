@@ -25,7 +25,7 @@ There is one Arduino sketch, and every module is a header (one translation unit)
 | `tilt.h` | Tilt | BMI270 at 0x68. It is initialised with the boost **off**, and after every boost-on it writes 0xFF into 0x0C..0x11 (the MPU6886 workaround). It reads only the 6-byte accel burst, and switches itself off after 3 s of implausible readings. |
 | `persist.h` | Persist | 16-byte session record (with CRC8) in PM1 RTC RAM at 0xA0, rewritten on every LED tick and every state change. Settings and last duration live in NVS (`mt`). |
 | `power.h` | Power | VIN > 4.5 V counts as USB. LVP 3.3 V, `SINGLE_RST_DIS` set every boot, the boost follows the Bars setting (Auto: on with USB), and the 10-min idle power-off in Set on battery. Never touches the PM1 LDO. |
-| `sound.h` | Sound | IOE1 IO2 is the buzzer enable (`M5IOE1_Class::gpio2`, which is 0-based **1**: a raw `2` would be IO3 = CHG_PROG, i.e. 650 mA). PWM is channel 3 (IO11) at 2.7 kHz. |
+| `sound.h` | Sound | IOE1 IO2 is the buzzer enable (`M5IOE1_Class::gpio2`, which is 0-based **1**: a raw `2` would be IO3 = CHG_PROG, i.e. 650 mA). PWM is channel 3 (IO11) at 2.7 kHz, and IO11 must be set as an output, or the PWM never reaches the pin. |
 | `MatrixTimer.ino` | App | The state machine of design.md §5.1, settings menu, serial console. |
 
 ## Serial console
@@ -42,6 +42,7 @@ There is one Arduino sketch, and every module is a header (one translation unit)
 | `s` | Status: state, duration, remaining, ticks, USB, boost, battery, tilt, settings |
 | `wN` | Warp the clock forward N seconds (testing only, not saved) |
 | `r` | Raw accelerometer (g), pose and down edge |
+| `t` | Three test chirps |
 
 State changes are logged as `STATE A -> B`.
 
@@ -51,7 +52,7 @@ State changes are logged as `STATE A -> B`.
 - **On battery** the matrix is capped at duty 2/16, whatever the brightness setting (pause stays at 1/16).
 - **Lay flat to pause** fires only on a real transition into "flat" (dwell 1 s). A block restored after a reset is not paused just because the device happens to be lying down.
 - **Peek** shows whole minutes rounded up, and seconds under one minute. C-hold (+5 min) also peeks, so the new total is visible.
-- **Done** flashes at 2 Hz and chirps three times every 10 s for the first minute, then flashes at 0.5 Hz until dismissed. Flip-to-repeat needs the opposite edge down for 0.8 s.
+- **Done**: the matrix (at 1/16) and the red bars alternate, at 2 Hz with three chirps every 10 s for the first minute, then at 0.5 Hz until dismissed. Flip-to-repeat needs the opposite edge down for 0.8 s.
 - **Settings** (A+C 2 s in Set) items are `M` matrix brightness 1–8, `B` bars A/1/0 (Auto/On/Off), `I` bar intensity 5/10/25 %, `S` sound 1/0, and `O` orientation A/0–3. B advances, and B on the last item saves and exits.
 - **Bars under Auto** run only on USB. On battery the 5 V boost is off, which also removes the IMU collision. The battery gauge in Set is therefore only visible on USB.
 

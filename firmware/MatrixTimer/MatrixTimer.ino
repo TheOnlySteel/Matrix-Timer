@@ -255,6 +255,13 @@ static void handleSettings() {
 }
 
 // ---------------------------------------------------------------- output
+// Done: matrix and bars take turns. 2 Hz (250 ms each) for the first minute,
+// then 0.5 Hz (1 s each). True = the matrix's turn.
+static bool doneMatrixPhase(uint32_t ms) {
+  uint32_t e = ms - doneAt;
+  return e < cfg::kDoneFastMs ? (e % 500) < 250 : (e % 2000) < 1000;
+}
+
 static Frame currentFrame(uint32_t ms, int64_t now, int* duty) {
   int level = settings.brightness;
   *duty = level;
@@ -271,10 +278,10 @@ static Frame currentFrame(uint32_t ms, int64_t now, int* duty) {
       *duty = 1;
       return smooth.frame(rem, total, clk.elapsed(now) / 1e6, true);
     case St::Done: {
-      bool fast = ms - doneAt < cfg::kDoneFastMs;
-      bool on = fast ? ((ms - doneAt) % 500) < 250 : ((ms - doneAt) % 2000) < 1000;
+      // Matrix at 1/16, alternating with the bars (Steel, 21 Nov).
+      *duty = 1;
       Frame f;
-      f.fill(on);
+      f.fill(doneMatrixPhase(ms));
       return f;
     }
     case St::Settings: {
@@ -319,13 +326,10 @@ static void renderBars(uint32_t ms, int64_t now) {
       break;
     }
     case St::Paused: bars.setPos(0, colors::kAmber, 0.4f); break;
-    case St::Done: {
-      bool fast = ms - doneAt < cfg::kDoneFastMs;
-      bool on = fast ? ((ms - doneAt) % 500) < 250 : ((ms - doneAt) % 2000) < 1000;
-      if (on) for (int i = 0; i < 5; ++i) bars.setPos(i, colors::kRed, 1.0f);
-      tau = 0;  // pulse in step with the matrix flash
+    case St::Done:
+      if (!doneMatrixPhase(ms)) for (int i = 0; i < 5; ++i) bars.setPos(i, colors::kRed, 1.0f);
+      tau = 0;  // alternate crisply with the matrix flash
       break;
-    }
     default: break;
   }
   if (power.low() && (ms % 5000) < 200) bars.setPos(0, colors::kRed, 1.0f, 2);
@@ -377,10 +381,11 @@ static void console(uint32_t ms) {
       case 'f': dumpFrame(); break;
       case 's': status(); break;
       case 'w': warpUs += (int64_t)atol(line + 1) * 1000000; Serial.printf("WARP +%lds\n", atol(line + 1)); break;
+      case 't': Serial.printf("SOUND test chirps (enabled=%d)\n", sound.enabled()); sound.chirps(3); break;
       case 'r': Serial.printf("TILT raw x=%+.3f y=%+.3f z=%+.3f pose=%d down=%u\n", tilt.raw()[0], tilt.raw()[1],
                               tilt.raw()[2], (int)tilt.pose(), tilt.downEdge()); break;
       case '?': Serial.println("keys: a b c (click) A B C (hold) X (A+C settings) p (power) f (frame) s (status) "
-                               "wN (warp N s) r (tilt raw)"); break;
+                               "wN (warp N s) r (tilt raw) t (test chirps)"); break;
       default: break;
     }
   }

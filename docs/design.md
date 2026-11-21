@@ -142,7 +142,7 @@ Also enabled: **flip to repeat**. In Done, turning the frame upside down (sustai
 
 ### 5.5 Done
 
-Matrix flashes all 256 LEDs on and off at 2 Hz (at the configured brightness, never above it); bars pulse red. Buzzer (IOE1 PWM at ~2.7 kHz, the MLT-8530's resonance) plays three short chirps, repeating every 10 s for 1 minute, then stops; the visual alarm continues at 0.5 Hz until dismissed. **Position taken:** no continuous beeping. This sits next to someone working.
+The matrix (all 256 LEDs, at 1/16 duty) and the red bars **take turns** flashing: 2 Hz alternation for the first minute, then 0.5 Hz until dismissed. Steel picked the alternation and the 1/16 matrix on the desk (21 Nov). Buzzer (IOE1 PWM at ~2.7 kHz, the MLT-8530's resonance) plays three short chirps, repeating every 10 s for 1 minute, then stops. **Position taken:** no continuous beeping. This sits next to someone working.
 
 ## 6. Timing model
 
