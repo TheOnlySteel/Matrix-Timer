@@ -33,8 +33,8 @@ int main() {
   CHECK(!f.get(0, 0) && !f.get(7, 15) && f.get(8, 0) && f.get(15, 15));
   // active LED (row 8 col 0): 1 s on, 0.5 s off, whatever the fraction
   double rem = slice * 127.5;   // 128 left
-  CHECK(grid(rem, 1500, 10.4).get(8, 0) == true);    // 10.4 mod 1.5 = 0.9 < 1.0
-  CHECK(grid(rem, 1500, 10.6).get(8, 0) == false);   // 1.1
+  CHECK(grid(rem, 1500, 9.9).get(8, 0) == true);     // 9.9 mod 1.5 = 0.9 < 1.0
+  CHECK(grid(rem, 1500, 10.2).get(8, 0) == false);   // 1.2
   CHECK(grid(slice * 127.01, 1500, 0.95).get(8, 0) == true);
   CHECK(grid(slice * 128, 1500, 1.05).get(8, 0) == false);
   // short blocks: steady
