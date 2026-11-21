@@ -62,15 +62,19 @@ class Bars {
     if (which & 2) target_[5 + x] = v;      // bar B
   }
 
-  // 5-LED analogue gauge: the topmost lit LED carries the remainder as
-  // brightness; the bottom LED never fades below 15 % while any remains.
+  // 5-LED analogue gauge; the topmost lit LED carries the remainder as
+  // brightness. Light bleeds through the Bottom2's diffuser into the LED
+  // above, so the bar looked one LED fuller than meant (Steel, desk check
+  // 21 Nov): every LED above the bottom one reads one step lower than the
+  // plain model. The bottom LED still drains over the last fifth and never
+  // fades below 15 % while any time remains.
   void gauge(float fraction, Rgb c) {
     float x = fraction < 0 ? 0 : (fraction > 1 ? 1 : fraction);
     x *= 5;
     for (int i = 0; i < 5; ++i) {
-      float lv = x - i;
+      float lv = i == 0 ? x : x - i - 1;
       lv = lv < 0 ? 0 : (lv > 1 ? 1 : lv);
-      if (i == 0 && x > 0 && x < 0.15f) lv = 0.15f;
+      if (i == 0 && x > 0 && lv < 0.15f) lv = 0.15f;
       setPos(i, c, lv);
     }
   }
