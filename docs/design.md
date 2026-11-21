@@ -58,7 +58,7 @@ The Bottom2's ten SK6812s are treated as two 5-LED columns, position 0 at the bo
 | State | Bars |
 |---|---|
 | Set | Battery level, dim green (USB power only under Auto); animate upward while charging |
-| Running | **Remaining-time gauge.** Each LED is 20 % of the block; the topmost lit LED's brightness carries the remainder, so the bar shrinks continuously. The LEDs above the bottom one are drawn one step lower than this, because light bleeding through the diffuser made the bar look a LED fuller than meant (desk check, 21 Nov). Teal above 20 %, amber ≤ 20 %, red ≤ 5 %. The bottom LED never fades below 15 % while time remains. |
+| Running | **Remaining-time gauge.** Each LED is 20 % of the block; the topmost lit LED's brightness carries the remainder, so the bar shrinks continuously. The LEDs above the bottom one are drawn one step lower than this, because light bleeding through the diffuser made the bar look a LED fuller than meant (desk check, 21 Nov). A fresh block still starts with all five lit; the top one fades out after 15 s. Teal above 20 %, amber ≤ 20 %, red ≤ 5 %. The bottom LED never fades below 15 % while time remains. |
 | Paused | Bottom LED amber, steady, dim |
 | Done | Red, pulsing with the matrix flash |
 | Low battery (< 15 %) | Bottom-left LED blinks red once every 5 s, in any state |

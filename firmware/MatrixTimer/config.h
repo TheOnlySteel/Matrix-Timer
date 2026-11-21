@@ -35,6 +35,7 @@ constexpr uint32_t kCancelWipeMs = 300;
 constexpr int kBarPin = 5;          // G5, SK6812 data
 constexpr int kBarLeds = 10;
 constexpr uint8_t kBarHardCap = 64; // 25 % of 255: never exceeded, whatever the setting
+constexpr double kBarTopHoldS = 15;  // a fresh block shows all 5, top one fades out after this
 
 // --- done (design.md §5.5) ---
 constexpr uint32_t kDoneFastMs = 60000;   // 2 Hz flash + chirps for 1 minute, then 0.5 Hz

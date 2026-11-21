@@ -67,7 +67,8 @@ class Bars {
   // above, so the bar looked one LED fuller than meant (Steel, desk check
   // 21 Nov): every LED above the bottom one reads one step lower than the
   // plain model. The bottom LED still drains over the last fifth and never
-  // fades below 15 % while any time remains.
+  // fades below 15 % while any time remains. (The app holds the top LED on
+  // for the first kBarTopHoldS of a block, so a fresh block shows all five.)
   void gauge(float fraction, Rgb c) {
     float x = fraction < 0 ? 0 : (fraction > 1 ? 1 : fraction);
     x *= 5;

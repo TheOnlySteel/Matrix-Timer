@@ -311,7 +311,11 @@ static void renderBars(uint32_t ms, int64_t now) {
     }
     case St::Running: {
       float f = clk.remaining(now) / (float)clk.duration_us;
-      bars.gauge(f, f <= 0.05f ? colors::kRed : f <= 0.20f ? colors::kAmber : colors::kTeal);
+      Rgb col = f <= 0.05f ? colors::kRed : f <= 0.20f ? colors::kAmber : colors::kTeal;
+      bars.gauge(f, col);
+      // A fresh block starts full (all 5); the bleed-compensated gauge drops the
+      // top LED, so hold it for a moment and let the cross-fade take it out.
+      if (clk.elapsed(now) < (int64_t)(cfg::kBarTopHoldS * 1e6)) bars.setPos(4, col, 1.0f);
       break;
     }
     case St::Paused: bars.setPos(0, colors::kAmber, 0.4f); break;
